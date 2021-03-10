@@ -1,0 +1,16 @@
+@import 'mixin';
+.null-data-component {
+  --background: #F4F4F4;
+  .null-data-component-container {
+    @include flex-justify-align(center);
+    flex-direction: column;
+    height: 100%;
+    .null-data-icon {
+      @include wh(format(500), format(258));
+    }
+    .info {
+      @include sc(format(32), #999);
+      margin-top: format(70);
+    }
+  }
+}

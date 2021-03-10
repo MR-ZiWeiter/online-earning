@@ -1,0 +1,59 @@
+@import 'mixin';
+.share-component {
+  @include wh(100%, 100%);
+  overflow: hidden;
+  &.browser {
+    display: flex;
+    align-items: flex-end;
+  }
+  .share-component-wexin {
+    display: flex;
+    justify-content: flex-end;
+    .share-text {
+      @include wh(format(300), auto);
+      margin-top: format(100);
+      margin-right: format(20);
+    }
+    .share-arrow {
+      @include wh(format(300), auto);
+    }
+  }
+  .share-component-container {
+    @include flex-justify-align(flex-start, flex-start);
+    @include wh(100%, format(364));
+    align-self: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    background: #FFF;
+    .share-title-info {
+      @include wh(100%, format(108));
+      @include flex-justify-align(space-between, center);
+      padding: 0 format(40);
+      .title {
+        @include sc(format(32), $default_color);
+        font-weight: bold;
+      }
+      .close-icon {
+        @include wh(format(40), format(40));
+      }
+    }
+    .share-type-list-box {
+      @include flex-justify-align(center);
+      flex: 1;
+      width: 100%;
+      .share-type-list-model {
+        @include flex-justify-align(center);
+        flex: 1;
+        flex-direction: column;
+        .share-icon {
+          @include wh(format(100), format(100));
+        }
+        .label {
+          @include sc(format(28), $default_color);
+          font-weight: 500;
+          margin-top: format(16);
+        }
+      }
+    }
+  }
+}

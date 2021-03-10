@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.style.fontSize = (document.documentElement.clientWidth / 750) * 100 + 'px'
+    })
+    var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
+    document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+  </script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .bodyDocument {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .content {
+      width: 100%;
+      height: 100%;
+      overflow-y: scroll;
+    }
+    .content>p,
+    .content>span {
+      font-size: 15px;
+      padding: 0 15px;
+    }
+  </style>
+</head>
+<body class="bodyDocument">
+  <section class="content" id="contentBox"></section>
+  <script>
+    let searchParams = {id: '', type: 1};
+    window.location.search.slice(1).split('&').map(item => {
+      searchParams[item.split('=')[0]] = item.split('=')[1]
+    })
+    let httpClient = new XMLHttpRequest()
+    httpClient.open('GET', `https://api.zudian.top/service/sysNotice/detail?id=${searchParams.id}&type=${searchParams.type}`, true)
+    httpClient.send()
+    httpClient.onload = function () {
+      const status = httpClient.status;
+      if ((status >= 200 && status < 300) || status === 304) {
+        let result;
+        if (httpClient.responseType === 'text') {
+          result = httpClient.responseText;
+        } else if (httpClient.responseType === 'document') {
+          result = httpClient.responseXML;
+        } else {
+          result = httpClient.response;
+        }
+        // console.log(result)
+        let resultJSON = JSON.parse(result)
+        if (resultJSON.rel) {
+          document.title = resultJSON.rel.title 
+          document.getElementById('contentBox').innerHTML = resultJSON.rel.content
+        } else {
+          document.getElementById('contentBox').innerHTML = '<p style="text-align: center;margin-top:30px;">暂无数据</p>'
+        }
+        if (window.parent) {
+          window.parent.document.title = document.title
+        }
+
+        try {
+          window.webkit.messageHandlers.updateTitle.postMessage(document.title);
+        } catch (err) {
+          console.log('其他端')
+        }
+      }
+    }
+  </script>
+</body>
+</html>
