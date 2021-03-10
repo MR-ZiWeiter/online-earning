@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.style.fontSize = (document.documentElement.clientWidth / 750) * 100 + 'px'
+    })
+    var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
+    document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+  </script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .bodyDocument {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .content {
+      /* width: 100%; */
+      height: 100%;
+      overflow-y: scroll;
+      font-size: 16px;
+    }
+    .content>p,
+    .content>span {
+      font-size: 15px;
+      padding: 0 15px;
+    }
+  </style>
+</head>
+<body class="bodyDocument">
+  <section class="content" id="contentBox"></section>
+  <script>
+    let searchParams = {id: '', type: 1, packSource: ''};
+    window.location.search.slice(1).split('&').map(item => {
+      searchParams[item.split('=')[0]] = item.split('=')[1]
+    })
+    let httpClient = new XMLHttpRequest()
+    httpClient.open('GET', `https://api.app.61ertong.com/service/app/version/getCommonRichText?id=${searchParams.id}&type=${searchParams.type}&packSource=${searchParams.packSource}`, true)
+    httpClient.send()
+    httpClient.onload = function () {
+      const status = httpClient.status;
+      if ((status >= 200 && status < 300) || status === 304) {
+        let result;
+        if (httpClient.responseType === 'text') {
+          result = httpClient.responseText;
+        } else if (httpClient.responseType === 'document') {
+          result = httpClient.responseXML;
+        } else {
+          result = httpClient.response;
+        }
+        // console.log(result)
+        let resultJSON = JSON.parse(result)
+        if (resultJSON.rel) {
+          document.getElementById('contentBox').innerHTML = resultJSON.rel.content
+        } else {
+          document.getElementById('contentBox').innerHTML = '<p style="text-align: center;margin-top:30px;">暂无数据</p>'
+        }
+      }
+    }
+
+    switch (Number(searchParams.type)) {
+      case 1:
+        document.title = '用户协议'
+        break
+      case 2:
+        document.title = '隐私政策'
+        break
+      case 3:
+        document.title = '中国移动认证服务协议'
+        break
+      case 4:
+        document.title = '中国联通认证服务协议'
+        break
+      case 5:
+        document.title = '中国电信认证服务协议'
+        break
+      case 6:
+        document.title = '用户注销协议'
+        break
+      case 7:
+        document.title = '权益说明'
+        break
+      case 8:
+        document.title = '自动续费服务声明'
+        break
+      case 9:
+        document.title = '会员服务协议'
+        break
+      case 10:
+        document.title = '自动续费协议'
+        break
+      case 11:
+        document.title = '常见问题'
+        break
+    }
+    // alert(document.title)
+    if (window.parent) {
+      window.parent.document.title = document.title
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.style.fontSize = (document.documentElement.clientWidth / 750) * 100 + 'px'
+    })
+    var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
+    document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+  </script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .content-box {
+      height: 100vh;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      width: 100vw;
+    }
+    .content-box>p,
+    .content-box>span {
+      font-size: 15px;
+    }
+    .content-item {
+      height: 1.02rem;
+      border-bottom: 0.5px solid #E5E5E5;
+      display: flex;
+      padding: 0 .4rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .content-item .title {
+      font-size: 0.28rem;
+      font-family: PingFang SC;
+      font-weight: bold;
+      line-height: .4rem;
+      color: rgba(51,51,51,1);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+    .content-item .time {
+      font-size: 0.24rem;
+      font-family: PingFang SC;
+      font-weight: 400;
+      line-height: .34rem;
+      color: rgba(153,153,153,1);
+    }
+  </style>
+</head>
+<body>
+  <section class="content-box" id="contentBox">
+    <!-- <section class="content-item">
+      <span class="title">朝富通租赁获得1000万A轮融资</span>
+      <span class="time">2020-01-22</span>
+    </section> -->
+  </section>
+  <script>
+    let searchParams = {id: '', type: 1};
+    window.location.search.slice(1).split('&').map(item => {
+      searchParams[item.split('=')[0]] = item.split('=')[1]
+    })
+    console.log(searchParams)
+    let httpClient = new XMLHttpRequest()
+    httpClient.open('GET', `https://api.zudian.top/service/sysNotice/list?dataCategory=${searchParams.id}&dataType=${searchParams.type}`, true)
+    httpClient.send()
+    httpClient.onload = function () {
+      const status = httpClient.status;
+      if ((status >= 200 && status < 300) || status === 304) {
+        let result;
+        if (httpClient.responseType === 'text') {
+          result = httpClient.responseText;
+        } else if (httpClient.responseType === 'document') {
+          result = httpClient.responseXML;
+        } else {
+          result = httpClient.response;
+        }
+        // console.log(result)
+        let resultJSON = JSON.parse(result)
+        if (resultJSON.rel) {
+          let ohtml = ''
+          resultJSON.rel.map(item => {
+            ohtml += `<section class="content-item" onclick="openViewEvent(${item.id})">
+              <span class="title">${item.title}</span>
+              <span class="time">${item.releaseTime}</span>
+            </section>`
+          })
+          document.getElementById('contentBox').innerHTML = ohtml
+        } else {
+          document.getElementById('contentBox').innerHTML = '<p style="text-align: center;margin-top:30px;font-size: .32rem;">暂无数据</p>'
+        }
+      }
+    }
+
+
+    switch (Number(searchParams.type)) {
+      case 1:
+        document.title = '公告'
+        break
+      case 2:
+        document.title = '新闻'
+        break
+      case 3:
+        document.title = '小知识'
+        break
+    }
+    if (window.parent) {
+      window.parent.document.title = document.title
+    }
+
+    function openViewEvent (id) {
+      window.location.href = './news.html?id=' + id
+    }
+  </script>
+</body>
+</html>

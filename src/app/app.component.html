@@ -1,3 +1,22 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
+<!-- 快捷导航 -->
+<cnet-core-toolbar></cnet-core-toolbar>
+<!-- 护眼模式 -->
+<cnet-eye-care-mode *ngIf="settingConfig.eyeCareMode"></cnet-eye-care-mode>
+<!-- APP内路由 -->
+<ion-app
+  (touchmove)="globalTouchMoveEvent($event)"
+  [ngClass]="isWebView ? 'hidden' : ''">
+  <ion-router-outlet
+    [mode]="mode"
+    [swipeGesture]="true"
+    (activate)="onMainActivate($event)"
+    (deactivate)="onMainDeactivate($event)"
+  ></ion-router-outlet>
 </ion-app>
+<!-- 附属路由 用作webview使用 -->
+<ion-router-outlet
+  name="webview-popup"
+  [ngClass]="!isWebView ? 'hidden' : ''"
+  (activate)="onPopupActivate($event)"
+  (deactivate)="onPopupDeactivate($event)"
+></ion-router-outlet>

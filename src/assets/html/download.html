@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网赚-APP-下载</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .download-page {
+      width: 100%;
+      height: 100vh;
+      max-width: 750px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+    .download-page::-webkit-scrollbar {
+      display: none;
+    }
+    .img-dom {
+      font-size: 0;
+      position: relative;
+    }
+    .img-dom img {
+      max-width: 100%;
+    }
+    .img-dom .btn {
+      position: absolute;
+      bottom: 21vw;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 63.5vw;
+    }
+    .img-dom .open-text {
+      position: absolute;
+      bottom: 14vw;
+      font-size: 3vw;
+      color: #FFF;
+      left: 50%;
+      transform: translateX(-50%);
+      word-break: break-all;
+      white-space: nowrap;
+    }
+    .back-bg {
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffc831;
+    }
+    .back-bg img {
+      width: 63.5vw;
+    }
+
+    .mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    .mask.active {
+      display: none;
+    }
+
+    .mask .shareText {
+      position: absolute;
+      width: 2.86rem;
+      height: 0.42rem;
+      left: 1.44rem;
+      top: 0.86rem;
+    }
+
+    .mask .shareArrow {
+      position: absolute;
+      width: 2.42rem;
+      height: 1.39rem;
+      right: 0.52rem;
+      top: 1px;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.style.fontSize = (document.documentElement.clientWidth / 750) * 100 + 'px'
+    })
+    var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
+    document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+  </script>
+</head>
+<body>
+  <section class="download-page">
+    <button onclick="downloadAndroidEvent()" >下载APP</button>
+  </section>
+
+  <!-- mask -->
+  <div class="mask active" onclick="hide()">
+    <image class="shareText" src="/assets/images/components/share-component/cnet_share_open_text@2x.png"></image>
+    <image class="shareArrow" src="/assets/images/components/share-component/cnet_share_arrow@2x.png"></image>
+  </div>
+
+  <script>
+    var $ = function (name) {
+      return document.querySelector(name);
+    }
+    let searchParams = {id: '', type: '', albumID: '', device: ''};
+    window.location.search.slice(1).split('&').map(item => {
+      searchParams[item.split('=')[0]] = item.split('=')[1]
+    })
+    if (searchParams.device && searchParams.type) {
+      if (searchParams.type === 'video') {
+        if (searchParams.id) {
+          window.location.href = `https://weixin.app.61ertong.com/pages/player/video/${searchParams.albumID || 'sigin'};cid=${searchParams.id}`
+        } else {
+          window.location.href = `https://weixin.app.61ertong.com/pages/player/video/${searchParams.albumID || 'sigin'}`
+        }
+      } else if (searchParams.type === 'audio') {
+        if (searchParams.id) {
+          window.location.href = `https://weixin.app.61ertong.com/pages/player/audio/${searchParams.albumID}/inner/${searchParams.id}`
+        } else {
+          window.location.href = `https://weixin.app.61ertong.com/pages/player/audio/${searchParams.albumID}`
+        }
+      }
+    }
+  </script>
+  <script>
+    let httpClient = new XMLHttpRequest()
+    let download_androrid = ''
+    // let download_iphone = 'https://itunes.apple.com/app/id1507955255'
+    let download_iphone
+    httpClient.open('GET', `https://api.app.61ertong.com/service/app/version/latest?appType=1&clientType=1`, true)
+    httpClient.send()
+    httpClient.onload = function () {
+      const status = httpClient.status;
+      if ((status >= 200 && status < 300) || status === 304) {
+        let result;
+        if (httpClient.responseType === 'text') {
+          result = httpClient.responseText;
+        } else if (httpClient.responseType === 'document') {
+          result = httpClient.responseXML;
+        } else {
+          result = httpClient.response;
+        }
+        // console.log(result)
+        let resultJSON = JSON.parse(result)
+        if (resultJSON.rel) {
+          download_androrid = resultJSON.rel.url
+          // console.log(download_androrid)
+        }
+      }
+    }
+
+    function downloadIphoneEvent() {
+      if (!isWx()) {
+        // window.href = download_iphone
+        if (download_iphone) {
+          let down = document.createElement('a')
+          down.href = download_iphone
+          down.download = true
+          down.click()
+        } else {
+          alert('IOS版本正在上架审核，敬请期待!')
+        }
+      } else {
+        // this.show()
+        if (download_iphone) {
+          let down = document.createElement('a')
+          down.href = download_iphone
+          down.download = true
+          down.click()
+        }
+      }
+    }
+
+    function downloadAndroidEvent() {
+      // if (!isWx()) {
+      //   // window.href = download_androrid
+      //   let down = document.createElement('a')
+      //   down.href = download_androrid
+      //   down.download = true
+      //   down.click()
+      // } else {
+      //   this.show()
+      // }
+      let down = document.createElement('a')
+      down.href = 'https://a.app.qq.com/o/simple.jsp?pkgname=com.gequ61.android.flash&fromcase=40003'
+      down.download = true
+      down.click()
+    }
+
+    function hide() {
+      document.querySelector('.mask').classList = 'mask active'
+    }
+    function show() {
+      document.querySelector('.mask').classList = 'mask'
+      // console.log(document.querySelector('.mask').classList )
+    }
+
+    function isWx() {
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

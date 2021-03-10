@@ -1,0 +1,20 @@
+<section [ngClass]="['share-component', type]">
+  <!-- 微信端 -->
+  <section class="share-component-wexin" *ngIf="type === 'weixin'">
+    <ion-img class="share-text" src="/assets/images/components/share-component/cnet_share_text@2x.png"></ion-img>
+    <ion-img class="share-arrow" src="/assets/images/components/share-component/cnet_share_arrow@2x.png"></ion-img>
+  </section>
+  <!-- 浏览器 -->
+  <section class="share-component-container" *ngIf="type === 'browser'">
+    <header class="share-title-info">
+      <h3 class="title">分享到</h3>
+      <ion-icon (click)="dismiss()" class="close-icon" src="/assets/svgs/public/min-icon/cnet_min_icon_lineheight_close_modal@2x.svg"></ion-icon>
+    </header>
+    <section class="share-type-list-box">
+      <section class="share-type-list-model" (click)="openShareEvent(item)" *ngFor="let item of shareConfig">
+        <ion-icon class="share-icon" [src]="item.icon"></ion-icon>
+        <span class="label">{{item.label}}</span>
+      </section>
+    </section>
+  </section>
+</section>

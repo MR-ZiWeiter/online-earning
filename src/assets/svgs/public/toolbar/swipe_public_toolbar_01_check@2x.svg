@@ -1,0 +1,36 @@
+<svg id="icon_主页" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff9718;
+        stroke: #979797;
+        stroke-miterlimit: 10;
+        opacity: 0;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 1.5px;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #0486fe;
+        stroke-linecap: round;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="icon_主页_选中">
+    <g id="矩形" class="cls-1">
+      <rect class="cls-3" width="22" height="22"/>
+      <rect class="cls-4" x="0.75" y="0.75" width="20.5" height="20.5"/>
+    </g>
+    <path id="路径_18681" data-name="路径 18681" class="cls-2" d="M120.269,118.186l7.685,4.839a.316.316,0,0,1,.148.268v10.53a.315.315,0,0,1-.315.316H122.02a.315.315,0,0,1-.315-.316v-4.066a.316.316,0,0,0-.315-.316H118.8a.316.316,0,0,0-.315.316v4.066a.315.315,0,0,1-.315.316h-5.749a.315.315,0,0,1-.315-.316v-10.53a.316.316,0,0,1,.148-.268l7.685-4.839A.314.314,0,0,1,120.269,118.186Z" transform="translate(-109.102 -115.138)"/>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<svg id="icon_测测乐" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill: #6d6d6d;
+      }
+
+      .cls-3 {
+        stroke: #0486fe;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <g id="icon_测测乐-2" data-name="icon_测测乐">
+    <rect id="矩形" class="cls-1" width="22" height="22"/>
+    <g id="组_13570" data-name="组 13570" transform="translate(-1245.515 -1058.516)">
+      <rect id="矩形_2521" data-name="矩形 2521" class="cls-2" width="22" height="22" transform="translate(1245.515 1058.516)"/>
+      <g id="组_13665" data-name="组 13665" transform="translate(1249.107 1061.504)">
+        <path id="路径_18955" data-name="路径 18955" class="cls-3" d="M281,540.625l-3.875,3.875H266v-16h15v12.125" transform="translate(-266.092 -528.5)"/>
+        <line id="直线_45" data-name="直线 45" class="cls-3" x2="8.162" transform="translate(2.908 3.615)"/>
+        <line id="直线_46" data-name="直线 46" class="cls-3" x2="4.393" transform="translate(2.908 7.621)"/>
+        <path id="路径_18957" data-name="路径 18957" class="cls-3" d="M11.859,3.063H8.594V-.775" transform="translate(14.133 3.468) rotate(90)"/>
+      </g>
+    </g>
+  </g>
+</svg>
