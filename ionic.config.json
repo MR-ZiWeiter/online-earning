@@ -1,0 +1,8 @@
+{
+  "name": "ionic-online-earning",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "5ccfd21a"
+}
