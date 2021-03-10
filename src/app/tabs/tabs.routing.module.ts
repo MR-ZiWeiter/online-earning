@@ -10,7 +10,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'upcoming', pathMatch: 'full' },
       { path: 'upcoming', loadChildren: () => import('./upcoming/upcoming.module').then( m => m.UpcomingModule ) },
       { path: 'task', loadChildren: () => import('./task/task.module').then( m => m.TaskModule ) },
-      { path: 'rights-protection', loadChildren: () => import('./rights-protection/rights-protection.module').then( m => m.RightsProtectionModule ) },
+      { path: 'rights-protection',
+        loadChildren: () => import('./rights-protection/rights-protection.module').then( m => m.RightsProtectionModule ) },
       { path: 'user', loadChildren: () => import('./user/user.module').then( m => m.UserModule ) }
     ]
   }

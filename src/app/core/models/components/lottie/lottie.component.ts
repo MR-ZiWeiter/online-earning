@@ -3,7 +3,7 @@ import lottie from 'lottie-web';
 import { LottieConfig } from './lottie';
 
 @Component({
-  selector: 'cnet-core-public-lottie',
+  selector: 'swipe-core-public-lottie',
   templateUrl: './lottie.component.html',
   styleUrls: ['./lottie.component.scss']
 })

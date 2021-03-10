@@ -1,7 +1,7 @@
 <!-- 快捷导航 -->
 <cnet-core-toolbar></cnet-core-toolbar>
 <!-- 护眼模式 -->
-<cnet-eye-care-mode *ngIf="settingConfig.eyeCareMode"></cnet-eye-care-mode>
+<swipe-eye-care-mode *ngIf="settingConfig.eyeCareMode"></swipe-eye-care-mode>
 <!-- APP内路由 -->
 <ion-app
   (touchmove)="globalTouchMoveEvent($event)"

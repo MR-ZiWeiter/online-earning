@@ -8,13 +8,7 @@ import { WorkIndexedDBService } from 'src/app/core/models/provider/indexedDB/wor
 
 export class SettingsService {
   private settingsConfig: settingsConfig = {
-    eyeCareMode: false,
-    ageGroup: 1,
-    anthorConfig: {
-      anthor: '/assets/images/default/cnet_default_anthor_0_3@2x.png',
-      ageGroup: 1,
-      ageName: '0-3岁'
-    }
+    eyeCareMode: false
   };
   // 设置中间件
   private $settingsConfig: BehaviorSubject<any> = new BehaviorSubject<any>(null);

@@ -166,7 +166,7 @@ export class AppComponent {
 
   // 设置标题
   public setWxAppTitle(title: string) {
-    document.title = title || '六一儿童网';
+    document.title = title || '网赚-用户端';
   }
 
   async serviceAgreementPresentModal() {
