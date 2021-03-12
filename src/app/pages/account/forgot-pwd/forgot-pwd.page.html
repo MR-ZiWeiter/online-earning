@@ -1,0 +1,33 @@
+<ion-content class="account-forgot-pwd-page">
+  <section class="forgot-pwd-container">
+    <header class="title-info">
+      <h3 class="title-text">忘记密码</h3>
+    </header>
+    <section class="form-model">
+      <section class="custom-input">
+        <swipe-input [(value)]="registerForm.phone" type="number" placeholder="请输入手机号" [isClear]="true"></swipe-input>
+      </section>
+      <section class="custom-input">
+        <swipe-input
+          type="number"
+          [(value)]="registerForm.code"
+          placeholder="请输入验证码"
+          [maxLength]="6"
+          [isClear]="true"
+          [isSuffix]="true">
+          <span name="suffix" class="label-text">获取验证码</span>
+          <span class="label-text">获取验证码</span>
+        </swipe-input>
+      </section>
+      <section class="custom-input">
+        <swipe-input [(value)]="registerForm.password" type="password" placeholder="请输入登录密码" [isClear]="true"></swipe-input>
+      </section>
+      <section class="custom-input">
+        <swipe-input [(value)]="registerForm.check_password" type="password" placeholder="请重新输入密码" [isClear]="true"></swipe-input>
+      </section>
+    </section>
+    <section class="submit-info">
+      <ion-button class="submit-btn" expand="block" color="primary">确认提交</ion-button>
+    </section>
+  </section>
+</ion-content>

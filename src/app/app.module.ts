@@ -14,16 +14,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 // 注入网络请求
-import { HttpService } from './core/models/provider/http/http.service';
+import { HttpService } from './core/modules/provider/http/http.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { LarkHttpInterceptor } from './core/models/provider/http/interceptor';
-import { RequestPreviewHandler } from './core/models/provider/http/handler/request-preview-handler';
-import { RequestExceptionHandler } from './core/models/provider/http/handler/request-exception-handler';
-import { RequestProcessedHandler } from './core/models/provider/http/handler/request-processed-handler';
+import { LarkHttpInterceptor } from './core/modules/provider/http/interceptor';
+import { RequestPreviewHandler } from './core/modules/provider/http/handler/request-preview-handler';
+import { RequestExceptionHandler } from './core/modules/provider/http/handler/request-exception-handler';
+import { RequestProcessedHandler } from './core/modules/provider/http/handler/request-processed-handler';
 
 
 // 缓存数据库加载 indexedDB
-import { WorkIndexedDBService } from './core/models/provider/indexedDB/work-indexedDB.service';
+import { WorkIndexedDBService } from './core/modules/provider/indexedDB/work-indexedDB.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,6 +1,6 @@
 import { Observable, BehaviorSubject, timer } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { WorkIndexedDBService } from 'src/app/core/models/provider/indexedDB/work-indexedDB.service';
+import { WorkIndexedDBService } from 'src/app/core/modules/provider/indexedDB/work-indexedDB.service';
 
 @Injectable({
   providedIn: 'root'

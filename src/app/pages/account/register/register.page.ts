@@ -1,22 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginForm } from './login';
-import { ToastController, NavController } from '@ionic/angular';
-import { LoggerService } from './../../../core/modules/provider/logger/logger.service';
+import { Router } from '@angular/router';
+import { NavController, ToastController } from '@ionic/angular';
 import { UserAccountService } from 'src/app/core/modules/provider/api';
+import { LoggerService } from 'src/app/core/modules/provider/logger/logger.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { WebviewService } from 'src/app/core/services/webview/webview.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'pages-account-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'pages-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class RegisterPage implements OnInit {
 
-  public loginForm: LoginForm = {
+  public registerForm: RegisterForm = {
+    username: null,
+    code: null,
     phone: null,
-    password: null
+    password: null,
+    check_password: null,
+    phone_code: null
   };
   // 获取验证码状态
   public getCodeStatus = false;
@@ -53,7 +56,7 @@ export class LoginPage implements OnInit {
   }
   // 清楚指定值的表单数据
   public clearInputChange(nameString: string): void {
-    this.loginForm[nameString] = null;
+    this.registerForm[nameString] = null;
   }
   // 手机验证
   async presentToastWithOptions() {
@@ -67,11 +70,11 @@ export class LoginPage implements OnInit {
   }
   // 获取验证码
   public fetchCodeEvent(): void {
-    if (!this.loginForm.phone) {
+    if (!this.registerForm.phone) {
       this.presentToastWithOptions();
     } else {
       this.userAccountService.asyncFetchAccountLoginRegisterCode({
-        phone: this.loginForm.phone
+        phone: this.registerForm.phone
       }).subscribe((res: any) => {
         this.settingTimeOutEvent();
       });
@@ -79,8 +82,8 @@ export class LoginPage implements OnInit {
   }
   // 提交
   public submitChange(): void {
-    // console.log(this.loginForm);
-    this.userAccountService.asyncAccountLoginRegister(this.loginForm).subscribe(res => {
+    // console.log(this.registerForm);
+    this.userAccountService.asyncAccountLoginRegister(this.registerForm).subscribe(res => {
       // console.log(this.navControl);
       // if (this.navControl.direction
       // this.navControl.back();
@@ -88,18 +91,12 @@ export class LoginPage implements OnInit {
     }, err => {});
   }
 
-  /* 注册新账户 */
-  public openRegisterPage() {
-    this.router.navigate(['/pages/account/register'])
-  }
-
-  /* 忘记密码 */
-  public openForgotPasswordPage() {
-    this.router.navigate(['/pages/account/forgot-pwd'])
+  /* 登录账号 */
+  public openLoginPage() {
+    this.router.navigate(['/pages/account/login'])
   }
 
   public openRuleService(type: number): void {
     this.webviewService.openServiceRuleEvent(type);
   }
-
 }

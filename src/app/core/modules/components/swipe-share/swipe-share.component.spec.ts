@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { EyeCareModeComponent } from './eye-care-mode.component';
+import { SwipeShareComponent } from './swipe-share.component';
 
-describe('EyeCareModeComponent', () => {
-  let component: EyeCareModeComponent;
-  let fixture: ComponentFixture<EyeCareModeComponent>;
+describe('SwipeShareComponent', () => {
+  let component: SwipeShareComponent;
+  let fixture: ComponentFixture<SwipeShareComponent>;
 
   beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ EyeCareModeComponent ]
+      declarations: [ SwipeShareComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EyeCareModeComponent);
+    fixture = TestBed.createComponent(SwipeShareComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

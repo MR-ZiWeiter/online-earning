@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import lottie from 'lottie-web';
-import { LottieConfig } from './lottie';
+import { LottieConfig } from './swipe-lottie';
 
 @Component({
-  selector: 'swipe-core-public-lottie',
-  templateUrl: './lottie.component.html',
-  styleUrls: ['./lottie.component.scss']
+  selector: 'swipe-lottie',
+  templateUrl: './swipe-lottie.component.html',
+  styleUrls: ['./swipe-lottie.component.scss']
 })
 
-export class LottieComponent implements OnInit {
+export class SwipeLottieComponent implements OnInit {
 
   @ViewChild('lottie', {static: true}) public lottieDom: any;
 

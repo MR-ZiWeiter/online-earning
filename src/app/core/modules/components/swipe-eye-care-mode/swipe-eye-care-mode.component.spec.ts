@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { NullDataComponent } from './null-data.component';
+import { SwipeEyeCareModeComponent } from './swipe-eye-care-mode.component';
 
-describe('NullDataComponent', () => {
-  let component: NullDataComponent;
-  let fixture: ComponentFixture<NullDataComponent>;
+describe('SwipeEyeCareModeComponent', () => {
+  let component: SwipeEyeCareModeComponent;
+  let fixture: ComponentFixture<SwipeEyeCareModeComponent>;
 
   beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ NullDataComponent ]
+      declarations: [ SwipeEyeCareModeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NullDataComponent);
+    fixture = TestBed.createComponent(SwipeEyeCareModeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LottieComponent } from './lottie.component';
+import { SwipeContextNullComponent } from './swipe-context-null.component';
 
-describe('LottieComponent', () => {
-  let component: LottieComponent;
-  let fixture: ComponentFixture<LottieComponent>;
+describe('SwipeContextNullComponent', () => {
+  let component: SwipeContextNullComponent;
+  let fixture: ComponentFixture<SwipeContextNullComponent>;
 
   beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ LottieComponent ]
+      declarations: [ SwipeContextNullComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LottieComponent);
+    fixture = TestBed.createComponent(SwipeContextNullComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

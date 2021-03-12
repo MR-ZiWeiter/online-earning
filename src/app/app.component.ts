@@ -6,10 +6,10 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 // 导入弹窗组件
-import { WorkIndexedDBService } from './core/models/provider/indexedDB/work-indexedDB.service';
-import { LoggerService } from './core/models/provider/logger/logger.service';
+import { WorkIndexedDBService } from './core/modules/provider/indexedDB/work-indexedDB.service';
+import { LoggerService } from './core/modules/provider/logger/logger.service';
 import { UserService } from './core/services/user/user.service';
-import { ApiUserIndexService } from './core/models/provider/api';
+import { ApiUserIndexService } from './core/modules/provider/api';
 import { SettingsService } from './core/services/settings/settings.service';
 
 import vConsole from 'vconsole';
@@ -146,21 +146,21 @@ export class AppComponent {
 
   public onMainActivate(ev: Event | any): void {
     this.setWxAppTitle(ev.title);
-    // console.log(ev);
+    console.log(ev);
     console.log('当前为主路由：' + ev.checkedTabsName);
     this.isWebView = false;
   }
   public onMainDeactivate(ev: Event | any): void {
-    // console.log(ev);
+    console.log(ev);
     console.log('退出主路由：' + ev.checkedTabsName);
   }
   public onPopupActivate(ev: Event | any): void {
-    // console.log(ev);
+    console.log(ev);
     this.isWebView = true;
     console.log('当前为附属路由：' + ev.activatedRoute.outlet);
   }
   public onPopupDeactivate(ev: Event | any): void {
-    // console.log(ev);
+    console.log(ev);
     console.log('退出附属路由：' + ev.activatedRoute.outlet);
   }
 

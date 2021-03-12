@@ -1,5 +1,5 @@
 export interface LoginForm {
-  phone: number;
-  verificationCode: number;
+  phone: number|string;
+  password: string;
   [propName: string]: any;
 }

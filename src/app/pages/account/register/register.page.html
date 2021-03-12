@@ -1,0 +1,42 @@
+<ion-content class="account-register-page">
+  <section class="register-container">
+    <header class="title-info">
+      <h3 class="title-text">注册账号</h3>
+    </header>
+    <section class="form-model">
+      <section class="custom-input">
+        <swipe-input [(value)]="registerForm.username" type="text" placeholder="请输入您的姓名" [pattern]="'^.{2,6}$'" [isClear]="true" [isRequired]="false"></swipe-input>
+      </section>
+      <section class="custom-input">
+        <swipe-input [(value)]="registerForm.phone" type="number" placeholder="请输入手机号" [isClear]="true"></swipe-input>
+      </section>
+      <section class="custom-input">
+        <swipe-input
+          type="number"
+          [(value)]="registerForm.code"
+          placeholder="请输入验证码"
+          [maxLength]="6"
+          [isClear]="true"
+          [isSuffix]="true">
+          <span name="suffix" class="label-text">获取验证码</span>
+          <span class="label-text">获取验证码</span>
+        </swipe-input>
+      </section>
+      <section class="custom-input">
+        <swipe-input [(value)]="registerForm.password" type="password" placeholder="请输入登录密码" [isClear]="true"></swipe-input>
+      </section>
+      <section class="custom-input">
+        <swipe-input [(value)]="registerForm.check_password" type="password" placeholder="请重新输入密码" [isClear]="true"></swipe-input>
+      </section>
+      <section class="custom-input">
+        <swipe-input [(value)]="registerForm.phone_code" type="text" placeholder="请输入邀请码" [isClear]="true"></swipe-input>
+      </section>
+    </section>
+    <section class="submit-info">
+      <ion-button class="submit-btn" expand="block" color="primary">注册</ion-button>
+    </section>
+    <section class="other-info">
+      <span class="label-text" (click)="openLoginPage()">已有账号，去登录</span>
+    </section>
+  </section>
+</ion-content>

@@ -4,6 +4,8 @@ import { CoreModule } from 'src/app/core/core.module';
 
 import { LoginPage } from './login/login.page';
 import { AutoLoginPage } from './auto-login/auto-login.page';
+import { RegisterPage } from './register/register.page';
+import { ForgotPwdPage } from './forgot-pwd/forgot-pwd.page';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { AutoLoginPage } from './auto-login/auto-login.page';
   ],
   declarations: [
     LoginPage,
-    AutoLoginPage
+    AutoLoginPage,
+    RegisterPage,
+    ForgotPwdPage
   ]
 })
 export class AccountModule { }

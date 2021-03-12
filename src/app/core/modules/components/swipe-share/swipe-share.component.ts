@@ -6,11 +6,11 @@ import wx from 'weixin-js-sdk';
 import { ApiSystemService } from '../../provider/api';
 
 @Component({
-  selector: 'app-share',
-  templateUrl: './share.component.html',
-  styleUrls: ['./share.component.scss']
+  selector: 'swipe-share',
+  templateUrl: './swipe-share.component.html',
+  styleUrls: ['./swipe-share.component.scss']
 })
-export class ShareComponent extends CoreToolsFunction implements OnInit {
+export class SwipeShareComponent extends CoreToolsFunction implements OnInit {
 
   public shareConfig = [
     // {

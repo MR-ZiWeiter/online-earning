@@ -1,13 +1,13 @@
 @import 'mixin';
-.account-login-page {
+.account-register-page {
   @include wh(100%, 100%);
   overflow: hidden;
   --background: #{$default_background_color};
-  .login-container {
+  .register-container {
     @include flex-justify-align(flex-start, center);
     flex-direction: column;
     .title-info {
-      @include wh(100%, format(380));
+      @include wh(100%, format(246));
       @include flex-justify-align(center, center);
       .title-text {
         @include sc(format(44), var(--ion-color-primary));
@@ -16,11 +16,16 @@
     }
     .form-model {
       .custom-input {
-        margin-bottom: format(32);
+        margin-bottom: format(20);
+        .label-text {
+          @include flex-justify-align();
+          @include sc(format(28), $default_color_4);
+          @include wh(format(170), 100%);
+        }
       }
     }
     .submit-info {
-      margin-top: format(68);
+      margin-top: format(40);
       .submit-btn {
         @include wh(format(630), format(92));
         margin: 0;
