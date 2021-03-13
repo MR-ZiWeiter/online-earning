@@ -1,0 +1,84 @@
+@import 'mixin';
+
+.custom-header {
+  .custom-header-component {
+    .other-btn {
+      @include sc(format(28), var(--ion-color-primary));
+      @include click-active();
+      transform: translateY(-50%);
+      position: absolute;
+      right: format(34);
+      top: 50%;
+      font-weight: 500;
+    }
+  }
+}
+
+.upcoming-page {
+  @include wh(100%, 100%);
+  --background: #{$default_background_color};
+  .upcoming-container {
+    @include flex-justify-align(flex-start, center);
+    flex-direction: column;
+    .tools-info {
+      @include wh(format(670), format(252));
+      .count-info {
+        @include wh(100%, auto);
+        @include flex-justify-align(space-between, center);
+        margin-top: format(40);
+        .current-btn,
+        .success-btn {
+          margin: 0;
+          &::part(native) {
+            @include wh(format(326), format(92));
+            @include flex-justify-align();
+            border-radius: format(8);
+          }
+        }
+        .current-btn::part(native) {
+          @include sc(format(32), var(--ion-color-primary));
+          border: format(2) solid $default_color_7_border;
+          background-color: $default_color_7;
+        }
+        .success-btn::part(native) {
+          @include sc(format(32), var(--ion-color-success));
+          border: format(2) solid $default_color_8_border;
+          background-color: $default_color_8;
+        }
+      }
+      .new-card-btn {
+        @include wh(100%, format(92));
+        margin: 0;
+        margin-top: format(28);
+        &::part(native) {
+          @include sc(format(32), $default_color);
+          background-color: var(--ion-color-primary);
+          border-radius: format(8);
+          font-weight: 400;
+        }
+      }
+    }
+    .line-info {
+      @include wh(format(670), format(98));
+      @include flex-justify-align(center, center);
+      position: relative;
+      margin: 0 format(40);
+      &::before {
+        content: '';
+        @include wh(40%, format(2));
+        background-color: $default_color_9;
+        margin-right: format(18);
+      }
+      &::after {
+        content: '';
+        @include wh(40%, format(2));
+        background-color: $default_color_9;
+        margin-left: format(18)
+      }
+      .label-text {
+        @include sc(format(24), $default_color_9);
+        font-weight: 400;
+      }
+    }
+  }
+}

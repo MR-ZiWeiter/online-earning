@@ -45,7 +45,7 @@ export class AuthService extends CoreToolsFunction {
   // 登出
   public logout(): void {
     this.userService.setUserBasicInfo(null);
-    this.userService.setWxAppToken(null);
+    this.userService.setAppToken(null);
     this.router.navigate(['/pages/account/login']);
   }
 }

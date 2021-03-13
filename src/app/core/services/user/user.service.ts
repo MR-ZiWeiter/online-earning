@@ -13,7 +13,7 @@ export class UserService {
   // 初始化时获取TOken
   constructor() {
     this.getToken();
-    this.setWxAppToken(this.token);
+    this.setAppToken(this.token);
   }
   // 获取用户基本信息数据
   public getUserBasicInfo(): Observable<any> {
@@ -47,7 +47,7 @@ export class UserService {
   }
 
   // 暴露更新Tokeo方法
-  public setWxAppToken(info: string): void {
+  public setAppToken(info: string): void {
     this.setToken(info);
     this.$WxAppToken.next(info);
   }

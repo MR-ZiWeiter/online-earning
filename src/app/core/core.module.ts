@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SwipeEyeCareModeComponent } from './modules/components/swipe-eye-care-mode/swipe-eye-care-mode.component';
 import { SwipeContextNullComponent } from './modules/components/swipe-context-null/swipe-context-null.component';
+import { SwipeHeaderComponent } from './modules/components/swipe-header/swipe-header.component';
 import { SwipeLottieComponent } from './modules/components/swipe-lottie/swipe-lottie.component';
 import { SwipeShareComponent } from './modules/components/swipe-share/swipe-share.component';
 import { SwipeInputComponent } from './modules/components/swipe-input/swipe-input.component';
@@ -22,7 +23,8 @@ import { TabsService } from './services/tabs/tabs.service';
     SwipeContextNullComponent,
     SwipeLottieComponent,
     SwipeShareComponent,
-    SwipeInputComponent
+    SwipeInputComponent,
+    SwipeHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { TabsService } from './services/tabs/tabs.service';
     SwipeLottieComponent,
     SwipeShareComponent,
     SwipeInputComponent,
+    SwipeHeaderComponent
   ]
 })
 export class CoreModule { }

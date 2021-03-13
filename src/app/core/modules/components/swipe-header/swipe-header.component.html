@@ -1,0 +1,29 @@
+<section [ngClass]="[!customHeader ? 'swipe-header-component' : 'cusotm-header-class']">
+  <ng-container *ngIf="customHeader">
+    <ng-content select="[name=all]"></ng-content>
+  </ng-container>
+  <ng-container v-else>
+    <ng-container *ngIf="customLeft">
+      <ng-content select="[name=left]"></ng-content>
+    </ng-container>
+    <ng-container v-else>
+      <section class="public-left-slot" (click)="handlerLeftEvent()" *ngIf="isBack">
+        <ion-img class="public-left-icon" [src]="renderLeftIcon"></ion-img>
+      </section>
+    </ng-container>
+    <ng-container *ngIf="customCenter">
+      <ng-content select="[name=center]"></ng-content>
+    </ng-container>
+    <ng-container v-else>
+      <span class="public-title-text">{{title}}</span>
+    </ng-container>
+    <ng-container *ngIf="customRight">
+      <ng-content select="[name=right]"></ng-content>
+    </ng-container>
+    <ng-container v-else>
+      <section class="public-right-slot">
+        <ng-content select="[name=right]"></ng-content>
+      </section>
+    </ng-container>
+  </ng-container>
+</section>

@@ -24,7 +24,7 @@ export class AutoLoginPage implements OnInit {
 
   ngOnInit() {
     if (this.options.token) {
-      this.userService.setWxAppToken(this.options.token);
+      this.userService.setAppToken(this.options.token);
       if (this.options.redirectUrl) {
         if (this.options.redirectUrl.includes('https://') || this.options.redirectUrl.includes('http://')) {
           window.location.href = decodeURIComponent(this.options.redirectUrl);

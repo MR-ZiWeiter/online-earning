@@ -1,0 +1,83 @@
+@import 'mixin';
+.task-info-cell-component {
+  @include wh(format(670), format(512));
+  @include bgBorderRadius($default_color, format(8), 0);
+  overflow: hidden;
+  .header-info {
+    @include wh(100%, format(74));
+    @include flex-justify-align(space-between, center);
+    border-bottom: format(2) solid $default_border_color;
+    padding: 0 format(30);
+    .label-text {
+      @include sc(format(24), $default_color_3);
+      font-weight: bold;
+    }
+    .value-text {
+      @include sc(format(24), var(--ion-color-primary));
+      font-weight: bold;
+    }
+  }
+  .content-info {
+    @include flex-justify-align(flex-start, flex-start);
+    flex-direction: column;
+    .product-info {
+      @include flex-justify-align(flex-start, center);
+      margin: format(32) format(32) format(20);
+      .pruduct-image::part(image) {
+        @include wh(format(132), format(132));
+      }
+      .infos {
+        @include flex-justify-align(center, flex-start);
+        flex-direction: column;
+        margin-left: format(20);
+        .infos-item {
+          @include flex-justify-align(flex-start, center);
+          &:first-child {
+            .label-text {
+              letter-spacing: format(14);
+            }
+          }
+          .label-text {
+            @include wh(format(138), format(46));
+            @include flex-justify-align(flex-start, center);
+            @include sc(format(28), $default_color_4);
+          }
+          .value-text {
+            @include sc(format(28), $default_color_3);
+            margin-left: format(4);
+            &.light {
+              color: var(--ion-color-primary);
+            }
+          }
+        }
+      }
+    }
+    .task-info {
+      @include flex-justify-align(flex-start, flex-start);
+      flex-direction: column;
+      .task-info-item {
+        @include wh(100%, format(50));
+        @include flex-justify-align(flex-start, center);
+        margin: 0 format(30);
+        .label-text {
+          @include sc(format(28), $default_color_4);
+          font-weight: 400;
+        }
+        .value-text {
+          @include sc(format(28), $default_color_3);
+          font-weight: 400;
+          margin-left: format(4);
+        }
+      }
+    }
+    .start-btn {
+      margin: format(15) format(30) 0;
+      .start-btn-custom {
+        &::part(native) {
+          @include wh(format(606), format(92));
+          border-radius: format(8);
+        }
+      }
+    }
+  }
+}

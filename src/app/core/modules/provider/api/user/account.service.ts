@@ -17,7 +17,7 @@ export class UserAccountService {
   asyncAccountLoginRegister(info: LoginForm): Observable<any> {
     return new Observable(observer => {
       this.http.post('/service/login/phone', info, {}, {}).subscribe((res: ApiResponseModel) => {
-        this.userService.setWxAppToken(res.rel);
+        this.userService.setAppToken(res.rel);
         observer.next(res);
       }, err => {
         console.log(err);
@@ -73,7 +73,7 @@ export class UserAccountService {
   asyncAccountLogoutOff(info: any): Observable<any> {
     return new Observable(observer => {
       this.http.post('/service/user/writeOff', info, {}, info).subscribe((res: ApiResponseModel) => {
-        this.userService.setWxAppToken(null);
+        this.userService.setAppToken(null);
         observer.next(res);
       }, err => {
         console.log(err);

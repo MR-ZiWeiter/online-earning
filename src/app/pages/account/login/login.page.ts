@@ -5,6 +5,7 @@ import { LoggerService } from './../../../core/modules/provider/logger/logger.se
 import { UserAccountService } from 'src/app/core/modules/provider/api';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { WebviewService } from 'src/app/core/services/webview/webview.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,6 +34,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private toastController: ToastController,
     private userAccountService: UserAccountService,
+    private userService: UserService,
     private authService: AuthService,
     private logger: LoggerService) { }
 
@@ -80,12 +82,11 @@ export class LoginPage implements OnInit {
   // 提交
   public submitChange(): void {
     // console.log(this.loginForm);
-    this.userAccountService.asyncAccountLoginRegister(this.loginForm).subscribe(res => {
-      // console.log(this.navControl);
-      // if (this.navControl.direction
-      // this.navControl.back();
-      this.router.navigate(['/']);
-    }, err => {});
+    this.userService.setAppToken('1234567890');
+    this.router.navigate(['/'])
+    // this.userAccountService.asyncAccountLoginRegister(this.loginForm).subscribe(res => {
+    //   this.router.navigate(['/']);
+    // }, err => {});
   }
 
   /* 注册新账户 */

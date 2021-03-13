@@ -1,3 +1,50 @@
-<p>
-  upcoming works!
-</p>
+<ion-header class="custom-header">
+  <swipe-header class="custom-header-component" title="代办事宜" [isBack]="false" [customRight]="true">
+    <span (click)="openMenuInfo()" name="right" class="other-btn">选择名片</span>
+  </swipe-header>
+</ion-header>
+
+<ion-content class="upcoming-page">
+  <section class="upcoming-container">
+    <!-- 操作类 -->
+    <section class="tools-info">
+      <section class="count-info">
+        <ion-button class="current-btn" color="primary">正在进行5个任务</ion-button>
+        <ion-button class="success-btn" color="success">已完成10个任务</ion-button>
+      </section>
+      <ion-button class="new-card-btn" color="primary">添加新名片</ion-button>
+    </section>
+    <!-- 分割线 -->
+    <section class="line-info">
+      <span class="label-text">代办任务</span>
+    </section>
+    <!-- 任务列表 -->
+    <section class="task-info">
+      <section class="task-info-item">
+        <swipe-task-info-cell></swipe-task-info-cell>
+      </section>
+    </section>
+  </section>
+</ion-content>
+
+<!-- 侧窗 -->
+<ion-menu side="end" type="push" contentId="main">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>选择名片</ion-title>
+      <ion-buttons slot="primary">
+        <ion-button color="medium">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <section class="header-info">
+
+    </section>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main"></ion-router-outlet>
+

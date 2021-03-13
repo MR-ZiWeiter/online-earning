@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-upcoming',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpcomingComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private menu: MenuController
+  ) { }
 
   ngOnInit() {
+  }
+
+  public openMenuInfo() {
+    this.menu.open('end');
   }
 
 }

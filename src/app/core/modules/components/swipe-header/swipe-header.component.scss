@@ -1,0 +1,26 @@
+@import 'mixin';
+.swipe-header-component {
+  @include flex-justify-align(center, center);
+  @include wh(100%, format(88));
+  padding-top: var(--status-bar-height);
+  background: $default_color;
+  position: relative;
+  flex: 0 0 format(88);
+  .public-left-slot {
+    @include wh(auto, format(88));
+    @include flex-justify-align(center);
+    @include click-active();
+    position: absolute;
+    left: 0;
+    top: var(--status-bar-height);
+    .public-left-icon {
+      @include wh(format(20), format(36));
+      margin: format(26) format(38);
+    }
+  }
+  .public-title-text {
+    @include sc(format(34), $default_color_1);
+    align-self: center;
+    justify-self: center;
+  }
+}
