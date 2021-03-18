@@ -1,7 +1,7 @@
 @import 'mixin';
 .swipe-input-component {
   @include flex-justify-align(flex-start, center);
-  @include wh(format(630), format(92));
+  @include wh(100%, 100%);
   border: format(2) solid $default_border_color;
   border-radius: format(8);
   overflow: hidden;
@@ -17,15 +17,20 @@
   &.error {
     border-color: var(--ion-color-danger);
   }
+  &.no-border {
+    border: none;
+  }
   .prefix,
   .suffix {
     height: 100%;
+    @include flex-justify-align(center);
   }
   .context-input {
     @include wh(100%, 100%);
     @include flex-justify-align(center, flex-start);
     margin: 0 format(30);
     position: relative;
+    flex: 1;
     .input-class {
       @include wh(100%, 100%);
       @include sc(format(28), $default_color_2);

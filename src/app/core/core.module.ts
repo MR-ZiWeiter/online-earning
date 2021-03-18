@@ -1,3 +1,4 @@
+import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-upload.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +9,7 @@ import { SwipeHeaderComponent } from './modules/components/swipe-header/swipe-he
 import { SwipeLottieComponent } from './modules/components/swipe-lottie/swipe-lottie.component';
 import { SwipeShareComponent } from './modules/components/swipe-share/swipe-share.component';
 import { SwipeInputComponent } from './modules/components/swipe-input/swipe-input.component';
+import { SwipeCheckboxComponent } from './modules/components/swipe-checkbox/swipe-checkbox.component';
 
 // API接口类服务模块
 import { ApiServiceModule } from './modules/provider/api/index.module';
@@ -24,7 +26,9 @@ import { TabsService } from './services/tabs/tabs.service';
     SwipeLottieComponent,
     SwipeShareComponent,
     SwipeInputComponent,
-    SwipeHeaderComponent
+    SwipeHeaderComponent,
+    SwipeUploadComponent,
+    SwipeCheckboxComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +49,9 @@ import { TabsService } from './services/tabs/tabs.service';
     SwipeLottieComponent,
     SwipeShareComponent,
     SwipeInputComponent,
-    SwipeHeaderComponent
+    SwipeHeaderComponent,
+    SwipeUploadComponent,
+    SwipeCheckboxComponent
   ]
 })
 export class CoreModule { }

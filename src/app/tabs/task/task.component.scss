@@ -1,0 +1,157 @@
+@import 'mixin';
+
+.custom-header {
+  .custom-header-component {
+    .other-btn {
+      @include sc(format(28), var(--ion-color-primary));
+      @include click-active();
+      transform: translateY(-50%);
+      position: absolute;
+      right: format(34);
+      top: 50%;
+      font-weight: 500;
+    }
+  }
+}
+
+.custom-tab-info {
+  .custom-segment {
+    @include wh(100%, format(80));
+    background: $default_color;
+    border-radius: 0;
+    flex: 0 0 format(80);
+    .custom-segament-button {
+      &.segment-button-checked {
+        .custom-sty {
+          @include sc(format(28), var(--ion-color-primary));
+        }
+      }
+      .custom-sty {
+        @include sc(format(28), $default_color_2);
+      }
+    }
+    .custom-segament-button::before {
+      display: none;
+    }
+    .custom-segament-button::part(indicator) {
+      @include wh(100%, 100%);
+      inset: inherit;
+      &::after {
+        content: '';
+        @include wh(100%, format(2));
+        background: var(--ion-color-primary);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+    .custom-segament-button::part(indicator-background) {
+      display: none;
+    }
+  }
+}
+
+.task-page {
+  @include wh(100%, 100%);
+  --background: #{$default_background_color};
+  .task-container {
+    @include wh(100%, 100%);
+    @include flex-justify-align(flex-start, center);
+    flex-direction: column;
+    .task-info {
+      flex: 1;
+      margin-top: format(40);
+      background: transparent;
+      .task-info-item {
+        margin-bottom: format(30);
+        .custom-handler {
+          @include wh(100%, format(116));
+          @include flex-justify-align(flex-end, center);
+          border-top: format(1) solid $default_border_color;
+          margin-top: format(30);
+          padding: format(30);
+          .hand-view,
+          .cancel {
+            margin: 0 0 0 format(12);
+            @include flex-justify-align(center, center);
+            &::part(native) {
+              @include wh(auto, format(56));
+              @include flex-justify-align(center, center);
+              @include sc(format(24), $default_color);
+              font-weight: 400;
+              border-radius: format(8);
+            }
+          }
+          .hand-view::part(native) {
+            background-color: var(--ion-color-primary);
+          }
+          .cancel::part(native) {
+            background-color: $default_color;
+            color: $default_color_2;
+            border: format(2) solid $default_border_color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.custom-side-menu {
+  .platform-info {
+    @include wh(100%, auto);
+    margin-top: format(12);
+    background-color: $default_color;
+    .platform-item {
+      @include wh(100%, format(88));
+      @include flex-justify-align(space-between, center);
+      overflow: hidden;
+      padding: 0 format(30);
+      position: relative;
+      .label-text {
+        @include sc(format(30), $default_color_3);
+        font-weight: 400;
+      }
+      .icon-arrow {
+        position: absolute;
+        right: format(30);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .value-text {
+        padding-right: format(40);
+        @include sc(format(30), $default_color_4);
+      }
+      .code-input {
+        @include wh(100%, 100%);
+        border: none;
+        outline: none;
+        flex: 1;
+        &::placeholder {
+          @include sc(format(30), #C0C4CC);
+        }
+      }
+    }
+  }
+
+  .btn-group {
+    @include wh(100%, format(152));
+    @include flex-justify-align(center, center);
+    .btn-search {
+      @include wh(format(222), format(80));
+      background-color: var(--ion-color-parmary);
+      border-radius: format(8);
+    }
+    .btn-reset {
+      @include wh(format(222), format(80));
+      background-color: $default_color;
+      border-radius: format(8);
+      border: format(2) solid $default_border_color;
+    }
+  }
+
+  .content-info {
+    &::part(background) {
+      background-color: $default_background_color;
+    }
+  }
+}

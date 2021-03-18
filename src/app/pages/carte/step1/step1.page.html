@@ -1,0 +1,16 @@
+<ion-content class="step1-component">
+  <section class="custom-input">
+    <swipe-input
+      [(value)]="username"
+      [isBorder]="false"
+      type="text"
+      placeholder="请输入您的名片ID"
+      [isPrefix]="true"
+      [isSuffix]="true"
+      [isClear]="true"
+      [isRequired]="true">
+      <span class="label-text" name="prefix">名片ID：</span>
+      <button class="btn-view" name="suffix">解析</button>
+    </swipe-input>
+  </section>
+</ion-content>

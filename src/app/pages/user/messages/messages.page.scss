@@ -1,0 +1,29 @@
+@import 'mixin';
+
+.custom-header {
+  .custom-header-component {
+    .other-btn {
+      @include sc(format(28), var(--ion-color-primary));
+      @include click-active();
+      transform: translateY(-50%);
+      position: absolute;
+      right: format(34);
+      top: 50%;
+      font-weight: 500;
+    }
+  }
+}
+
+.messages-page {
+  --background: #{$default_background_color};
+  .content {
+    margin-top: format(20);
+  }
+}
+
+// .messages-page {
+//   @include wh(100%, 100%);
+//   .content {
+//     @include wh(100%, 100%);
+//   }
+// }

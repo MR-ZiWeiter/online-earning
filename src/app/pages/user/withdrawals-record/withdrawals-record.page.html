@@ -1,0 +1,25 @@
+<ion-header class="custom-header">
+  <swipe-header class="custom-header-component" title="消息列表" [isBack]="true"></swipe-header>
+</ion-header>
+
+<ion-content class="withdrawals-record-page">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      pullingText="下拉刷新"
+      refreshingSpinner="bubbles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="content">
+    <swipe-info-cell></swipe-info-cell>
+    <swipe-info-cell></swipe-info-cell>
+    <swipe-info-cell></swipe-info-cell>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="正在加载更多数据...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

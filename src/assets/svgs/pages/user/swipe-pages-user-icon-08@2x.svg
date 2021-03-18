@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #303133;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+
+      .cls-3 {
+        fill: #303133;
+      }
+    </style>
+  </defs>
+  <g id="组_21332" data-name="组 21332" transform="translate(-239 -261)">
+    <rect id="矩形_2549" data-name="矩形 2549" class="cls-1" width="20" height="20" transform="translate(239 261)"/>
+    <g id="组_21331" data-name="组 21331">
+      <path id="路径_23791" data-name="路径 23791" class="cls-2" d="M254.66,268.454a5.722,5.722,0,0,0-11.16,0"/>
+      <path id="路径_23792" data-name="路径 23792" class="cls-2" d="M254.66,272.546A5.725,5.725,0,0,1,249.08,277"/>
+      <path id="路径_23793" data-name="路径 23793" class="cls-2" d="M243.366,272.5H244.5v-4h-1.134a.794.794,0,0,0-.866.693v2.614A.794.794,0,0,0,243.366,272.5Z"/>
+      <path id="路径_23794" data-name="路径 23794" class="cls-2" d="M254.634,272.5H253.5v-4h1.134a.794.794,0,0,1,.866.693v2.614A.794.794,0,0,1,254.634,272.5Z"/>
+      <circle id="椭圆_2275" data-name="椭圆 2275" class="cls-3" cx="1" cy="1" r="1" transform="translate(248.08 276)"/>
+    </g>
+  </g>
+</svg>

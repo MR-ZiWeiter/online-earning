@@ -1,0 +1,11 @@
+<section class="swipe-checkbox-component">
+  <section class="check-box-group">
+    <label [ngClass]="['check-item', item.isCheck ? 'check' : 'no-check']" *ngFor="let item of checkboxRender">
+      <span class="check-box">
+        <input type="checkbox" [(ngModel)]="item.isCheck" class="check-box-input">
+        <span class="check-inner"></span>
+      </span>
+      <span class="label-text">{{item.label}}</span>
+    </label>
+  </section>
+</section>

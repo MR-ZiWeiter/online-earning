@@ -1,0 +1,34 @@
+@import 'mixin';
+.swipe-upload-component {
+  @include flex-justify-align(flex-start, flex-start);
+  flex-wrap: wrap;
+  .info-item {
+    @include wh(format(150), format(150));
+    @include flex-justify-align(center, center);
+    position: relative;
+    margin: 0 format(20) format(20) 0;
+    border-radius: format(8);
+    .image-info {
+      @include wh(100%, 100%);
+    }
+    .icon-close {
+      @include wh(format(30), format(30));
+      @include click-active();
+      position: absolute;
+      top: format(-15);
+      right: format(-15);
+    }
+  }
+  .add-item {
+    @include wh(format(150), format(150));
+    @include flex-justify-align(center, center);
+    @include click-active();
+    margin: 0 0 format(20) 0;
+    background-color: $bgColors;
+    border-radius: format(8);
+    .icon-add {
+      // @include wh(format(30), format(30));
+      font-size: format(50);
+    }
+  }
+}

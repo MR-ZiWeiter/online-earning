@@ -1,0 +1,23 @@
+@import 'mixin';
+.business-card-info-component {
+  @include wh(100%, format(266));
+  background-color: $default_color;
+  border-bottom: format(1) solid $default_border_color;
+  padding: 0 format(30);
+  .header-info {
+    @include wh(100%, format(98));
+    @include flex-justify-align(flex-start, center);
+  }
+  .btn-group {
+    .btn-item {
+      @include sc(format(24), $default_color_3);
+      padding: format(12) format(24);
+      border: format(2) solid #DCDFE6;
+      border-radius: format(8);
+      font-weight: 400;
+      margin: format(0) format(12) format(16) 0;
+      outline: none;
+      background-color: $default_color;
+    }
+  }
+}

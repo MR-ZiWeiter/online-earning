@@ -17,6 +17,7 @@ export class SwipeInputComponent implements OnInit {
   @Input() public type!: string;
   @Input() public pattern!: RegExp;
   @Input() public isRequired: boolean = false;
+  @Input() public isBorder: boolean = true;
 
   @Input() public isPrefix: boolean = false;
   @Input() public isSuffix: boolean = false;

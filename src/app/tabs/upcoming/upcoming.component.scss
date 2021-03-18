@@ -29,6 +29,7 @@
         .current-btn,
         .success-btn {
           margin: 0;
+          @include wh(format(326), format(92));
           &::part(native) {
             @include wh(format(326), format(92));
             @include flex-justify-align();
@@ -79,6 +80,66 @@
         @include sc(format(24), $default_color_9);
         font-weight: 400;
       }
+    }
+  }
+}
+
+.custom-side-menu {
+  .platform-info {
+    @include wh(100%, auto);
+    margin-top: format(12);
+    background-color: $default_color;
+    .platform-item {
+      @include wh(100%, format(88));
+      @include flex-justify-align(space-between, center);
+      overflow: hidden;
+      padding: 0 format(30);
+      position: relative;
+      .label-text {
+        @include sc(format(30), $default_color_3);
+        font-weight: 400;
+      }
+      .icon-arrow {
+        position: absolute;
+        right: format(30);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .value-text {
+        padding-right: format(40);
+        @include sc(format(30), $default_color_4);
+      }
+      .code-input {
+        @include wh(100%, 100%);
+        border: none;
+        outline: none;
+        flex: 1;
+        &::placeholder {
+          @include sc(format(30), #C0C4CC);
+        }
+      }
+    }
+  }
+
+  .btn-group {
+    @include wh(100%, format(152));
+    @include flex-justify-align(center, center);
+    .btn-search {
+      @include wh(format(222), format(80));
+      background-color: var(--ion-color-parmary);
+      border-radius: format(8);
+    }
+    .btn-reset {
+      @include wh(format(222), format(80));
+      background-color: $default_color;
+      border-radius: format(8);
+      border: format(2) solid $default_border_color;
+    }
+  }
+
+  .content-info {
+    &::part(background) {
+      background-color: $default_background_color;
     }
   }
 }

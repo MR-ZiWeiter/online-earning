@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { PagesRoutesModule } from './pages.routing';
 
 @NgModule({
-  declarations: [],
   imports: [
-    PagesRoutesModule
+    PagesRoutesModule,
   ],
-  exports: []
+  exports: [],
+  declarations: [],
 })
 export class PagesModule { }

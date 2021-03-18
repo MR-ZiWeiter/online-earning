@@ -1,0 +1,20 @@
+<ion-header class="custom-header">
+  <swipe-header class="custom-header-component" title="提现申请" [isBack]="true"></swipe-header>
+</ion-header>
+
+<ion-content class="change-pdw-page">
+  <section class="form-model">
+    <section class="custom-input">
+      <swipe-input [(value)]="registerForm.old_password" type="password" placeholder="请输入原密码" [isClear]="true"></swipe-input>
+    </section>
+    <section class="custom-input">
+      <swipe-input [(value)]="registerForm.password" type="password" placeholder="请输入登录密码" [isClear]="true"></swipe-input>
+    </section>
+    <section class="custom-input">
+      <swipe-input [(value)]="registerForm.check_password" type="password" placeholder="请重新输入密码" [isClear]="true"></swipe-input>
+    </section>
+  </section>
+  <section class="submit-info">
+    <ion-button class="submit-btn" expand="block" color="primary">确认提交</ion-button>
+  </section>
+</ion-content>

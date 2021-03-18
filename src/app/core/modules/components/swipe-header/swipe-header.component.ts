@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { environment } from '@app/env';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'swipe-header',
@@ -72,7 +73,7 @@ export class SwipeHeaderComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  constructor(private navController: NavController) { }
 
   ngOnInit() {
   }
@@ -84,6 +85,7 @@ export class SwipeHeaderComponent implements OnInit {
     } else {
       switch(this.type) {
         case 1:
+          this.navController.back();
           break
         case 2:
           break

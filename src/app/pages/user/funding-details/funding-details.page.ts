@@ -1,0 +1,37 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'swipe-funding-details',
+  templateUrl: './funding-details.page.html',
+  styleUrls: ['./funding-details.page.scss'],
+})
+export class FundingDetailsPage implements OnInit {
+
+  public buysArray: any[] = []
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  public doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
+    setTimeout(() => {
+      console.log('Done');
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      if (this.buysArray.length == 1000) {
+        event.target.disabled = true;
+      }
+    }, 500);
+  }
+
+}

@@ -1,11 +1,11 @@
+import { CoreModule } from 'src/app/core/core.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CoreModule,
     RouterModule.forChild([
       { path: '', component: UserComponent }
     ])

@@ -1,3 +1,23 @@
-<p>
-  user works!
-</p>
+<ion-content class="user-page">
+  <section class="anthor-info">
+    <img src="/" class="anthor-img" alt="/">
+    <section class="anthor-info-intro">
+      <span class="title-text">兴业网袜</span>
+      <span class="label-text">余额：1595元</span>
+    </section>
+  </section>
+  <section class="nav-group">
+    <section class="nav-min-group" *ngFor="let item of menuRenderConfig; let i=index">
+      <section class="nav-item" *ngFor="let citem of item; let ci=index" [routerLink]="citem.url">
+        <section class="icon-info">
+          <ion-img class="icon-img" [src]="citem.icon"></ion-img>
+          <span class="label-text">{{citem.label}}</span>
+        </section>
+        <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+      </section>
+    </section>
+  </section>
+  <section class="footer-btn">
+    <ion-button class="logout">退出登录</ion-button>
+  </section>
+</ion-content>

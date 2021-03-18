@@ -1,6 +1,7 @@
 <section [ngClass]="['swipe-input-component',
   isFocus ? 'focus' : 'blur',
-  isPass ? 'success' : (value || isRequired ? 'error' : 'no-content')]">
+  isPass ? 'success' : (value || isRequired ? 'error' : 'no-content'),
+  isBorder ? 'border' : 'no-border']">
   <section class="prefix" *ngIf="isPrefix">
     <ng-content select="[name=prefix]"></ng-content>
   </section>

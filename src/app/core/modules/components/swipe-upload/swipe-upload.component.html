@@ -1,0 +1,9 @@
+<section class="swipe-upload-component">
+  <section class="info-item" [ngStyle]="{width: coreTools.pxToVw(size[0]), height: coreTools.pxToVw(size[1])}">
+    <img class="image-info" />
+    <ion-icon *ngIf="!isLock" class="icon-close" name="close-circle-outline"></ion-icon>
+  </section>
+  <section *ngIf="!isLock" class="add-item" [ngStyle]="{width: coreTools.pxToVw(size[0]), height: coreTools.pxToVw(size[1])}">
+    <ion-icon class="icon-add" name="add-outline"></ion-icon>
+  </section>
+</section>

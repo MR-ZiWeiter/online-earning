@@ -1,0 +1,47 @@
+<ion-content class="step2-component">
+  <section class="custom-input">
+    <swipe-input
+      [(value)]="username"
+      [isBorder]="false"
+      type="text"
+      placeholder="请输入您的名片ID"
+      [isPrefix]="true"
+      [isClear]="true"
+      [isRequired]="true">
+      <span class="label-text" name="prefix">名片ID：</span>
+    </swipe-input>
+  </section>
+  <section class="custom-input">
+    <swipe-input
+      [(value)]="username"
+      [isBorder]="false"
+      type="text"
+      placeholder="请备注关系+姓名"
+      [isPrefix]="true"
+      [isClear]="true"
+      [isRequired]="true">
+      <span class="label-text" name="prefix">备注：</span>
+    </swipe-input>
+  </section>
+  <section class="up-load-info">
+    <section class="header-info">
+      <span class="label-text">收货地址截图</span>
+      <span class="intro-text">（可能会收到小礼物）</span>
+    </section>
+    <section class="upload-component">
+      <swipe-upload></swipe-upload>
+    </section>
+  </section>
+  <section class="dot-info">
+    <section class="credibility">
+      <img src="/" class="anthor" />
+      <span class="label-text">信誉等级：4</span>
+    </section>
+    <section class="dot-group">
+      <section class="dot-item">
+        <span class="label-text">男</span>
+        <span class="value-text">性别</span>
+      </section>
+    </section>
+  </section>
+</ion-content>

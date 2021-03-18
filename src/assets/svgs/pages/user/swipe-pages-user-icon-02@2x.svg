@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #303133;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+    </style>
+  </defs>
+  <g id="组_13723" data-name="组 13723" transform="translate(-265 -202.659)">
+    <rect id="矩形_2543" data-name="矩形 2543" class="cls-1" width="20" height="20" transform="translate(265 202.659)"/>
+    <g id="组_13724" data-name="组 13724" transform="translate(0 -0.341)">
+      <rect id="矩形_2544" data-name="矩形 2544" class="cls-2" width="14" height="10.625" rx="2" transform="translate(268 207.688)"/>
+      <line id="直线_77" data-name="直线 77" class="cls-2" x2="13.125" transform="translate(268.438 210.75)"/>
+      <line id="直线_78" data-name="直线 78" class="cls-2" x2="2.625" transform="translate(277.188 213.375)"/>
+    </g>
+  </g>
+</svg>

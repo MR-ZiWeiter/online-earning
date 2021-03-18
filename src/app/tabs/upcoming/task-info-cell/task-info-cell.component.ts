@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'swipe-task-info-cell',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-info-cell.component.scss']
 })
 export class TaskInfoCellComponent implements OnInit {
+
+  @Input() public isCustomHandler: boolean = false;
 
   constructor() { }
 

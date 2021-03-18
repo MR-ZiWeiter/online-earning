@@ -1,0 +1,15 @@
+@import 'mixin';
+
+.contact-info-component {
+  @include flex-justify-align(flex-start, flex-start);
+  padding: format(40) 0;
+  margin: 0 format(30);
+  flex-direction: column;
+  border-bottom: format(2) solid $default_background_color;
+  .info-text {
+    @include sc(format(28), $default_color_3);
+    line-height: format(48);
+    font-weight: 400;
+  }
+}
+

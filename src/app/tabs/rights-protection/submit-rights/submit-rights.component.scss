@@ -1,0 +1,42 @@
+@import 'mixin';
+
+.submit-rights-page {
+  @include wh(100%, 100%);
+  --background: #{$default_background_color};
+  .submit-rights-container {
+    @include wh(100%, 100%);
+    @include flex-justify-align(flex-start, center);
+    flex-direction: column;
+    .submit-rights-info {
+      flex: 1;
+      margin-top: format(40);
+      background: transparent;
+      .submit-rights-info-item {
+        margin-bottom: format(30);
+        .custom-handler {
+          @include wh(calc(100% - #{format(60)}), auto);
+          @include flex-justify-align(flex-start, flex-start);
+          flex-direction: column;
+          border-top: format(1) solid $default_border_color;
+          margin: format(30) format(30) format(20);
+          .handler-info {
+            .title-text {
+              @include sc(format(32), $default_color_2);
+              @include wh(100%, format(94));
+              @include flex-justify-align(flex-start, center);
+              font-weight: bold;
+            }
+            .context-text {
+              @include sc(format(28), $default_color_3);
+            }
+            .context-textarea {
+              @include wh(100%, format(126));
+              border: format(2) solid $default_border_color;
+              border-radius: format(8);
+            }
+          }
+        }
+      }
+    }
+  }
+}

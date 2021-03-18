@@ -1,0 +1,14 @@
+@import 'mixin';
+.step-page {
+  --background: #{$default_background_color};
+  @include wh(100%, auto);
+  .card-list {
+    @include wh(100%, auto);
+    @include flex-justify-align(center);
+    flex-direction: column;
+    background-color: transparent;
+    .custom-task-cell {
+      margin-bottom: format(20);
+    }
+  }
+}

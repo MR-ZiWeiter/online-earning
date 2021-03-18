@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fd0;
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #303133;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+    </style>
+  </defs>
+  <g id="组_21326" data-name="组 21326" transform="translate(107 -3190)">
+    <rect id="Rectangle_2" data-name="Rectangle 2" class="cls-1" width="20" height="20" transform="translate(-107 3190)"/>
+    <g id="组_21327" data-name="组 21327">
+      <path id="路径_18678" data-name="路径 18678" class="cls-2" d="M514,1242.658v-1.606a4.051,4.051,0,0,1,4.051-4.051h0a4.051,4.051,0,0,1,4.051,4.051" transform="translate(-614.989 1954.866)"/>
+      <rect id="矩形_1925" data-name="矩形 1925" class="cls-2" width="12.89" height="10.026" rx="2" transform="translate(-103.383 3197.953)"/>
+      <line id="直线_47" data-name="直线 47" class="cls-2" x2="4.297" transform="translate(-99.086 3202.966)"/>
+    </g>
+  </g>
+</svg>

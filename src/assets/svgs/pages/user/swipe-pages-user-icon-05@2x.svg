@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fd0;
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #1c1e1e;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.2px;
+      }
+    </style>
+  </defs>
+  <g id="icon_客服" transform="translate(0 -1)">
+    <rect id="Rectangle_2" data-name="Rectangle 2" class="cls-1" width="20" height="20" transform="translate(0 1)"/>
+    <g id="组_125" data-name="组 125" transform="translate(-28.602 0.333)">
+      <g id="组_1602" data-name="组 1602" transform="translate(32.102 3.668)">
+        <path id="路径_135" data-name="路径 135" class="cls-2" d="M536.527,418.521v8.516a2.109,2.109,0,0,1-2.083,2.134H526.01a2.109,2.109,0,0,1-2.083-2.134V417.3a2.108,2.108,0,0,1,2.083-2.134h6.6Z" transform="translate(-523.727 -415.171)"/>
+        <line id="直线_43" data-name="直线 43" class="cls-2" x2="5.338" transform="translate(3.757 5.126)"/>
+        <line id="直线_76" data-name="直线 76" class="cls-2" x2="5.338" transform="translate(3.757 8.973)"/>
+      </g>
+    </g>
+  </g>
+</svg>

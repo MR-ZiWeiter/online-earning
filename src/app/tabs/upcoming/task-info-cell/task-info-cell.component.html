@@ -31,8 +31,11 @@
         <span class="value-text">2020-03-01 14:22:22</span>
       </section>
     </section>
-    <section class="start-btn">
+    <section class="start-btn" *ngIf="!isCustomHandler; else customRef">
       <ion-button class="start-btn-custom" color="primary">开始任务</ion-button>
     </section>
+    <ng-template #customRef>
+      <ng-content select="[name=customTemp]"></ng-content>
+    </ng-template>
   </section>
 </section>

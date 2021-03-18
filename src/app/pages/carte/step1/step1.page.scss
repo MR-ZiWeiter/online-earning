@@ -1,0 +1,24 @@
+@import 'mixin';
+.step1-component {
+  --background: #{$default_background_color};
+  .custom-input {
+    @include wh(100%, format(88));
+    background-color: $default_color;
+    padding: 0 format(40);
+    .label-text {
+      @include flex-justify-align(center, center);
+      @include wh(auto, 100%);
+      @include sc(format(30), $default_color_3);
+    }
+    .btn-view {
+      @include wh(auto, format(56));
+      @include sc(format(24), $default_color);
+      @include flex-justify-align(center, center);
+      @include click-active();
+      background-color: var(--ion-color-primary);
+      padding: 0 format(44);
+      border-radius: format(8);
+      outline: none;
+    }
+  }
+}

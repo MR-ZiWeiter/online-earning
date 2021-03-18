@@ -1,0 +1,23 @@
+@import 'mixin';
+.steps-component {
+  @include wh(100%, format(138));
+  @include flex-justify-align(center, center);
+  background-color: $default_background_color;
+  .steps-item {
+    @include flex-justify-align(center, center);
+    .number {
+      @include wh(format(48), format(48));
+      @include flex-justify-align(center, center);
+      border: format(1) solid $default_color_2;
+      border-radius: 50%;
+    }
+    .label-text {
+      @include sc(format(28), $default_color_2);
+      font-weight: 400;
+      margin-left: format(12);
+    }
+  }
+  .icon-arrow {
+    margin: 0 format(34);
+  }
+}

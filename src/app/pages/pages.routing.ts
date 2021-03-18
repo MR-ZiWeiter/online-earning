@@ -4,7 +4,10 @@ import { AuthGuard } from '../core/services/auth/auth.guard';
 // canActivate: [AuthGuard]
 const routes: Routes = [
   { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
-  { path: 'preview', loadChildren: () => import('./preview/preview.module').then( m => m.PreviewModule)}
+  { path: 'preview', loadChildren: () => import('./preview/preview.module').then( m => m.PreviewModule)},
+  /* 添加名片模块 */
+  { path: 'carte', canActivate: [AuthGuard], loadChildren: () => import('./carte/carte.module').then( m => m.CarteModule)},
+  { path: 'user', canActivate: [AuthGuard], loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
 ];
 
 const PagesRoutes = RouterModule.forChild(routes);

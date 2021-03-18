@@ -1,0 +1,38 @@
+<ion-header class="custom-header">
+  <swipe-header class="custom-header-component" title="提交维权" [isBack]="false"></swipe-header>
+</ion-header>
+
+<ion-content class="submit-rights-page" id="main">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      pullingText="下拉刷新"
+      refreshingSpinner="bubbles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <section class="submit-rights-container">
+    <!-- 任务列表 -->
+    <ion-list class="submit-rights-info">
+      <section class="submit-rights-info-item">
+        <swipe-task-info-cell [isCustomHandler]="true">
+          <section class="custom-handler" name="customTemp">
+            <section class="handler-info">
+              <span class="title-text">维权类型</span>
+              <article class="context-text">实际付款比平台多，要求补回</article>
+            </section>
+            <section class="handler-info">
+              <span class="title-text">备注说明</span>
+              <ion-textarea class="context-textarea" placeholder="Enter more information here..."></ion-textarea>
+            </section>
+            <section class="handler-info">
+              <span class="title-text">上传截图</span>
+              <swipe-upload [isLock]="true"></swipe-upload>
+            </section>
+          </section>
+        </swipe-task-info-cell>
+      </section>
+    </ion-list>
+  </section>
+</ion-content>
+

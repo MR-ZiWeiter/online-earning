@@ -1,0 +1,69 @@
+@import 'mixin';
+.swipe-checkbox-component {
+  .check-box-group {
+    @include grid-col-row-gap(repeat(3, auto), auto, auto, format(24));
+    .check-item {
+      @include flex-justify-align(center, center);
+      &.check {
+        .check-box {
+          .check-inner {
+            background-color: var(--ion-color-primary);
+            border-color: var(--ion-color-primary);
+            &::after {
+              position: absolute;
+              display: table;
+              border: format(4) solid #fff;
+              border-top: 0;
+              border-left: 0;
+              transform: rotate(45deg) scale(1) translate(-50%,-50%);
+              opacity: 1;
+              transition: all .2s cubic-bezier(.12,.4,.29,1.46) .1s;
+              content: " ";
+            }
+          }
+        }
+        .label-text {
+          color: var(--ion-color-primary);
+        }
+      }
+      .check-box {
+        .check-box-input {
+          opacity: 0;
+          position: absolute;
+        }
+        .check-inner {
+          @include wh(format(28), format(28));
+          background-color: $default_color;
+          border: format(1) solid $default_border_color;
+          border-radius: format(4);
+          border-collapse: separate;
+          transition: all .3s;
+          display: block;
+          direction: ltr;
+          position: relative;
+          top: 0;
+          left: 0;
+          &::after {
+            position: absolute;
+            top: 46%;
+            left: 18%;
+            display: table;
+            @include wh(format(8), format(14));
+            border: format(1) solid $default_border_color;
+            border-top: 0;
+            border-left: 0;
+            transform: rotate(45deg) scale(0) translate(-50%,-50%);
+            opacity: 0;
+            transition: all .1s cubic-bezier(.71,-.46,.88,.6),opacity .1s;
+            content: " ";
+          }
+        }
+      }
+      .label-text {
+        @include sc(format(28), $default_color_3);
+        font-weight: 400;
+        margin-left: format(16);
+      }
+    }
+  }
+}

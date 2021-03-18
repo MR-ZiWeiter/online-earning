@@ -1,0 +1,74 @@
+@import 'mixin';
+
+.custom-tab-info {
+  .custom-segment {
+    @include wh(100%, format(80));
+    background: $default_color;
+    border-radius: 0;
+    flex: 0 0 format(80);
+    .custom-segament-button {
+      &.segment-button-checked {
+        .custom-sty {
+          @include sc(format(28), var(--ion-color-primary));
+        }
+      }
+      .custom-sty {
+        @include sc(format(28), $default_color_2);
+      }
+    }
+    .custom-segament-button::before {
+      display: none;
+    }
+    .custom-segament-button::part(indicator) {
+      @include wh(100%, 100%);
+      inset: inherit;
+      &::after {
+        content: '';
+        @include wh(100%, format(2));
+        background: var(--ion-color-primary);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+    .custom-segament-button::part(indicator-background) {
+      display: none;
+    }
+  }
+}
+
+.rights-protection-page {
+  @include wh(100%, 100%);
+  --background: #{$default_background_color};
+  .rights-protection-container {
+    @include wh(100%, 100%);
+    @include flex-justify-align(flex-start, center);
+    flex-direction: column;
+    .rights-protection-info {
+      flex: 1;
+      margin-top: format(40);
+      background: transparent;
+      .rights-protection-info-item {
+        margin-bottom: format(30);
+        .custom-handler {
+          @include wh(calc(100% - #{format(60)}), auto);
+          @include flex-justify-align(flex-start, flex-start);
+          flex-direction: column;
+          border-top: format(1) solid $default_border_color;
+          margin: format(30) format(30) format(20);
+          .handler-info {
+            .title-text {
+              @include sc(format(32), $default_color_2);
+              @include wh(100%, format(94));
+              @include flex-justify-align(flex-start, center);
+              font-weight: bold;
+            }
+            .context-text {
+              @include sc(format(28), $default_color_3);
+            }
+          }
+        }
+      }
+    }
+  }
+}

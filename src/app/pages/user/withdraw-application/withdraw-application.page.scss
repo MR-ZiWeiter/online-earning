@@ -1,0 +1,97 @@
+@import 'mixin';
+.withdraw-application-page {
+  @include wh(100%, auto);
+  --background: #{$default_background_color};
+  .count-info {
+    @include flex-justify-align(flex-start, flex-start);
+    @include wh(100%, format(314));
+    background-color: var(--ion-color-primary);
+    flex-direction: column;
+    padding: format(40) format(40);
+    .lable-text {
+      @include sc(format(32), $default_color);
+      font-weight: bold;
+    }
+    .withdraw-info {
+      @include flex-justify-align(flex-start, center);
+      position: relative;
+      border-bottom: format(1) solid #{$default_color}4d;
+      padding-bottom: format(12);
+      margin-top: format(34);
+      &::before {
+        content: '￥';
+        @include sc(format(28), $default_color);
+        align-self: flex-end;
+      }
+      .price-input {
+        @include sc(format(56), $default_color);
+        @include wh(100%, format(80));
+        background: transparent;
+        border: none;
+        outline: none;
+        flex: 1;
+        &::placeholder {
+          @include sc(format(50), $default_color);
+          @include flex-justify-align(flex-start, center);
+        }
+      }
+      .all-count {
+        @include sc(format(28), $default_color);
+        @include click-active();
+        font-weight: 400;
+        margin-top: format(24);
+      }
+    }
+    .count-balance {
+      margin-top: format(20);
+      .lable-text {
+        @include sc(format(28), $default_color);
+        font-weight: 400;
+      }
+    }
+  }
+  .withdraw-intro {
+    margin: format(32) format(40);
+    background-color: $default_color;
+    border-radius: format(8);
+    .title-text {
+      @include sc(format(32), $default_color_2);
+      @include wh(format(670), format(74));
+      @include flex-justify-align(flex-start, center);
+      padding: 0 format(32);
+      border-bottom: format(1) solid $default_border_color;
+    }
+    .type-group {
+      @include flex-justify-align(flex-start, flex-start);
+      flex-direction: column;
+      .type-item {
+        @include flex-justify-align(center, flex-start);
+        @include wh(calc(100% - #{format(64)}), auto);
+        border-bottom: format(1) solid $default_border_color;
+        min-height: format(144);
+        flex-direction: column;
+        margin: 0 format(32);
+        &:last-child {
+          border-bottom: none;
+        }
+        ::ng-deep .label-text {
+          @include sc(format(28), $default_color_2);
+        }
+        .intro {
+          @include sc(format(24), $default_color_3);
+          font-weight: 400;
+          margin-top: format(10);
+        }
+      }
+    }
+  }
+  .footer-btn {
+    @include wh(100%, format(172));
+    @include flex-justify-align(center, flex-start);
+    .submit-btn::part(native) {
+      @include wh(format(670), format(92));
+      @include sc(format(32), $default_color);
+      border-radius: format(8);
+    }
+  }
+}

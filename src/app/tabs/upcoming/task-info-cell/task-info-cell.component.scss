@@ -1,7 +1,8 @@
 @import 'mixin';
 .task-info-cell-component {
-  @include wh(format(670), format(512));
+  @include wh(format(670), auto);
   @include bgBorderRadius($default_color, format(8), 0);
+  min-height: format(512);
   overflow: hidden;
   .header-info {
     @include wh(100%, format(74));

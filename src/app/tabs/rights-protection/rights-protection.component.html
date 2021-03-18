@@ -1,3 +1,52 @@
-<p>
-  rights-protection works!
-</p>
+<ion-header class="custom-header">
+  <swipe-header class="custom-header-component" title="我的维权" [isBack]="false"></swipe-header>
+</ion-header>
+
+<ion-header class="custom-tab-info">
+  <ion-segment class="custom-segment" (ionChange)="segmentChanged($event)" value="action-1">
+    <ion-segment-button class="custom-segament-button" *ngFor="let item of tabConfig" [value]="item.value">
+      <ion-label class="custom-sty">{{item.label}}({{item.number}})</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content class="rights-protection-page" id="main">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      pullingText="下拉刷新"
+      refreshingSpinner="bubbles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <section class="rights-protection-container">
+    <!-- 任务列表 -->
+    <ion-list class="rights-protection-info">
+      <section class="rights-protection-info-item">
+        <swipe-task-info-cell [isCustomHandler]="true">
+          <section class="custom-handler" name="customTemp">
+            <section class="handler-info">
+              <span class="title-text">维权类型</span>
+              <article class="context-text">实际付款比平台多，要求补回</article>
+            </section>
+            <section class="handler-info">
+              <span class="title-text">备注说明</span>
+              <article class="context-text">搜索和指定网址低无法找到，无法继续</article>
+            </section>
+            <section class="handler-info">
+              <span class="title-text">上传截图</span>
+              <swipe-upload [isLock]="true"></swipe-upload>
+            </section>
+          </section>
+        </swipe-task-info-cell>
+      </section>
+    </ion-list>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="正在加载更多数据...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </section>
+</ion-content>
+

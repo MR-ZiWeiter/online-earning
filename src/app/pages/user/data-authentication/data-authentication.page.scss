@@ -1,0 +1,111 @@
+@import 'mixin';
+
+.custom-header {
+  .custom-header-component {
+    .other-btn {
+      @include sc(format(28), var(--ion-color-primary));
+      @include click-active();
+      transform: translateY(-50%);
+      position: absolute;
+      right: format(34);
+      top: 50%;
+      font-weight: 500;
+    }
+  }
+}
+
+.data-authentication-page {
+  --background: #{$default_background_color};
+  .basic-info,
+  .payment-info {
+    .header-info {
+      @include wh(100%, format(104));
+      @include flex-justify-align(flex-start, center);
+      margin-top: format(10);
+      padding: 0 format(40);
+      position: relative;
+      &::before {
+        content: '';
+        @include wh(format(10), format(34));
+        background-color: var(--ion-color-primary);
+        border-radius: 0 format(4) format(4) 0;
+        position: absolute;
+        overflow: hidden;
+        left: 0;
+      }
+      .title-text {
+        @include sc(format(32), $default_color_2);
+        font-weight: bold;
+      }
+    }
+    .group-form {
+      background-color: $default_color;
+      margin: 0 format(40) format(30);
+      padding-bottom: format(6);
+      border-radius: format(8);
+      overflow: hidden;
+      .custom-input {
+        @include wh(100%, format(88));
+        background-color: $default_color;
+        padding: 0 format(40);
+        position: relative;
+        &::before {
+          content: '';
+          @include wh(calc(100% - #{format(80)}), format(2));
+          background: $default_background_color;
+          position: absolute;
+          bottom: 0;
+        }
+        &:last-child {
+          &::before {
+            display: none;
+          }
+        }
+        .label-text {
+          @include flex-justify-align(flex-start, center);
+          @include wh(format(160), 100%);
+          @include sc(format(30), $default_color_3);
+        }
+        .icon-arrow {
+          color: $default_color_3;
+        }
+      }
+      .upload-info {
+        background-color: $default_color;
+        padding: 0 format(40);
+        .label-text {
+          @include wh(100%, format(90));
+          @include sc(format(28), $default_color_3);
+          @include flex-justify-align(flex-start, center);
+          font-weight: 400;
+        }
+        ::ng-deep .icon-add {
+          font-size: format(58);
+        }
+      }
+      .min-title-info {
+        @include wh(auto, format(100));
+        @include flex-justify-align(flex-start, center);
+        border-bottom: format(1) solid $default_background_color;
+        margin: 0 format(32);
+        .label-text {
+          @include sc(format(28), $default_color_3);
+          font-weight: 400;
+        }
+      }
+      .check-box-group {
+        padding: format(32);
+      }
+    }
+  }
+  .footer-btn {
+    @include wh(100%, format(172));
+    @include flex-justify-align(center, flex-start);
+    .submit-btn::part(native) {
+      @include wh(format(670), format(92));
+      @include sc(format(32), $default_color);
+      border-radius: format(8);
+    }
+  }
+}
+
