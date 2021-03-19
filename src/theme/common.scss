@@ -1,0 +1,13 @@
+@import 'mixin';
+
+// Task任务全局类
+ion-modal.custom-task-modal.sc-ion-modal-ios-h,
+ion-modal.custom-task-modal.sc-ion-modal-md-h {
+  --background: transparent;
+  .modal-wrapper {
+    height: format(1100);
+    align-self: flex-end;
+    background: $default_background_color;
+    border-radius: format(8) format(8) 0 0;
+  }
+}

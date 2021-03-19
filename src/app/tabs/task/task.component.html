@@ -27,7 +27,7 @@
       <section class="task-info-item">
         <swipe-task-info-cell [isCustomHandler]="true">
           <section class="custom-handler" name="customTemp">
-            <ion-button class="hand-view">查看</ion-button>
+            <ion-button class="hand-view" (click)="openTaskInfoPage()">查看</ion-button>
             <ion-button class="cancel">取消</ion-button>
           </section>
         </swipe-task-info-cell>
@@ -49,7 +49,7 @@
 </ion-content>
 
 <!-- 侧窗 -->
-<ion-menu class="custom-side-menu" side="end" type="push" contentId="main">
+<ion-menu class="custom-side-menu" menuId="task" side="end" type="push" contentId="main">
   <ion-header>
     <ion-toolbar>
       <ion-title>选择名片</ion-title>

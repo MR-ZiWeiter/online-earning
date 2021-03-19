@@ -1,0 +1,61 @@
+@import 'mixin';
+
+.task-card-component {
+  @include wh(100%, auto);
+  .header-info {
+    @include wh(100%, format(74));
+    @include flex-justify-align(flex-start, flex-end);
+    padding: 0 format(40);
+    position: relative;
+    .title-text {
+      @include sc(format(32), $default_color_2);
+      font-weight: bold;
+    }
+    &::before {
+      @include wh(format(10), format(34));
+      content: '';
+      position: absolute;
+      border-radius: 0 format(4) format(4) 0;
+      background: var(--ion-color-primary);
+      left: 0;
+    }
+  }
+  .step-info {
+    padding: format(15) format(32);
+    margin: 0 format(40);
+    .step-item {
+      @include flex-justify-align(flex-start, center);
+      @include wh(100%, format(56));
+      .label-text {
+        @include sc(format(28), $default_color_4);
+        font-weight: 400;
+      }
+      .value-text {
+        @include sc(format(28), $default_color_3);
+        font-weight: 400;
+        &.light {
+          color: var(--ion-color-primary);
+        }
+      }
+    }
+  }
+  .content-intro {
+    @include wh(format(670), auto);
+    background: $default_color;
+    border-radius: format(8);
+    margin: 0 auto;
+    .min-title {
+      @include wh(100%, format(74));
+      @include flex-justify-align(flex-start, center);
+      border-bottom: format(1) solid $default_border_color;
+      padding: 0 format(32);
+      .title-text {
+        @include sc(format(32), $default_color_3);
+        font-weight: bold;
+      }
+    }
+    .content-html {
+      padding: format(30);
+    }
+  }
+}

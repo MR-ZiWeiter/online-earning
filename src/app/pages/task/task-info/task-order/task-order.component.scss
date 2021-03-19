@@ -1,0 +1,47 @@
+@import 'mixin';
+.task-order-component {
+  @include wh(100%, auto);
+  @include flex-justify-align(flex-start, center);
+  flex-direction: column;
+  .header-info {
+    @include flex-justify-align(flex-start, center);
+    @include wh(100%, format(114));
+    padding: 0 format(40);
+    .lable-text {
+      @include sc(format(32), $default_color_2);
+      font-weight: bold;
+    }
+  }
+  .basic-bord {
+    @include wh(format(670), auto);
+    background: $default_color;
+    border-radius: format(8);
+    .min-title {
+      @include wh(100%, format(74));
+      @include flex-justify-align(flex-start, center);
+      border-bottom: format(1) solid $default_border_color;
+      padding: 0 format(32);
+      .label-text {
+        @include sc(format(32), $default_color_3);
+        font-weight: bold;
+      }
+    }
+    .group {
+      @include flex-justify-align(space-between, flex-start);
+      padding: format(30);
+      flex-direction: column;
+      .item {
+        @include wh(100%, format(56));
+        .label-text {
+          @include sc(format(28), $default_color_4);
+        }
+        .value-text {
+          @include sc(format(28), $default_color_3);
+          &.light {
+            color: var(--ion-color-primary);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import 'mixin';
+
+.task-order-information-component {
+  @include wh(100%, auto);
+  .content-intro {
+    @include wh(format(670), auto);
+    background: $default_color;
+    border-radius: format(8);
+    margin: 0 auto;
+    .min-title {
+      @include wh(100%, format(74));
+      @include flex-justify-align(flex-start, center);
+      border-bottom: format(1) solid $default_border_color;
+      padding: 0 format(32);
+      .title-text {
+        @include sc(format(32), $default_color_3);
+        font-weight: bold;
+      }
+    }
+    .upload-info {
+      padding: 0 format(32);
+      .label-text {
+        @include wh(100%, format(90));
+        @include sc(format(28), $default_color_2);
+        @include flex-justify-align(flex-start, center);
+        font-weight: 400;
+      }
+    }
+  }
+}

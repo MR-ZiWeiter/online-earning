@@ -23,14 +23,17 @@
             </section>
             <section class="handler-info">
               <span class="title-text">备注说明</span>
-              <ion-textarea class="context-textarea" placeholder="Enter more information here..."></ion-textarea>
+              <ion-textarea class="context-textarea" placeholder="请描述您的问题"></ion-textarea>
             </section>
             <section class="handler-info">
               <span class="title-text">上传截图</span>
-              <swipe-upload [isLock]="true"></swipe-upload>
+              <swipe-upload></swipe-upload>
             </section>
           </section>
         </swipe-task-info-cell>
+      </section>
+      <section class="submit-info">
+        <ion-button class="submit-btn" expand="block" color="primary">提交维权</ion-button>
       </section>
     </ion-list>
   </section>

@@ -8,6 +8,7 @@ const routes: Routes = [
   /* 添加名片模块 */
   { path: 'carte', canActivate: [AuthGuard], loadChildren: () => import('./carte/carte.module').then( m => m.CarteModule)},
   { path: 'user', canActivate: [AuthGuard], loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+  { path: 'task', canActivate: [AuthGuard], loadChildren: () => import('./task/task.module').then(m => m.TaskModule) }
 ];
 
 const PagesRoutes = RouterModule.forChild(routes);

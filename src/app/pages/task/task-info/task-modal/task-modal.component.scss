@@ -1,0 +1,36 @@
+@import 'mixin';
+
+.task-modal {
+  position: relative;
+  --background: transparent;
+  .handler {
+    position: absolute;
+    right: format(20);
+    top: format(20);
+    z-index: 9;
+    .icon-close {
+      @include wh(format(44), format(44));
+    }
+  }
+  .content {
+    padding: format(20) 0;
+    .null {
+      margin-top: format(30);
+    }
+  }
+}
+
+.task-modal-footer {
+  @include wh(100%, format(98));
+  @include flex-justify-align(center, center);
+  background: $default_color;
+  .submit-info {
+    @include wh(100%, format(98));
+    @include flex-justify-align(center, center);
+    .submit-btn {
+      @include wh(auto, format(92));
+      flex: 1;
+      margin: 0;
+    }
+  }
+}

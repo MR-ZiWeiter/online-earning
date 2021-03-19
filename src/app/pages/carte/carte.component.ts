@@ -31,7 +31,8 @@ export class CarteComponent implements OnInit {
   }
 
   public openMenuInfo() {
-    this.menu.open('end');
+    this.menu.enable(true, 'carte');
+    this.menu.open('carte');
   }
 
   public async openPlatformPickerEvent() {

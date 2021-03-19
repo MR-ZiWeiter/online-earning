@@ -50,7 +50,8 @@ export class TaskComponent implements OnInit {
   }
 
   public openMenuInfo() {
-    this.menu.open('end');
+    this.menu.enable(true, 'task');
+    this.menu.open('task');
   }
 
   public async openPlatformPickerEvent() {
@@ -73,6 +74,11 @@ export class TaskComponent implements OnInit {
   /* 打开新名片 */
   public openNewCartePage() {
     this.router.navigate(['/pages/carte/step-1'])
+  }
+
+  /* 打开任务详情 */
+  public openTaskInfoPage() {
+    this.router.navigate(['/pages/task/task-info'])
   }
 
   public segmentChanged(ev: any) {

@@ -33,7 +33,24 @@
               @include wh(100%, format(126));
               border: format(2) solid $default_border_color;
               border-radius: format(8);
+              &::placeholder {
+                @include sc(format(28), $default_border_color);
+              }
+              ::ng-deep textarea {
+                padding: format(16) format(20);
+              }
             }
+          }
+        }
+      }
+      .submit-info {
+        @include flex-justify-align(center, center);
+        margin-top: format(40);
+        .submit-btn {
+          @include wh(format(670), format(92));
+          margin: 0;
+          &::part(native) {
+            border-radius: format(8);
           }
         }
       }

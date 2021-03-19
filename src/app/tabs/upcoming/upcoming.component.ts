@@ -34,7 +34,8 @@ export class UpcomingComponent implements OnInit {
   }
 
   public openMenuInfo() {
-    this.menu.open('end');
+    this.menu.enable(true, 'upcoming');
+    this.menu.open('upcoming');
   }
 
   public async openPlatformPickerEvent() {

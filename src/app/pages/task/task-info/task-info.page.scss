@@ -1,0 +1,25 @@
+@import 'mixin';
+
+.task-info-page {
+  --background: #{$default_background_color};
+  .task-info-container {
+    padding-bottom: format(40);
+  }
+}
+
+.task-info-footer {
+  @include wh(100%, format(124));
+  @include flex-justify-align(center, center);
+  .submit-info {
+    @include flex-justify-align(center, center);
+    // margin-top: format(40);
+    .submit-btn {
+      @include wh(format(670), format(92));
+      margin: 0;
+      &::part(native) {
+        border-radius: format(8);
+      }
+    }
+  }
+}
+

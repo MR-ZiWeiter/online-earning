@@ -1,6 +1,9 @@
 @import 'mixin';
 .user-page {
   --background: url('#{$static-host-url}/assets/svgs/pages/user/swipe-pages-user-bg@2x.svg') no-repeat;
+  &::part(background) {
+    background-size: 100% auto;
+  }
   .anthor-info {
     @include wh(100%, format(228));
     @include flex-justify-align(flex-start, center);
