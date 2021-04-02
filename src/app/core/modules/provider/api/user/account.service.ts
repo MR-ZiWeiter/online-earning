@@ -13,11 +13,11 @@ export class UserAccountService {
     private userService: UserService
   ) {}
 
-  // 登录注册
-  asyncAccountLoginRegister(info: LoginForm): Observable<any> {
+  // 登录
+  asyncAccountLogin(info: LoginForm): Observable<any> {
     return new Observable(observer => {
-      this.http.post('/service/login/phone', info, {}, {}).subscribe((res: ApiResponseModel) => {
-        this.userService.setAppToken(res.rel);
+      this.http.post('/login/login/in', {}, {}, info).subscribe((res: ApiResponseModel) => {
+        this.userService.setAppToken(res.rel.token);
         observer.next(res);
       }, err => {
         console.log(err);
@@ -25,43 +25,45 @@ export class UserAccountService {
       });
     });
   }
-  // 发送验证码
+  // 注册
+  asyncAccountRegister(info: RegisterForm): Observable<any> {
+    return new Observable(observer => {
+      this.http.post('/login/register', {}, {}, info).subscribe((res: ApiResponseModel) => {
+        this.userService.setAppToken(res.rel.token);
+        observer.next(res);
+      }, err => {
+        console.log(err);
+        observer.error(false);
+      });
+    });
+  }
+  // 刷新TOKEN
+  asyncAccountRefreshToken(info: any): Observable<any> {
+    return new Observable(observer => {
+      this.http.post('/login/token/refresh', info, {}, info).subscribe((res: ApiResponseModel) => {
+        this.userService.setAppToken(res.rel.token);
+        observer.next(res);
+      }, err => {
+        console.log(err);
+        observer.error(false);
+      });
+    });
+  }
+  // 注册验证码获取
+  asyncFetchAccountRegisterCode(info: any): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/open/sms/code/register', info, {}).subscribe((res: ApiResponseModel) => {
+        observer.next(res);
+      }, err => {
+        console.log(err);
+        observer.error(false);
+      });
+    });
+  }
+  // 获取修改手机号验证码
   asyncFetchAccountLoginRegisterCode(info: any): Observable<any> {
     return new Observable(observer => {
-      this.http.get('/service/sendValidate', info, {}).subscribe((res: ApiResponseModel) => {
-        observer.next(res);
-      }, err => {
-        console.log(err);
-        observer.error(false);
-      });
-    });
-  }
-  // 验证原手机号(更换手机号第一步)
-  asyncAccountVerifyPhone(info: any): Observable<any> {
-    return new Observable(observer => {
-      this.http.post('/service/user/phone/verify', info, {}, {}).subscribe((res: ApiResponseModel) => {
-        observer.next(res);
-      }, err => {
-        console.log(err);
-        observer.error(false);
-      });
-    });
-  }
-  // 绑定新手机号(更换手机号第二步)
-  asyncAccountChangePhone(info: any): Observable<any> {
-    return new Observable(observer => {
-      this.http.post('/service/user/phone/change', info, {}, {}).subscribe((res: ApiResponseModel) => {
-        observer.next(res);
-      }, err => {
-        console.log(err);
-        observer.error(false);
-      });
-    });
-  }
-  // 第一次绑定手机号
-  asyncAccountBindPhone(info: any): Observable<any> {
-    return new Observable(observer => {
-      this.http.post('/service/user/phone/bind', info, {}, {}).subscribe((res: ApiResponseModel) => {
+      this.http.get('/open/sms/code/change/mobile', info, {}).subscribe((res: ApiResponseModel) => {
         observer.next(res);
       }, err => {
         console.log(err);

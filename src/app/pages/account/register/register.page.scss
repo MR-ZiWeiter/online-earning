@@ -17,6 +17,7 @@
     .form-model {
       .custom-input {
         margin-bottom: format(20);
+        @include wh(format(630), format(92));
         .label-text {
           @include flex-justify-align();
           @include sc(format(28), $default_color_4);

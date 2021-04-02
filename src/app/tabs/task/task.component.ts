@@ -1,74 +1,102 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController, PickerController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BusinessInfoComponent } from 'src/app/pages/components/business-info/business-info.component';
+import { BusinessInfoService } from 'src/app/pages/components/business-info/business-info.service';
+import { ApiTaskIndexService } from 'src/app/core/modules/provider/api';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
+  providers: [BusinessInfoService]
 })
 export class TaskComponent implements OnInit {
 
-  public buysArray: any[] = [];
+  public taskRenderConfig: any = {
+    buyerId: null,
+    pageNum: 1,
+    pageSize: 20,
+    status: 1
+  };
+
+  public taskRenderList: any[] = [];
 
   public tabConfig: any[] = [
-    { label: '未开始', number: 2, value: 'action-1' },
-    { label: '进行中', number: 0, value: 'action-2' },
-    { label: '已完成', number: 1, value: 'action-3' },
-    { label: '已取消', number: 0, value: 'action-4' }
+    { label: '未开始', number: 1, value: 1 },
+    { label: '进行中', number: 2, value: 2 },
+    { label: '已完成', number: 3, value: 3 },
+    { label: '已取消', number: 4, value: 4 }
   ];
 
+  @ViewChild('swiperCustomMenu') private swiperCustomMenuComponent: BusinessInfoComponent;
+
   constructor(
-    private menu: MenuController,
     private router: Router,
-    private ionPickerCotroller: PickerController
-  ) { }
+    private toastController: ToastController,
+    private apiTaskIndexService: ApiTaskIndexService,
+    private businessInfoService: BusinessInfoService
+  ) {
+    this.businessInfoService.getBusinessInfoConfig().subscribe(res => {
+      /* 处理名片映射 */
+      if (res && res.selected) {
+        this.taskRenderConfig.buyerId = res.selected;
+
+      }
+    })
+  }
 
   ngOnInit() {
   }
 
-  public doRefresh(event) {
-    console.log('Begin async operation');
+  private async onTaskListInfo(fn?: Function, fn2?: Function) {
+    if (!this.taskRenderConfig.buyerId) {
+      const toast = await this.toastController.create({
+        duration: 2000,
+        color: 'danger',
+        message: '请先选择名片后再试!'
+      })
+      await toast.present();
+      fn2 && fn2();
+      return false;
+    }
+    this.apiTaskIndexService.asyncFetchTaskListInfo(this.taskRenderConfig).subscribe(res => {
+      // console.log(res);
+      fn && fn(res);
+    })
+  }
 
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+  public doRefresh(event?: any) {
+    this.taskRenderConfig.pageNum = 1;
+    this.onTaskListInfo((res) => {
+      this.taskRenderList = res.rel;
+      if (res.length === this.taskRenderConfig.pageSize) {
+        event && (event.target.disabled = false);
+      } else {
+        event && (event.target.disabled = false);
+      }
+      event && event.target.complete();
+    }, () => {
+      event && event.target.complete();
+    })
   }
 
   public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
-    setTimeout(() => {
-      console.log('Done');
+    this.taskRenderConfig.pageNum++;
+    this.onTaskListInfo((res) => {
       event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.buysArray.length == 1000) {
+      if (this.taskRenderConfig.pageSize * (this.taskRenderConfig.pageNum - 1) > this.taskRenderList.length) {
+        this.taskRenderList = this.taskRenderList.concat(res.rel);
         event.target.disabled = true;
+      } else {
+        this.taskRenderList = res.rel;
       }
-    }, 500);
+    });
   }
 
+  /* 打开侧栏菜单 */
   public openMenuInfo() {
-    this.menu.enable(true, 'task');
-    this.menu.open('task');
-  }
-
-  public async openPlatformPickerEvent() {
-    const customPicker = await this.ionPickerCotroller.create({
-      columns: [
-        {
-          name: '选择平台',
-          options: [
-            {
-              text: '淘宝',
-              value: '1'
-            }
-          ]
-        }
-      ]
-    })
-    customPicker.present()
+    this.swiperCustomMenuComponent.openMenuInfo();
   }
 
   /* 打开新名片 */
@@ -77,12 +105,18 @@ export class TaskComponent implements OnInit {
   }
 
   /* 打开任务详情 */
-  public openTaskInfoPage() {
-    this.router.navigate(['/pages/task/task-info'])
+  public openTaskInfoPage(info: any) {
+    this.router.navigate(['/pages/task/task-info', info.id])
   }
 
   public segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
+    // console.log('Segment changed', ev);
+    this.doRefresh();
+  }
+
+  /* 名片回调 */
+  public businessChange(ev: {id: string; key: string}) {
+    this.doRefresh();
   }
 
 }

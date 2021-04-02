@@ -9,11 +9,12 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoggerService } from './../logger/logger.service';
-import { catchError, map, tap, mergeMap, retry } from 'rxjs/operators';
+import { catchError, map, tap, mergeMap, retry, retryWhen, delay } from 'rxjs/operators';
 import { Observable, throwError, timer, of } from 'rxjs';
 import { RequestProcessedHandler } from './handler/request-processed-handler';
 import { RequestPreviewHandler } from './handler/request-preview-handler';
 import { RequestExceptionHandler } from './handler/request-exception-handler';
+import { LoadingController } from '@ionic/angular';
 
 // import {Constants} from '../../../common/Constants';
 
@@ -24,6 +25,7 @@ export class LarkHttpInterceptor implements HttpInterceptor {
 
   constructor(public http: HttpClient,
               public logger: LoggerService,
+              private loadingController: LoadingController,
               private requestProcessedHandler: RequestProcessedHandler,
               private requestPreviewHandler: RequestPreviewHandler,
               private requestExceptionHandler: RequestExceptionHandler) {
@@ -55,9 +57,14 @@ export class LarkHttpInterceptor implements HttpInterceptor {
         }),
         // retry(3),
         catchError((err: any) => {
+          this.loadingController.getTop().then((load: any) => {
+            load && this.loadingController.dismiss();
+          })
+          // retryWhen((err: Observable<any>) => timer(5000))
           throw err;
           // return this.requestExceptionHandler.handle(err);
-        })
-      );
+        }),
+        retryWhen((err: Observable<any>) => timer(5000))
+      )
   }
 }

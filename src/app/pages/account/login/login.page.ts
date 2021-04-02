@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { WebviewService } from 'src/app/core/services/webview/webview.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'pages-account-login',
@@ -15,10 +16,13 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  public loginForm: LoginForm = {
-    phone: null,
-    password: null
-  };
+  // public loginForm: LoginForm = {
+  //   accountType: 1,
+  //   credential: null,
+  //   identifier: null,
+  //   loginMode: 'ACCOUNT_PASSWORD'
+  // };
+  public loginForm!: FormGroup;
   // 获取验证码状态
   public getCodeStatus = false;
   public timeOut = 60;
@@ -29,6 +33,7 @@ export class LoginPage implements OnInit {
   // 登录成功后重定向地址
   public redirectUrl = null;
   constructor(
+    private fb: FormBuilder,
     private webviewService: WebviewService,
     private navControl: NavController,
     private router: Router,
@@ -36,57 +41,33 @@ export class LoginPage implements OnInit {
     private userAccountService: UserAccountService,
     private userService: UserService,
     private authService: AuthService,
-    private logger: LoggerService) { }
+    private logger: LoggerService) {
+      this.loginForm = fb.group({
+        accountType: [1, [Validators.required]],
+        identifier: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/)]],
+        credential: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/)]],
+        loginMode: ['ACCOUNT_PASSWORD', [Validators.required]]
+      })
+    }
 
   ngOnInit() {
   }
-  // 设置倒计时
-  public settingTimeOutEvent(): void {
-    this.getCodeStatus = true;
-    this.timeOut = 60;
-    const getCodeTimer = setInterval(() => {
-      this.timeOut--;
-      if (this.timeOut === 0) {
-        clearInterval(getCodeTimer);
-        this.getCodeStatus = false;
-        this.tipType = 'no';
-      }
-    }, 1000);
-  }
   // 清楚指定值的表单数据
-  public clearInputChange(nameString: string): void {
-    this.loginForm[nameString] = null;
-  }
-  // 手机验证
-  async presentToastWithOptions() {
-    const toast = await this.toastController.create({
-      message: '请输入正确的手机号码!',
-      duration: 2000,
-      color: 'danger',
-      position: 'bottom'
-    });
-    toast.present();
-  }
-  // 获取验证码
-  public fetchCodeEvent(): void {
-    if (!this.loginForm.phone) {
-      this.presentToastWithOptions();
-    } else {
-      this.userAccountService.asyncFetchAccountLoginRegisterCode({
-        phone: this.loginForm.phone
-      }).subscribe((res: any) => {
-        this.settingTimeOutEvent();
-      });
-    }
-  }
+  // public clearInputChange(nameString: string): void {
+  //   this.loginForm[nameString] = null;
+  // }
   // 提交
   public submitChange(): void {
-    // console.log(this.loginForm);
-    this.userService.setAppToken('1234567890');
-    this.router.navigate(['/'])
-    // this.userAccountService.asyncAccountLoginRegister(this.loginForm).subscribe(res => {
-    //   this.router.navigate(['/']);
-    // }, err => {});
+    if (this.loginForm.valid) {
+      this.userAccountService.asyncAccountLogin(this.loginForm.value).subscribe(res => {
+        this.router.navigate(['/']);
+      }, err => {});
+    } else {
+      for (const i in this.loginForm.controls) {
+        this.loginForm.controls[i].markAsDirty();
+        this.loginForm.controls[i].updateValueAndValidity();
+      }
+    }
   }
 
   /* 注册新账户 */

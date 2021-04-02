@@ -15,46 +15,4 @@
   </section>
 </ion-content>
 
-<!-- 侧窗 -->
-<ion-menu class="custom-side-menu" menuId="carte" side="end" type="push" contentId="carte-main">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>选择名片</ion-title>
-      <ion-buttons slot="primary">
-        <ion-button color="medium">
-          <ion-icon name="close-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="content-info">
-    <section class="platform-info">
-      <section class="platform-item" (click)="openPlatformPickerEvent($event)">
-        <span class="label-text">平台：</span>
-        <span class="value-text">淘宝</span>
-        <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-      </section>
-      <section class="platform-item">
-        <span class="label-text">买号：</span>
-        <input class="code-input" type="text" placeholder="请输入要搜索的买号"/>
-      </section>
-    </section>
-    <section class="btn-group">
-      <ion-button color="primary" class="btn-search">查询</ion-button>
-      <ion-button class="btn-reset">清空</ion-button>
-    </section>
-    <ion-content>
-      <ion-list>
-        <swipe-business-card-info></swipe-business-card-info>
-      </ion-list>
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content
-          loadingSpinner="bubbles"
-          loadingText="正在加载更多数据...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </ion-content>
-  </ion-content>
-</ion-menu>
-
-
+<swipe-business-info (change)="businessChange($event)" [menuKey]="'carte-main'" #swiperCustomMenu></swipe-business-info>

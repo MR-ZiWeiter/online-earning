@@ -1,25 +1,27 @@
-<ion-content class="step2-component">
+<ion-content class="step2-component" *ngIf="businessRenderInfo">
   <section class="custom-input">
     <swipe-input
-      [(value)]="username"
+      [(ngModel)]="businessRenderInfo.nickname"
       [isBorder]="false"
       type="text"
       placeholder="请输入您的名片ID"
       [isPrefix]="true"
       [isClear]="true"
+      [disabled]="true"
       [isRequired]="true">
       <span class="label-text" name="prefix">名片ID：</span>
     </swipe-input>
   </section>
   <section class="custom-input">
     <swipe-input
-      [(value)]="username"
+      [(ngModel)]="remark"
       [isBorder]="false"
       type="text"
       placeholder="请备注关系+姓名"
       [isPrefix]="true"
       [isClear]="true"
-      [isRequired]="true">
+      [isRequired]="true"
+      (onBlur)="onRemarkChange()">
       <span class="label-text" name="prefix">备注：</span>
     </swipe-input>
   </section>
@@ -34,14 +36,21 @@
   </section>
   <section class="dot-info">
     <section class="credibility">
-      <img src="/" class="anthor" />
-      <span class="label-text">信誉等级：4</span>
+      <img [src]="businessRenderInfo.avatar" class="anthor" />
+      <span class="label-text">信誉等级：{{businessRenderInfo.reputationLevel}}</span>
     </section>
     <section class="dot-group">
-      <section class="dot-item">
-        <span class="label-text">男</span>
-        <span class="value-text">性别</span>
+      <section class="dot-item" *ngFor="let item of businessRenderInfo.buyerAccountTags|keys">
+        <span class="label-text">{{item.value || '-'}}</span>
+        <span class="value-text">{{item.label}}</span>
       </section>
     </section>
   </section>
 </ion-content>
+
+<ion-footer class="footer">
+  <section class="footer-btn-group">
+    <ion-button class="btn-item" full="outline" color="light" (click)="onNavigateBack()">上一步</ion-button>
+    <ion-button class="btn-item" full="solid" color="primary" (click)="onSubmitChange()">下一步</ion-button>
+  </section>
+</ion-footer>

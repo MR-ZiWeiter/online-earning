@@ -14,18 +14,24 @@
         font-weight: bold;
       }
     }
-    .form-model {
-      .custom-input {
-        margin-bottom: format(32);
+    .form-group {
+      @include flex-justify-align(flex-start, center);
+      flex-direction: column;
+      flex: 1;
+      .form-model {
+        .custom-input {
+          @include wh(format(630), format(92));
+          margin-bottom: format(32);
+        }
       }
-    }
-    .submit-info {
-      margin-top: format(68);
-      .submit-btn {
-        @include wh(format(630), format(92));
-        margin: 0;
-        &::part(native) {
-          border-radius: format(8);
+      .submit-info {
+        margin-top: format(68);
+        .submit-btn {
+          @include wh(format(630), format(92));
+          margin: 0;
+          &::part(native) {
+            border-radius: format(8);
+          }
         }
       }
     }

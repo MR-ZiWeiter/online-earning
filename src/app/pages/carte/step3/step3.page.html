@@ -1,9 +1,5 @@
 <ion-content class="step-page">
   <ion-list class="card-list">
-    <swipe-task-info-cell class="custom-task-cell"></swipe-task-info-cell>
-    <swipe-task-info-cell class="custom-task-cell"></swipe-task-info-cell>
-    <swipe-task-info-cell class="custom-task-cell"></swipe-task-info-cell>
-    <swipe-task-info-cell class="custom-task-cell"></swipe-task-info-cell>
-    <swipe-task-info-cell class="custom-task-cell"></swipe-task-info-cell>
+    <swipe-task-info-cell *ngFor="let item of saloonRenderArray" [renderInfo]="item" class="custom-task-cell"></swipe-task-info-cell>
   </ion-list>
 </ion-content>

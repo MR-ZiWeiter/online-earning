@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TaskInfoPage } from './task-info/task-info.page';
 
 const routes: Routes = [
-  { path: 'task-info', component: TaskInfoPage }
+  { path: 'task-info/:id', component: TaskInfoPage }
 ];
 
 @NgModule({

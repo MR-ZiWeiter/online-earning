@@ -1,9 +1,11 @@
 interface RegisterForm {
-  username: string;
-  phone: number;
-  code: string|number;
-  password: string;
-  check_password: string;
-  phone_code?: string;
+  accountType: 1|2|3;
+  credential?: string;
+  identifier?: string;
+  nickname: string;
+  qq?: string;
+  recommendCode?: string;
+  smsCode: string;
+  wechat?: string;
   [x: string]: any;
 }

@@ -3,17 +3,21 @@
     <header class="title-info">
       <h3 class="title-text">欢迎登录</h3>
     </header>
-    <section class="form-model">
-      <section class="custom-input">
-        <swipe-input [(value)]="loginForm.phone" type="text" placeholder="请输入您的账号" [pattern]="'^[0-9]*$'" [isClear]="true" [isRequired]="false"></swipe-input>
+    <form class="form-group" [formGroup]="loginForm" (submit)="submitChange()">
+      <section class="form-model">
+        <section class="custom-input">
+          <!-- [(value)]="loginForm.identifier" -->
+          <swipe-input formControlName="identifier" type="text" placeholder="请输入您的账号" [pattern]="'^[0-9a-z]{6,20}$'" [isClear]="true" [isRequired]="false"></swipe-input>
+        </section>
+        <section class="custom-input">
+          <!-- [(value)]="loginForm.credential" -->
+          <swipe-input formControlName="credential" type="password" placeholder="请输入您的密码" [pattern]="'^[0-9a-z]{6,20}$'" [isClear]="true" [isRequired]="false"></swipe-input>
+        </section>
       </section>
-      <section class="custom-input">
-        <swipe-input [(value)]="loginForm.password" type="password" placeholder="请输入您的密码" [isClear]="true"></swipe-input>
+      <section class="submit-info">
+        <ion-button type="submit" class="submit-btn" expand="block" color="primary" [disabled]="!loginForm.valid">登录</ion-button>
       </section>
-    </section>
-    <section class="submit-info">
-      <ion-button class="submit-btn" expand="block" color="primary" (click)="submitChange()">登录</ion-button>
-    </section>
+    </form>
     <section class="other-info">
       <span class="label-text" (click)="openRegisterPage()">注册新账号</span>
       <span class="label-text" (click)="openForgotPasswordPage()">忘记密码</span>

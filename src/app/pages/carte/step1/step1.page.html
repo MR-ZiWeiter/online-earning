@@ -1,7 +1,7 @@
 <ion-content class="step1-component">
   <section class="custom-input">
     <swipe-input
-      [(value)]="username"
+      [(ngModel)]="username"
       [isBorder]="false"
       type="text"
       placeholder="请输入您的名片ID"
@@ -10,7 +10,7 @@
       [isClear]="true"
       [isRequired]="true">
       <span class="label-text" name="prefix">名片ID：</span>
-      <button class="btn-view" name="suffix">解析</button>
+      <button class="btn-view" name="suffix" (click)="parsingBusinessInfo()">解析</button>
     </swipe-input>
   </section>
 </ion-content>

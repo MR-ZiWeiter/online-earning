@@ -1,4 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ApiUpcomingService } from 'src/app/core/modules/provider/api';
+import { IApiBusinessSaloonInfoModel } from 'src/app/core/model';
+import { BusinessInfoService } from '../../components/business-info/business-info.service';
 
 @Component({
   selector: 'swipe-step3',
@@ -7,9 +11,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Step3Page implements OnInit {
 
-  constructor() { }
+  /* 筛选配置 */
+  public saloonRenderConfig = {
+    buyerAccountId: '',
+    pageNum: 1,
+    pageSize: 20
+  }
+  /* 渲染数据集合 */
+  public saloonRenderArray: IApiBusinessSaloonInfoModel[] = [];
+
+  constructor(
+    private businessInfoService: BusinessInfoService,
+    private apiUpcomingService: ApiUpcomingService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    /* URL处理数据 */
+    const urlParams = activatedRoute.snapshot.params;
+    this.saloonRenderConfig.buyerAccountId = urlParams.id;
+    if (urlParams && urlParams.id) {
+      businessInfoService.setBusinessInfoConfig({
+        selected: urlParams.id
+      })
+    }
+    /* 监听选择名片回调 */
+    this.businessInfoService.getBusinessInfoConfig().subscribe(res => {
+      console.log(res)
+      if (res && res.selected) {
+        this.saloonRenderConfig.buyerAccountId = res.selected;
+      }
+    });
+  }
 
   ngOnInit() {
+    this.loadSaloonInfo();
+  }
+
+  private loadSaloonInfo() {
+    this.apiUpcomingService.asyncFetchUpcomingList(this.saloonRenderConfig).subscribe(res => {
+      // console.log(res)
+      this.saloonRenderArray = res.rel;
+    })
   }
 
 }

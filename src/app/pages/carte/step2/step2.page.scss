@@ -76,3 +76,16 @@
     }
   }
 }
+
+.footer {
+  .footer-btn-group {
+    @include flex-justify-align(center, center);
+    .btn-item {
+      flex: 1;
+      margin: 0;
+      &::part(native) {
+        border-radius: 0;
+      }
+    }
+  }
+}

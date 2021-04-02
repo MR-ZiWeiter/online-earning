@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuController, PickerController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ApiBusinessService } from 'src/app/core/modules/provider/api/upcoming/business.service';
+import { BusinessInfoComponent } from '../components/business-info/business-info.component';
 
 @Component({
   selector: 'app-carte',
@@ -7,49 +9,47 @@ import { MenuController, PickerController } from '@ionic/angular';
   styleUrls: ['./carte.component.scss']
 })
 export class CarteComponent implements OnInit {
+
+  public nickname!: string;
+
+  public businessConfig = {
+    nickname: '',
+    pageNum: 1,
+    pageSize: 20
+  }
+
   public buysArray: any[] = []
 
+  public paltformInfo: string|number = 1;
+
+  @ViewChild('swiperCustomMenu') private swiperCustomMenuComponent: BusinessInfoComponent;
+
   constructor(
-    private menu: MenuController,
-    private ionPickerCotroller: PickerController
+    private router: Router,
+    private apiBusinessService: ApiBusinessService
   ) { }
 
   ngOnInit() {
   }
 
-  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
-    setTimeout(() => {
-      console.log('Done');
-      event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.buysArray.length == 1000) {
-        event.target.disabled = true;
-      }
-    }, 500);
-  }
-
   public openMenuInfo() {
-    this.menu.enable(true, 'carte');
-    this.menu.open('carte');
+    this.swiperCustomMenuComponent.openMenuInfo();
   }
 
-  public async openPlatformPickerEvent() {
-    const customPicker = await this.ionPickerCotroller.create({
-      columns: [
-        {
-          name: '选择平台',
-          options: [
-            {
-              text: '淘宝',
-              value: '1'
-            }
-          ]
-        }
-      ]
+  public fetchBusinessListInfo() {
+    this.apiBusinessService.asyncFetchBusinessList({
+      platformId: this.paltformInfo,
+      ...this.businessConfig
+    }).subscribe(res => {
+      console.log(res)
     })
-    customPicker.present()
+
+  }
+
+  /* 选择名片后回调函数 */
+  public businessChange(ev: {id: string; key: string}) {
+    /* 跳转 */
+    this.router.navigate(['/pages/carte/step-3', ev.id]);
   }
 
 }

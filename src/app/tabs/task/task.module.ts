@@ -3,15 +3,15 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { TaskComponent } from './task.component';
 
-import { TaskInfoCellComponent } from '../upcoming/task-info-cell/task-info-cell.component';
-import { BusinessCardInfoComponent } from '../upcoming/business-card-info/business-card-info.component';
+import { PublicComponentModule } from 'src/app/pages/components/public-component.module';
 @NgModule({
   imports: [
     CoreModule,
+    PublicComponentModule,
     RouterModule.forChild([
       { path: '', component: TaskComponent }
     ])
   ],
-  declarations: [TaskComponent, TaskInfoCellComponent, BusinessCardInfoComponent]
+  declarations: [TaskComponent]
 })
 export class TaskModule { }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IHomeCenterInfoModal } from 'src/app/core/model';
+import { ApiUserIndexService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'app-user',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+
+  public homeCenterInfo!: IHomeCenterInfoModal;
 
   public menuRenderConfig: any[] = [
     [
@@ -25,9 +29,17 @@ export class UserComponent implements OnInit {
     ]
   ];
 
-  constructor() { }
+  constructor(private apiIndexUserService: ApiUserIndexService) { }
 
   ngOnInit() {
+    this.initalHomeCenterInfo();
+  }
+
+  private initalHomeCenterInfo() {
+    this.apiIndexUserService.asyncFetchUserHomeInfo().subscribe(res => {
+      // console.log(res);
+      this.homeCenterInfo = res.rel;
+    })
   }
 
 }

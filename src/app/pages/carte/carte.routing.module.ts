@@ -14,8 +14,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'step-1' },
       { path: 'step-1', component: Step1Page },
-      { path: 'step-2', component: Step2Page },
-      { path: 'step-3', component: Step3Page }
+      { path: 'step-2/:id', component: Step2Page },
+      { path: 'step-3/:id', component: Step3Page }
     ]
   },
 ];

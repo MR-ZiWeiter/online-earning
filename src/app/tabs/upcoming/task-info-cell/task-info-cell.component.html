@@ -1,38 +1,38 @@
-<section class="task-info-cell-component">
+<section class="task-info-cell-component" *ngIf="renderInfo">
   <section class="header-info">
-    <span class="label-text">编号：ST0012345678990</span>
-    <span class="value-text">天猫购买任务</span>
+    <span class="label-text">编号：{{renderInfo.taskCode}}</span>
+    <span class="value-text">{{renderInfo.platformTitle}}购买任务</span>
   </section>
   <section class="content-info">
     <section class="product-info">
-      <ion-img class="pruduct-image" src="/"></ion-img>
+      <ion-img class="pruduct-image" [src]="renderInfo.image"></ion-img>
       <section class="infos">
         <section class="infos-item">
           <span class="label-text">关键字</span>
-          <span class="value-text">扫码机器人</span>
+          <span class="value-text">{{renderInfo.keyword}}</span>
         </section>
         <section class="infos-item">
           <span class="label-text">任务押金</span>
-          <span class="value-text light">10元</span>
+          <span class="value-text light">{{renderInfo.unitPrice}}元</span>
         </section>
         <section class="infos-item">
           <span class="label-text">任务奖励</span>
-          <span class="value-text light">10元</span>
+          <span class="value-text light">{{renderInfo.award}}元</span>
         </section>
       </section>
     </section>
     <section class="task-info">
       <section class="task-info-item">
         <span class="label-text">商家名片：</span>
-        <span class="value-text">小小少地机器人</span>
+        <span class="value-text">{{renderInfo.shopTitle}}</span>
       </section>
       <section class="task-info-item">
         <span class="label-text">发布时间：</span>
-        <span class="value-text">2020-03-01 14:22:22</span>
+        <span class="value-text">{{renderInfo.createTime}}</span>
       </section>
     </section>
     <section class="start-btn" *ngIf="!isCustomHandler; else customRef">
-      <ion-button class="start-btn-custom" color="primary">开始任务</ion-button>
+      <ion-button class="start-btn-custom" color="primary" (click)="openStartTaskInfo()">开始任务</ion-button>
     </section>
     <ng-template #customRef>
       <ng-content select="[name=customTemp]"></ng-content>

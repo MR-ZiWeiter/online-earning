@@ -1,6 +1,6 @@
-<section class="business-card-info-component">
+<section class="business-card-info-component" (click)="changeBusinessInfo()" *ngIf="renderInfo">
   <section class="header-info">
-    <span class="title-text">1、星夜王子</span>
+    <span class="title-text">{{renderInfo.nickname}}</span>
   </section>
   <section class="btn-group">
     <button class="btn-item">资料</button>

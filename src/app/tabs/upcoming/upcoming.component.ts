@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MenuController, PickerController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ApiUpcomingService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'app-upcoming',
@@ -9,15 +10,29 @@ import { Router } from '@angular/router';
 })
 export class UpcomingComponent implements OnInit {
 
+  public saloonRenderConfig = {
+    buyerAccountId: '',
+    pageNum: 1,
+    pageSize: 20
+  }
+
   public buysArray: any[] = []
 
   constructor(
-    private menu: MenuController,
     private router: Router,
-    private ionPickerCotroller: PickerController
+    private menu: MenuController,
+    private ionPickerCotroller: PickerController,
+    private apiUpcomingService: ApiUpcomingService
   ) { }
 
   ngOnInit() {
+    this.loadSaloonInfo()
+  }
+
+  private loadSaloonInfo() {
+    this.apiUpcomingService.asyncFetchUpcomingList(this.saloonRenderConfig).subscribe(res => {
+      console.log(res)
+    })
   }
 
   public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {

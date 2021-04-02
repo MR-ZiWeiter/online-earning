@@ -27,7 +27,7 @@ export class RequestPreviewHandler {
     }
     const cloneHttpRequest = request.clone({
       setHeaders: {
-        token: this.getToken(),
+        accessToken: this.getToken(),
         client: 'wx',
         ...headers
       },

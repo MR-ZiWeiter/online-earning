@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-// tab页注入tabs服务 用于控制tabs内页隐藏tabbar
-import { TabsService } from 'src/app/core/services/tabs/tabs.service';
 
 @Component({
   selector: 'app-tabs',
@@ -11,7 +9,7 @@ import { TabsService } from 'src/app/core/services/tabs/tabs.service';
 export class TabsPage {
   public checkedTabsName: string;
 
-  constructor(public tabs: TabsService) {}
+  constructor() {}
 
   tabsChange(e: any) {
     console.log(e);

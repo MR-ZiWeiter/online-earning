@@ -15,8 +15,21 @@ export class ApiUserIndexService {
   // 获取用户基本信息
   asyncFetchBasicInfo(info: any = {}): Observable<any> {
     return new Observable(observer => {
-      this.http.get('/service/user/getUserBasicInfo', info).subscribe((res: ApiResponseModel) => {
-        console.log(res);
+      this.http.get('/buyer/account-privacy/get', info).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        this.userService.setUserBasicInfo(res.rel);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  // 个人主页信息
+  asyncFetchUserHomeInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/account-privacy/index', info).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
         this.userService.setUserBasicInfo(res.rel);
         observer.next(res);
       }, err => {
@@ -43,30 +56,6 @@ export class ApiUserIndexService {
   asyncFetchNotificationInfo(info: any = {}): Observable<any> {
     return new Observable(observer => {
       this.http.get('/service/tourSysMsg/getMsgList', info, {}).subscribe((res: ApiResponseModel) => {
-        // console.log(res);
-        observer.next(res);
-      }, err => {
-        observer.error(false);
-      });
-    });
-  }
-
-  // 我的喜欢列表
-  asyncFetchMyLoveInfo(info: any = {}): Observable<any> {
-    return new Observable(observer => {
-      this.http.get('/service/user/getRecentLike', info, {}).subscribe((res: ApiResponseModel) => {
-        // console.log(res);
-        observer.next(res);
-      }, err => {
-        observer.error(false);
-      });
-    });
-  }
-
-  // 删除我的喜欢
-  asyncDeleteMyLoveInfo(info: any = {}): Observable<any> {
-    return new Observable(observer => {
-      this.http.post('/service/user/deleteRecentLike', info, {}, info).subscribe((res: ApiResponseModel) => {
         // console.log(res);
         observer.next(res);
       }, err => {

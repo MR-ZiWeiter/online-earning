@@ -7,14 +7,22 @@ import { LoggerService } from './../logger/logger.service';
 
 import { environment } from '@app/env';
 import { map, tap, catchError } from 'rxjs/operators';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  constructor(private httpClient: HttpClient, private logger: LoggerService) {
+  public loading: any;
+
+  constructor(
+    private httpClient: HttpClient,
+    private logger: LoggerService,
+    private loadingController: LoadingController
+  ) {
     logger.log('HttpProvider Init OK');
+    this.loadingRender();
   }
   /**
    * 发起一个get请求
@@ -34,6 +42,16 @@ export class HttpService {
    */
   post(url: string, paramMap: {} = {}, header: {} = {}, body: any): Observable<object> {
     return this.sendRequest(url, paramMap, RequestMethods.POST, header, body);
+  }
+
+  /**
+   * 发起一个put请求
+   * @param url //
+   * @param paramMap //
+   * @param header //
+   */
+   put(url: string, paramMap: {} = {}, header: {} = {}, body: any): Observable<object> {
+    return this.sendRequest(url, paramMap, RequestMethods.PUT, header, body);
   }
 
   /**
@@ -97,6 +115,11 @@ export class HttpService {
     return this.sendRequest(url, paramMap, method, header);
   }
 
+  public async loadingRender() {
+    this.loading = await this.loadingController.create({
+      message: '加载中...'
+    })
+  }
 
   protected sendRequest(
     url: string,
@@ -114,6 +137,8 @@ export class HttpService {
     this.logger.log('请求参数:', JSON.stringify(paramMap));
     this.logger.log('请求方法:', method);
     this.logger.log('请求头:', JSON.stringify(header));
+
+    this.loading && this.loading.present();
     return new Observable(observer => {
       // console.log(method, url, {params: paramMap, headers: header});
       // console.log(1);

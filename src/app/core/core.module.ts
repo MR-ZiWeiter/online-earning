@@ -1,7 +1,7 @@
 import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-upload.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SwipeEyeCareModeComponent } from './modules/components/swipe-eye-care-mode/swipe-eye-care-mode.component';
 import { SwipeContextNullComponent } from './modules/components/swipe-context-null/swipe-context-null.component';
@@ -18,6 +18,8 @@ import { ApiServiceModule } from './modules/provider/api/index.module';
 import { TabsService } from './services/tabs/tabs.service';
 // import { UserService } from './services/user/user.service';
 
+// 管道类
+import { KeysPipe } from './pipes';
 
 @NgModule({
   declarations: [
@@ -28,11 +30,14 @@ import { TabsService } from './services/tabs/tabs.service';
     SwipeInputComponent,
     SwipeHeaderComponent,
     SwipeUploadComponent,
-    SwipeCheckboxComponent
+    SwipeCheckboxComponent,
+    /* 管道类 */
+    KeysPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     ApiServiceModule
   ],
@@ -44,6 +49,7 @@ import { TabsService } from './services/tabs/tabs.service';
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     SwipeEyeCareModeComponent,
     SwipeContextNullComponent,
     SwipeLottieComponent,
@@ -51,7 +57,9 @@ import { TabsService } from './services/tabs/tabs.service';
     SwipeInputComponent,
     SwipeHeaderComponent,
     SwipeUploadComponent,
-    SwipeCheckboxComponent
+    SwipeCheckboxComponent,
+    /* 管道类 */
+    KeysPipe
   ]
 })
 export class CoreModule { }

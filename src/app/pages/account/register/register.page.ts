@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
 import { UserAccountService } from 'src/app/core/modules/provider/api';
@@ -13,14 +14,7 @@ import { WebviewService } from 'src/app/core/services/webview/webview.service';
 })
 export class RegisterPage implements OnInit {
 
-  public registerForm: RegisterForm = {
-    username: null,
-    code: null,
-    phone: null,
-    password: null,
-    check_password: null,
-    phone_code: null
-  };
+  public registerForm!: FormGroup;
   // 获取验证码状态
   public getCodeStatus = false;
   public timeOut = 60;
@@ -37,7 +31,17 @@ export class RegisterPage implements OnInit {
     private toastController: ToastController,
     private userAccountService: UserAccountService,
     private authService: AuthService,
-    private logger: LoggerService) { }
+    private fb: FormBuilder,
+    private logger: LoggerService) {
+      this.registerForm = fb.group({
+        accountType: [1, [Validators.required]],
+        identifier: [null, [Validators.required, Validators.pattern(/^1[3-9]{1}[0-9]{9}$/)]],
+        credential: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/)]],
+        nickname: [null, [Validators.required]],
+        smsCode: [null, [Validators.required]],
+        recommendCode: [null]
+      })
+    }
 
   ngOnInit() {
   }
@@ -70,11 +74,11 @@ export class RegisterPage implements OnInit {
   }
   // 获取验证码
   public fetchCodeEvent(): void {
-    if (!this.registerForm.phone) {
+    if (!this.registerForm.controls.identifier.valid) {
       this.presentToastWithOptions();
     } else {
-      this.userAccountService.asyncFetchAccountLoginRegisterCode({
-        phone: this.registerForm.phone
+      this.userAccountService.asyncFetchAccountRegisterCode({
+        mobile: this.registerForm.get('identifier').value
       }).subscribe((res: any) => {
         this.settingTimeOutEvent();
       });
@@ -83,17 +87,14 @@ export class RegisterPage implements OnInit {
   // 提交
   public submitChange(): void {
     // console.log(this.registerForm);
-    this.userAccountService.asyncAccountLoginRegister(this.registerForm).subscribe(res => {
-      // console.log(this.navControl);
-      // if (this.navControl.direction
-      // this.navControl.back();
+    this.userAccountService.asyncAccountRegister(this.registerForm.value).subscribe(res => {
       this.router.navigate(['/']);
     }, err => {});
   }
 
   /* 登录账号 */
   public openLoginPage() {
-    this.router.navigate(['/pages/account/login'])
+    this.router.navigate(['/pages/account/login']);
   }
 
   public openRuleService(type: number): void {

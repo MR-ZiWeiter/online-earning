@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'swipe-business-card-info',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusinessCardInfoComponent implements OnInit {
 
+  /* 传入数据 */
+  @Input() public renderInfo!: any;
+
+  /* 上传数据 */
+  @Output() private change: EventEmitter<{id: string; key: string}> = new EventEmitter<{id: string; key: string}>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  /* 选择名片 */
+  public changeBusinessInfo() {
+    /* 上传回调 */
+    this.change.emit({id: this.renderInfo.id, key: this.renderInfo.nickname});
   }
 
 }

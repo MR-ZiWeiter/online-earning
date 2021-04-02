@@ -13,7 +13,7 @@ import { WebviewService } from 'src/app/core/services/webview/webview.service';
 })
 export class ForgotPwdPage implements OnInit {
 
-  public registerForm: RegisterForm = {
+  public registerForm: RegisterForm|any = {
     username: null,
     code: null,
     phone: null,
@@ -83,7 +83,7 @@ export class ForgotPwdPage implements OnInit {
   // 提交
   public submitChange(): void {
     // console.log(this.registerForm);
-    this.userAccountService.asyncAccountLoginRegister(this.registerForm).subscribe(res => {
+    this.userAccountService.asyncAccountLogin(this.registerForm).subscribe(res => {
       // console.log(this.navControl);
       // if (this.navControl.direction
       // this.navControl.back();
