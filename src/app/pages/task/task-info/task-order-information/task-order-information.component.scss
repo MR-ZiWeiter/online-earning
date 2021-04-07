@@ -19,12 +19,18 @@
     }
     .upload-info {
       padding: 0 format(32);
+      padding-bottom: format(32);
       .label-text {
         @include wh(100%, format(90));
         @include sc(format(28), $default_color_2);
         @include flex-justify-align(flex-start, center);
         font-weight: 400;
       }
+    }
+    .custom-input {
+      @include wh(format(606), format(92));
+      margin-bottom: format(32);
+      margin-top: format(20);
     }
   }
 }

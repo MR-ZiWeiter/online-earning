@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'swipe-task-order',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-order.component.scss'],
 })
 export class TaskOrderComponent implements OnInit {
+
+  @Input() public renderInfo!: any;
 
   constructor() { }
 

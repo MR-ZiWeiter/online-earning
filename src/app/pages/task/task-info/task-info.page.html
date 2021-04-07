@@ -2,19 +2,15 @@
   <swipe-header class="custom-header-component" title="任务详情"></swipe-header>
 </ion-header>
 
-<ion-content class="task-info-page">
+<ion-content class="task-info-page" *ngIf="renderInfo">
   <section class="task-info-container">
-    <swipe-task-order></swipe-task-order>
-    <swipe-task-card></swipe-task-card>
-    <swipe-task-card></swipe-task-card>
-    <swipe-task-card></swipe-task-card>
-    <swipe-task-card></swipe-task-card>
+    <swipe-task-order [renderInfo]="renderInfo"></swipe-task-order>
+    <swipe-task-card *ngFor="let item of renderInfo.taskStepVos" [renderInfo]="item"></swipe-task-card>
   </section>
 </ion-content>
 
-<ion-footer class="task-info-footer">
+<ion-footer class="task-info-footer" *ngIf="renderInfo && (renderInfo.status !== 3 && renderInfo.status !== 4)">
   <section class="submit-info">
     <ion-button class="submit-btn" expand="block" color="primary" (click)="openStartTask()">开始任务</ion-button>
   </section>
 </ion-footer>
-

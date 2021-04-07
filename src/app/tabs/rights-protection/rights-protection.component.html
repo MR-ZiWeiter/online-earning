@@ -3,7 +3,7 @@
 </ion-header>
 
 <ion-header class="custom-tab-info">
-  <ion-segment class="custom-segment" (ionChange)="segmentChanged($event)" value="action-1">
+  <ion-segment class="custom-segment" (ionChange)="segmentChanged($event)" [(ngModel)]="tabSelect">
     <ion-segment-button class="custom-segament-button" *ngFor="let item of tabConfig" [value]="item.value">
       <ion-label class="custom-sty">{{item.label}}({{item.number}})</ion-label>
     </ion-segment-button>
@@ -22,8 +22,8 @@
   <section class="rights-protection-container">
     <!-- 任务列表 -->
     <ion-list class="rights-protection-info">
-      <section class="rights-protection-info-item">
-        <swipe-task-info-cell [isCustomHandler]="true">
+      <section class="rights-protection-info-item" *ngFor="let item of renderArrayInfo">
+        <swipe-task-info-cell [renderInfo]="item" [isCustomHandler]="true">
           <section class="custom-handler" name="customTemp">
             <section class="handler-info">
               <span class="title-text">维权类型</span>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IHomeCenterInfoModal } from 'src/app/core/model';
 import { ApiUserIndexService } from 'src/app/core/modules/provider/api';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -29,7 +30,10 @@ export class UserComponent implements OnInit {
     ]
   ];
 
-  constructor(private apiIndexUserService: ApiUserIndexService) { }
+  constructor(
+    private authService: AuthService,
+    private apiIndexUserService: ApiUserIndexService
+  ) { }
 
   ngOnInit() {
     this.initalHomeCenterInfo();
@@ -40,6 +44,11 @@ export class UserComponent implements OnInit {
       // console.log(res);
       this.homeCenterInfo = res.rel;
     })
+  }
+
+  /* 退出登录 */
+  public openSignOut() {
+    this.authService.logout();
   }
 
 }

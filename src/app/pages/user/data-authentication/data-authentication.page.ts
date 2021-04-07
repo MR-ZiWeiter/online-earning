@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataAuthenticationPage implements OnInit {
 
+  public validetaForm!: FormGroup;
+
   public username: any;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) {
+    this.validetaForm = fb.group({
+      realName: [],
+
+    })
+  }
 
   ngOnInit() {
   }

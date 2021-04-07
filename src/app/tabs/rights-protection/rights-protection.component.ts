@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, PickerController, ModalController } from '@ionic/angular';
-import { SubmitRightsComponent } from './submit-rights/submit-rights.component';
+import { ApiAppealService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'app-rights-protection',
@@ -13,29 +13,46 @@ export class RightsProtectionComponent implements OnInit {
   public buysArray: any[] = [];
 
   public tabConfig: any[] = [
-    { label: '处理中', number: 2, value: 'action-1' },
-    { label: '已完成', number: 1, value: 'action-2' }
+    { label: '处理中', number: 2, value: 2 },
+    { label: '已完成', number: 1, value: 3 }
   ];
+  private renderConfig: any = {
+    pageNum: 1,
+    pageSize: 20,
+    status: 2
+  };
+
+  public set tabSelect(n: number) {
+    this.renderConfig.status = n;
+    this.switchFetchApplealInfo(n);
+  }
+  public get tabSelect(): number {
+    return this.renderConfig.status;
+  }
+
+  public renderArrayInfo: any[] = [];
 
   constructor(
-    private menu: MenuController,
     private router: Router,
+    private menu: MenuController,
     private ionPickerCotroller: PickerController,
-    private modalController: ModalController
-  ) { }
+    private apiAppealService: ApiAppealService
+  ) {
+    /* 获取默认数据 */
+    this.switchFetchApplealInfo(2);
+  }
 
   async ngOnInit() {
-    const modal = await this.modalController.create({
-      component: SubmitRightsComponent,
-      cssClass: 'custom-submit-rights-component',
-      swipeToClose: true,
-      mode: 'ios',
-      presentingElement: await this.modalController.getTop(),
-      componentProps: {}
+  }
+
+  /* 获取维权列表 */
+  public switchFetchApplealInfo(state: number) {
+    this.apiAppealService.asyncFetchAppealListInfo({
+      status: state
+    }).subscribe(res => {
+      // console.log(res)
+      this.renderArrayInfo = res.rel;
     })
-    await modal.present()
-    const { data } = await modal.onWillDismiss();
-    console.log(data)
   }
 
   public doRefresh(event) {
@@ -87,7 +104,8 @@ export class RightsProtectionComponent implements OnInit {
   }
 
   public segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
+    // console.log('Segment changed', ev);
+    this.switchFetchApplealInfo(ev.detail.value);
   }
 
 }

@@ -6,6 +6,16 @@
     <section class="upload-info">
       <span class="label-text">任意浏览信息，上传图片</span>
       <swipe-upload></swipe-upload>
+      <ng-container *ngIf="isLast">
+        <section class="custom-input">
+          <!-- [(value)]="loginForm.credential" -->
+          <swipe-input [(ngModel)]="submitTaskForm.orderNo" type="text" placeholder="请输入订单号" [pattern]="'^[0-9a-z]{6,20}$'" [isClear]="true" [isRequired]="true" (onBlur)="taskFormChange()"></swipe-input>
+        </section>
+        <section class="custom-input">
+          <!-- [(value)]="loginForm.credential" -->
+          <swipe-input [(ngModel)]="submitTaskForm.paidAmount" type="text" placeholder="请输入实际付款金额" [pattern]="'^[0-9a-z]{6,20}$'" [isClear]="true" [isRequired]="true" (onBlur)="taskFormChange()"></swipe-input>
+        </section>
+      </ng-container>
     </section>
   </section>
 </section>

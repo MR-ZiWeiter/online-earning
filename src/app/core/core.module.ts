@@ -10,6 +10,7 @@ import { SwipeLottieComponent } from './modules/components/swipe-lottie/swipe-lo
 import { SwipeShareComponent } from './modules/components/swipe-share/swipe-share.component';
 import { SwipeInputComponent } from './modules/components/swipe-input/swipe-input.component';
 import { SwipeCheckboxComponent } from './modules/components/swipe-checkbox/swipe-checkbox.component';
+import { SwipeRadioComponent } from './modules/components/swipe-radio/swipe-radio.component';
 
 // API接口类服务模块
 import { ApiServiceModule } from './modules/provider/api/index.module';
@@ -31,6 +32,7 @@ import { KeysPipe } from './pipes';
     SwipeHeaderComponent,
     SwipeUploadComponent,
     SwipeCheckboxComponent,
+    SwipeRadioComponent,
     /* 管道类 */
     KeysPipe
   ],
@@ -58,6 +60,7 @@ import { KeysPipe } from './pipes';
     SwipeHeaderComponent,
     SwipeUploadComponent,
     SwipeCheckboxComponent,
+    SwipeRadioComponent,
     /* 管道类 */
     KeysPipe
   ]

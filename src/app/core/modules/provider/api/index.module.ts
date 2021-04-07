@@ -6,7 +6,8 @@ import {
   ApiUpcomingService,
   ApiBusinessService,
   ApiSystemService,
-  ApiTaskIndexService
+  ApiTaskIndexService,
+  ApiAppealService
 } from './index';
 
 @NgModule({
@@ -18,7 +19,8 @@ import {
     ApiSuperVipService,
     ApiBusinessService,
     ApiSystemService,
-    ApiTaskIndexService
+    ApiTaskIndexService,
+    ApiAppealService
   ]
 })
 

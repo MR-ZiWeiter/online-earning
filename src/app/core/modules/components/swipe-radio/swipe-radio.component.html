@@ -1,0 +1,9 @@
+<section class="swipe-radio-component">
+  <label class="ant-radio-wrapper" (click)="checkRadioChange(item)" *ngFor="let item of radioRender">
+    <span [ngClass]="['ant-radio', item.value === _value ? 'ant-radio-checked' : '']">
+      <input type="radio" class="ant-radio-input"/>
+      <span class="ant-radio-inner"></span>
+    </span>
+    <span class="label-text">{{item.label}}</span>
+  </label>
+</section>

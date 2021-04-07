@@ -4,7 +4,6 @@ import { CoreModule } from 'src/app/core/core.module';
 import { RightsProtectionComponent } from './rights-protection.component';
 import { BusinessCardInfoComponent } from '../upcoming/business-card-info/business-card-info.component';
 import { TaskInfoCellComponent } from '../upcoming/task-info-cell/task-info-cell.component';
-import { SubmitRightsComponent } from './submit-rights/submit-rights.component';
 
 @NgModule({
   imports: [
@@ -16,8 +15,7 @@ import { SubmitRightsComponent } from './submit-rights/submit-rights.component';
   declarations: [
     RightsProtectionComponent,
     TaskInfoCellComponent,
-    BusinessCardInfoComponent,
-    SubmitRightsComponent
+    BusinessCardInfoComponent
   ]
 })
 export class RightsProtectionModule { }

@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BusinessInfoComponent } from 'src/app/pages/components/business-info/business-info.component';
 import { BusinessInfoService } from 'src/app/pages/components/business-info/business-info.service';
 import { ApiTaskIndexService } from 'src/app/core/modules/provider/api';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
+import { SubmitRightsComponent } from './submit-rights/submit-rights.component';
 
 @Component({
   selector: 'app-task',
@@ -33,6 +34,7 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private modalController: ModalController,
     private toastController: ToastController,
     private apiTaskIndexService: ApiTaskIndexService,
     private businessInfoService: BusinessInfoService
@@ -117,6 +119,23 @@ export class TaskComponent implements OnInit {
   /* 名片回调 */
   public businessChange(ev: {id: string; key: string}) {
     this.doRefresh();
+  }
+
+  /* 打开维权 */
+  public async openRightsModal(renderInfo?: any) {
+    const modal = await this.modalController.create({
+      component: SubmitRightsComponent,
+      cssClass: 'custom-submit-rights-component',
+      swipeToClose: true,
+      mode: 'ios',
+      presentingElement: await this.modalController.getTop(),
+      componentProps: {
+        renderInfo
+      }
+    })
+    await modal.present()
+    const { data } = await modal.onWillDismiss();
+    console.log(data)
   }
 
 }

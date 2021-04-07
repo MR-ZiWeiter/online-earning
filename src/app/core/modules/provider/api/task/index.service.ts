@@ -39,7 +39,7 @@ export class ApiTaskIndexService {
   // 提交任务
   asyncFetchTaskSubmitInfo(info: any = {}): Observable<any> {
     return new Observable(observer => {
-      this.http.get('/buyer/order/submit_task', info, {}).subscribe((res: ApiResponseModel) => {
+      this.http.post('/buyer/order/submit_task', info, {}, info).subscribe((res: ApiResponseModel) => {
         // console.log(res);
         observer.next(res);
       }, err => {
@@ -52,6 +52,18 @@ export class ApiTaskIndexService {
   asyncFetchTaskListInfo(info: any = {}): Observable<any> {
     return new Observable(observer => {
       this.http.get('/buyer/order/list', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  /* 任务详情 */
+  asyncFetchTaskDetailInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/order/details', info, {}).subscribe((res: ApiResponseModel) => {
         // console.log(res);
         observer.next(res);
       }, err => {

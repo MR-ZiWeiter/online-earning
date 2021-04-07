@@ -4,6 +4,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { TaskComponent } from './task.component';
 
 import { PublicComponentModule } from 'src/app/pages/components/public-component.module';
+import { SubmitRightsComponent } from './submit-rights/submit-rights.component';
 @NgModule({
   imports: [
     CoreModule,
@@ -12,6 +13,9 @@ import { PublicComponentModule } from 'src/app/pages/components/public-component
       { path: '', component: TaskComponent }
     ])
   ],
-  declarations: [TaskComponent]
+  declarations: [
+    TaskComponent,
+    SubmitRightsComponent
+  ]
 })
 export class TaskModule { }

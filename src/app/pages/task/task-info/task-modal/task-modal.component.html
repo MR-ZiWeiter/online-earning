@@ -3,15 +3,15 @@
     <ion-icon class="icon-close" name="close-outline" (click)="onCloseTaskModal()"></ion-icon>
   </section>
   <section class="content">
-    <swipe-task-card></swipe-task-card>
+    <swipe-task-card [renderInfo]="_renderInfo"></swipe-task-card>
     <section class="null"></section>
-    <swipe-task-order-information></swipe-task-order-information>
+    <swipe-task-order-information [isLast]="isLast" (taskForm)="taskFormChange($event)"></swipe-task-order-information>
   </section>
 </ion-content>
 
 <ion-footer class="task-modal-footer">
   <section class="submit-info">
-    <ion-button class="submit-btn" expand="full" color="light">确认提交</ion-button>
-    <ion-button class="submit-btn" expand="full" color="primary">下一步</ion-button>
+    <!-- <ion-button class="submit-btn" expand="full" color="light">确认提交</ion-button> -->
+    <ion-button class="submit-btn" expand="full" color="primary" (click)="nextStepChange()">下一步</ion-button>
   </section>
 </ion-footer>

@@ -20,6 +20,7 @@
           border-top: format(1) solid $default_border_color;
           margin: format(30) format(30) format(20);
           .handler-info {
+            @include wh(100%, auto);
             .title-text {
               @include sc(format(32), $default_color_2);
               @include wh(100%, format(94));

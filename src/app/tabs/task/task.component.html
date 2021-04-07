@@ -26,9 +26,11 @@
     <ion-list class="task-info">
       <section class="task-info-item">
         <swipe-task-info-cell *ngFor="let item of taskRenderList" [renderInfo]="item" [isCustomHandler]="true">
-          <section class="custom-handler" name="customTemp">
+          <section class="custom-handler" name="customTemp" [ngSwitch]="taskRenderConfig.status">
             <ion-button class="hand-view" (click)="openTaskInfoPage(item)">查看</ion-button>
-            <ion-button class="cancel">取消</ion-button>
+            <ion-button class="cancel" *ngSwitchCase="1">取消</ion-button>
+            <ion-button class="cancel" *ngSwitchCase="2">取消</ion-button>
+            <ion-button class="cancel" *ngSwitchCase="3" (click)="openRightsModal(item)">维权</ion-button>
           </section>
         </swipe-task-info-cell>
       </section>
