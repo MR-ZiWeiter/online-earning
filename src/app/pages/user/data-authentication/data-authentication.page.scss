@@ -63,7 +63,7 @@
         }
         .label-text {
           @include flex-justify-align(flex-start, center);
-          @include wh(format(160), 100%);
+          @include wh(format(180), 100%);
           @include sc(format(30), $default_color_3);
         }
         .icon-arrow {

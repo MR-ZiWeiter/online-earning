@@ -71,11 +71,11 @@ export class UserAccountService {
       });
     });
   }
-  // 注销账户
-  asyncAccountLogoutOff(info: any): Observable<any> {
+
+  /* 购物标签 */
+  asyncAccountShoppingTagInfo(info?: any): Observable<any> {
     return new Observable(observer => {
-      this.http.post('/service/user/writeOff', info, {}, info).subscribe((res: ApiResponseModel) => {
-        this.userService.setAppToken(null);
+      this.http.get('/common/shopping-tag/list', info, {}).subscribe((res: ApiResponseModel) => {
         observer.next(res);
       }, err => {
         console.log(err);
@@ -83,21 +83,11 @@ export class UserAccountService {
       });
     });
   }
-  // 注销账户检查
-  asyncAccountCheckLogoutOff(info?: any): Observable<any> {
-    return new Observable(observer => {
-      this.http.get('/service/user/writeOff/check', info, {}).subscribe((res: ApiResponseModel) => {
-        observer.next(res);
-      }, err => {
-        console.log(err);
-        observer.error(false);
-      });
-    });
-  }
+
   // 修改基本信息
   asyncAccountEditBaiscInfoChange(info?: any): Observable<any> {
     return new Observable(observer => {
-      this.http.post('/service/user/updateUserBasicInfo', {}, {}, info).subscribe((res: ApiResponseModel) => {
+      this.http.post('/buyer/account-privacy/save', {}, {}, info).subscribe((res: ApiResponseModel) => {
         observer.next(res);
       }, err => {
         console.log(err);

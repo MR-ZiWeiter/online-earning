@@ -25,9 +25,18 @@ export class SwipeCheckboxComponent implements OnInit {
 
   @Output() private checkboxRenderChange: EventEmitter<Array<ICheckboxModel>> = new EventEmitter<Array<ICheckboxModel>>();
 
+  @Output() private checkedChange: EventEmitter<Array<ICheckboxModel>> = new EventEmitter<Array<ICheckboxModel>>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public onClickChange(info: ICheckboxModel) {
+    setTimeout(() => {
+      const checked = this.checkboxRender.filter(fs => fs.isCheck)
+      this.checkedChange.emit(checked);
+    }, 300)
   }
 
 }

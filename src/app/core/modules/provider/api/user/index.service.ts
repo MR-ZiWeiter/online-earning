@@ -30,7 +30,29 @@ export class ApiUserIndexService {
     return new Observable(observer => {
       this.http.get('/buyer/account-privacy/index', info).subscribe((res: ApiResponseModel) => {
         // console.log(res);
-        this.userService.setUserBasicInfo(res.rel);
+        // this.userService.setUserBasicInfo(res.rel);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  // 获取提现方式
+  asyncFetchWithdrawInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/capital-account/pay-account/list', info).subscribe((res: ApiResponseModel) => {
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  /* 申请提现 */
+  asyncFetchWithdrawCashOut(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.post('/buyer/capital-account/cash-out', info, null, info).subscribe((res: ApiResponseModel) => {
         observer.next(res);
       }, err => {
         observer.error(false);

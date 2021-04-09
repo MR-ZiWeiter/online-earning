@@ -6,11 +6,11 @@
   <section class="count-info">
     <span class="lable-text">提现金额</span>
     <section class="withdraw-info">
-      <input type="number" class="price-input" placeholder="请输入需要提现的金额">
+      <input type="number" [(ngModel)]="amountConfig.amount" class="price-input" placeholder="请输入需要提现的金额">
       <span class="all-count">全部提现</span>
     </section>
-    <section class="count-balance">
-      <span class="lable-text">当前余额：6900000元</span>
+    <section class="count-balance" *ngIf="amountInfo">
+      <span class="lable-text">当前余额：{{amountInfo.balance}}元</span>
     </section>
   </section>
   <section class="withdraw-intro">
@@ -19,12 +19,12 @@
     </section>
     <section class="type-group">
       <section class="type-item" *ngFor="let item of withdrawTypeRender">
-        <swipe-checkbox [(checkboxRender)]="item.renderCheck"></swipe-checkbox>
+        <swipe-checkbox [checkboxRender]="item.renderCheck" (checkedChange)="checkedChange($event, item)"></swipe-checkbox>
         <span class="intro">{{item.label}}</span>
       </section>
     </section>
   </section>
   <section class="footer-btn">
-    <ion-button class="submit-btn" color="primary">确认提交</ion-button>
+    <ion-button class="submit-btn" color="primary" (click)="submitChange()">确认提交</ion-button>
   </section>
 </ion-content>

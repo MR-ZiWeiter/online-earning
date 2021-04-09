@@ -39,6 +39,13 @@ export class SwipeInputComponent implements ControlValueAccessor, OnInit {
   @Input() public isClear: boolean = false;
   @Input() public maxLength: number;
   @Input() public minLength: number;
+  @Input()
+  private set isDisabled(n: boolean) {
+    this.disabled = n;
+  }
+  private get isDisabled(): boolean {
+    return this.disabled;
+  }
 
   constructor() { }
   writeValue(obj: any): void {

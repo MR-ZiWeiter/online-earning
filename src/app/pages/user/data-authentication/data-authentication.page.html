@@ -1,191 +1,217 @@
 <ion-header class="custom-header">
-  <swipe-header class="custom-header-component" title="资金详情" [isBack]="true"></swipe-header>
+  <swipe-header class="custom-header-component" title="资料认证" [isBack]="true"></swipe-header>
 </ion-header>
 
 <ion-content class="data-authentication-page">
-  <section class="basic-info">
-    <section class="header-info">
-      <span class="title-text">基本资料</span>
-    </section>
-    <section class="group-form">
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="请输入您的真实姓名"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">真实姓名：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
+  <form [formGroup]="validetaForm" (submit)="submitChange()">
+    <section class="basic-info">
+      <section class="header-info">
+        <span class="title-text">基本资料</span>
       </section>
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="请输入您的手机号码"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">手机号码：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
-      </section>
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="男"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">性别：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
-      </section>
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="请输入您的QQ号码"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">QQ号码：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
-      </section>
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="请选择您当前所在地址"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">所在地址：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
-      </section>
-    </section>
-  </section>
-  <section class="payment-info">
-    <section class="header-info">
-      <span class="title-text">收款资料</span>
-    </section>
-    <section class="group-form">
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="请输入与真实姓名对应的开户行"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">开户行：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
-      </section>
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="请输入与真实姓名对应的银行卡号"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">银行卡号：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
-      </section>
-      <section class="upload-info">
-        <span class="label-text">银行卡截图：</span>
-        <swipe-upload [size]="[190, 190]"></swipe-upload>
+      <section class="group-form">
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            formControlName="realName"
+            [isBorder]="false"
+            placeholder="请输入您的真实姓名"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">真实姓名：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            [isBorder]="false"
+            placeholder="请输入您的手机号码"
+            formControlName="phone"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isDisabled]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">手机号码：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            (click)="presentActionSheetGender()"
+            [isBorder]="false"
+            placeholder="男"
+            formControlName="gender"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isDisabled]="true">
+            <span class="label-text" name="prefix">性别：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            formControlName="qq"
+            [isBorder]="false"
+            placeholder="请输入您的QQ号码"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">QQ号码：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="custom-input">
+          <swipe-input
+            (click)="openPickerAddressInfo()"
+            type="text"
+            formControlName="addressCode"
+            [isBorder]="false"
+            placeholder="请选择您当前所在地址"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">所在地址：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
       </section>
     </section>
-    <section class="group-form">
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="请输入支付宝账号"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">支付宝：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
+    <section class="payment-info">
+      <section class="header-info">
+        <span class="title-text">收款资料</span>
       </section>
-      <section class="upload-info">
-        <span class="label-text">支付宝截图：</span>
-        <swipe-upload [size]="[190, 190]"></swipe-upload>
+      <section class="group-form">
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            formControlName="idCardNumber"
+            [isBorder]="false"
+            placeholder="请输入与真实姓名对应的身份证号码"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">身份证号码：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="upload-info">
+          <span class="label-text">身份证照片：</span>
+          <swipe-upload [size]="[190, 190]"></swipe-upload>
+        </section>
+      </section>
+      <section class="group-form">
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            formControlName="openBankCode"
+            [isBorder]="false"
+            placeholder="请输入与真实姓名对应的开户行"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">开户行：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            formControlName="bankCardNum"
+            [isBorder]="false"
+            placeholder="请输入与真实姓名对应的银行卡号"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">银行卡号：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="upload-info">
+          <span class="label-text">银行卡截图：</span>
+          <swipe-upload [size]="[190, 190]"></swipe-upload>
+        </section>
+      </section>
+      <section class="group-form">
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            formControlName="aliPayNum"
+            [isBorder]="false"
+            placeholder="请输入支付宝账号"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">支付宝：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="upload-info">
+          <span class="label-text">支付宝截图：</span>
+          <swipe-upload [size]="[190, 190]"></swipe-upload>
+        </section>
+      </section>
+      <section class="group-form">
+        <section class="custom-input">
+          <swipe-input
+            type="text"
+            formControlName="weChatNum"
+            [isBorder]="false"
+            placeholder="请输入微信账号"
+            [isPrefix]="true"
+            [isSuffix]="true"
+            [isClear]="true"
+            [isRequired]="true">
+            <span class="label-text" name="prefix">微信号：</span>
+            <span name="suffix">
+              <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+            </span>
+          </swipe-input>
+        </section>
+        <section class="upload-info">
+          <span class="label-text">微信号截图：</span>
+          <swipe-upload [size]="[190, 190]"></swipe-upload>
+        </section>
+      </section>
+      <section class="group-form">
+        <section class="min-title-info">
+          <span class="label-text">选择常用购物标签：</span>
+        </section>
+        <section class="check-box-group">
+          <swipe-checkbox [checkboxRender]="checkboxRender" (checkedChange)="checkboxRenderChange($event)"></swipe-checkbox>
+        </section>
       </section>
     </section>
-    <section class="group-form">
-      <section class="custom-input">
-        <swipe-input
-          type="text"
-          [(ngModel)]="username"
-          [isBorder]="false"
-          placeholder="请输入微信账号"
-          [isPrefix]="true"
-          [isSuffix]="true"
-          [isClear]="true"
-          [isRequired]="true">
-          <span class="label-text" name="prefix">微信号：</span>
-          <span name="suffix">
-            <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-          </span>
-        </swipe-input>
-      </section>
-      <section class="upload-info">
-        <span class="label-text">微信号截图：</span>
-        <swipe-upload [size]="[190, 190]"></swipe-upload>
-      </section>
+    <section class="footer-btn">
+      <ion-button type="submit" class="submit-btn" color="primary">提交审核</ion-button>
     </section>
-    <section class="group-form">
-      <section class="min-title-info">
-        <span class="label-text">选择常用购物标签：</span>
-      </section>
-      <section class="check-box-group">
-        <swipe-checkbox></swipe-checkbox>
-      </section>
-    </section>
-  </section>
-  <section class="footer-btn">
-    <ion-button class="submit-btn" color="primary">提交审核</ion-button>
-  </section>
+  </form>
 </ion-content>
