@@ -23,7 +23,7 @@
   </ion-refresher>
   <section class="task-container">
     <!-- 任务列表 -->
-    <ion-list class="task-info">
+    <ion-list class="task-info" *ngIf="taskRenderList.length; else tempNullContext">
       <section class="task-info-item">
         <swipe-task-info-cell *ngFor="let item of taskRenderList" [renderInfo]="item" [isCustomHandler]="true">
           <section class="custom-handler" name="customTemp" [ngSwitch]="taskRenderConfig.status">
@@ -35,6 +35,9 @@
         </swipe-task-info-cell>
       </section>
     </ion-list>
+    <ng-template #tempNullContext>
+      <swipe-null></swipe-null>
+    </ng-template>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"

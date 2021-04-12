@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import {
   ApiUserIndexService,
   UserAccountService,
-  ApiSuperVipService,
   ApiUpcomingService,
   ApiBusinessService,
   ApiSystemService,
@@ -16,7 +15,6 @@ import {
     ApiUserIndexService,
     UserAccountService,
     ApiUpcomingService,
-    ApiSuperVipService,
     ApiBusinessService,
     ApiSystemService,
     ApiTaskIndexService,

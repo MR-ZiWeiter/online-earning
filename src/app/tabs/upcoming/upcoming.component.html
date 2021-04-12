@@ -5,6 +5,14 @@
 </ion-header>
 
 <ion-content class="upcoming-page" id="upcoming-main">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      pullingText="下拉刷新"
+      refreshingSpinner="bubbles"
+      refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
   <section class="upcoming-container">
     <!-- 操作类 -->
     <section class="tools-info">
@@ -19,55 +27,21 @@
       <span class="label-text">代办任务</span>
     </section>
     <!-- 任务列表 -->
-    <section class="task-info">
-      <section class="task-info-item">
-        <swipe-task-info-cell></swipe-task-info-cell>
+    <ion-list class="task-info" *ngIf="renderArray.length; else tempNullContext">
+      <section class="task-info-item" *ngFor="let item of renderArray">
+        <swipe-task-info-cell [renderInfo]="item"></swipe-task-info-cell>
       </section>
-    </section>
+    </ion-list>
+    <ng-template #tempNullContext>
+      <swipe-null></swipe-null>
+    </ng-template>
   </section>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="正在加载更多数据...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
-<!-- 侧窗 -->
-<ion-menu class="custom-side-menu" menuId="upcoming" side="end" type="push" contentId="upcoming-main">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>选择名片</ion-title>
-      <ion-buttons slot="primary">
-        <ion-button color="medium">
-          <ion-icon name="close-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="content-info">
-    <section class="platform-info">
-      <section class="platform-item" (click)="openPlatformPickerEvent($event)">
-        <span class="label-text">平台：</span>
-        <span class="value-text">淘宝</span>
-        <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
-      </section>
-      <section class="platform-item">
-        <span class="label-text">买号：</span>
-        <input class="code-input" type="text" placeholder="请输入要搜索的买号"/>
-      </section>
-    </section>
-    <section class="btn-group">
-      <ion-button color="primary" class="btn-search">查询</ion-button>
-      <ion-button class="btn-reset">清空</ion-button>
-    </section>
-    <ion-content>
-      <ion-list>
-        <swipe-business-card-info></swipe-business-card-info>
-      </ion-list>
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content
-          loadingSpinner="bubbles"
-          loadingText="正在加载更多数据...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </ion-content>
-  </ion-content>
-</ion-menu>
-
-<!-- <ion-router-outlet id="main"></ion-router-outlet> -->
-
+<swipe-business-info (change)="businessChange($event)" [menuKey]="'upcoming-main'" #swiperCustomMenu></swipe-business-info>

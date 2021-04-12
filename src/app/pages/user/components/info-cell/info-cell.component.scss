@@ -22,6 +22,8 @@
     margin-top: format(20);
     .value-text {
       @include sc(format(28), $default_color_4);
+      word-break: break-all;
+      word-wrap: break-word;
       line-height: format(48);
       font-weight: 400;
     }

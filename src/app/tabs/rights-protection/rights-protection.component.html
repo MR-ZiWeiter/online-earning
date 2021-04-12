@@ -3,7 +3,7 @@
 </ion-header>
 
 <ion-header class="custom-tab-info">
-  <ion-segment class="custom-segment" (ionChange)="segmentChanged($event)" [(ngModel)]="tabSelect">
+  <ion-segment class="custom-segment" [(ngModel)]="tabSelect">
     <ion-segment-button class="custom-segament-button" *ngFor="let item of tabConfig" [value]="item.value">
       <ion-label class="custom-sty">{{item.label}}({{item.number}})</ion-label>
     </ion-segment-button>
@@ -21,7 +21,7 @@
   </ion-refresher>
   <section class="rights-protection-container">
     <!-- 任务列表 -->
-    <ion-list class="rights-protection-info">
+    <ion-list class="rights-protection-info" *ngIf="renderArrayInfo.length; else tempNullContext">
       <section class="rights-protection-info-item" *ngFor="let item of renderArrayInfo">
         <swipe-task-info-cell [renderInfo]="item" [isCustomHandler]="true">
           <section class="custom-handler" name="customTemp">
@@ -41,6 +41,9 @@
         </swipe-task-info-cell>
       </section>
     </ion-list>
+    <ng-template #tempNullContext>
+      <swipe-null></swipe-null>
+    </ng-template>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"

@@ -11,7 +11,8 @@ export class WithdrawApplicationPage implements OnInit {
 
   public amountConfig: any = {
     amount: 0,
-    payAccountId: 0
+    payAccountId: 0,
+    payAccountText: null
   };
 
   public amountInfo: any = {};
@@ -72,7 +73,8 @@ export class WithdrawApplicationPage implements OnInit {
   public checkedChange(info: any, infos: any) {
     console.log(infos)
     if (info[0].isCheck) {
-      this.amountConfig.payAccountId = infos.id
+      this.amountConfig.payAccountId = infos.id;
+      this.amountConfig.payAccountText = infos.payType;
       /* 还原数据 */
       this.withdrawTypeRender = this.withdrawTypeRender.map(item => {
         return {
@@ -91,7 +93,10 @@ export class WithdrawApplicationPage implements OnInit {
   public submitChange() {
     // this.apiIndexUserService.asyncFetchWithdrawCashOut()
     if (this.amountConfig.amount <= Number(this.amountInfo.balance)) {
-      this.apiIndexUserService.asyncFetchWithdrawCashOut()
+      this.apiIndexUserService.asyncFetchWithdrawCashOut(this.amountConfig).subscribe(res => {
+        this.presentToast('提交成功~将在3个工作日内提现到' + this.amountConfig.payAccountText, 'success');
+        this.fetchAmountInfo();
+      })
     } else {
       this.amountConfig.amount = Number(this.amountInfo.balance);
       this.presentToast('请输入小于您的余额的提现金额', 'danger');

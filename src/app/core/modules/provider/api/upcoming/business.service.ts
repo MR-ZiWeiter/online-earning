@@ -71,4 +71,15 @@ export class ApiBusinessService {
       });
     });
   }
+  /* 删除名片 */
+  asyncPutBusinessDeleteInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.delete('/buyer/buyer-account/delete/${info}', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
 }

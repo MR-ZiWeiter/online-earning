@@ -7,12 +7,13 @@ import { LatestAnnouncementPage } from './latest-announcement/latest-announcemen
 import { ContactCustomerServicePage } from './contact-customer-service/contact-customer-service.page';
 import { DataAuthenticationPage } from './data-authentication/data-authentication.page';
 import { WithdrawApplicationPage } from './withdraw-application/withdraw-application.page';
+import { WithdrawalsRecordPage } from './withdrawals-record/withdrawals-record.page';
 import { ChangePwdPage } from './change-pwd/change-pwd.page';
 
 const routes: Routes = [
   { path: 'messages', component: MessagesPage },
   { path: 'funding-details', component: FundingDetailsPage },
-  { path: 'withdrawals-record', component: FundingDetailsPage },
+  { path: 'withdrawals-record', component: WithdrawalsRecordPage },
   { path: 'latest-announcement', component: LatestAnnouncementPage },
   { path: 'contact-customer-service', component: ContactCustomerServicePage },
   { path: 'data-authentication', component: DataAuthenticationPage },

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiUserIndexService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-funding-details',
@@ -7,31 +8,50 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FundingDetailsPage implements OnInit {
 
-  public buysArray: any[] = []
-  constructor() { }
+  private renderConfig = {
+    pageNum: 1,
+    pageSize: 20
+  }
+
+  public renderArray: any[] = []
+  constructor(
+    private apiUserIndexService: ApiUserIndexService
+  ) { }
 
   ngOnInit() {
+    this.doRefresh();
   }
 
-  public doRefresh(event) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+  public fetchRenderArray(fn?: Function, err?: Function) {
+    this.apiUserIndexService.asyncFetchCapitalList(this.renderConfig).subscribe(res => {
+      fn && fn(res);
+    }, error => {
+      err && err(error);
+    })
   }
+
+  public doRefresh(event?: any) {
+    this.renderConfig.pageNum = 1;
+    this.fetchRenderArray((res) => {
+      this.renderArray = res.rel.list;
+      event && (event.target.disabled = false);
+      event && event.target.complete();
+    }, () => {
+      event && event.target.complete();
+    })
+  }
+
   public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
-    setTimeout(() => {
-      console.log('Done');
+    this.renderConfig.pageNum++;
+    this.fetchRenderArray((res) => {
       event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.buysArray.length == 1000) {
+      if (res.rel.count > this.renderArray.length) {
+        this.renderArray = this.renderArray.concat(res.rel.list);
+      } else {
         event.target.disabled = true;
+        this.renderArray = this.renderArray.concat(res.rel.list);
       }
-    }, 500);
+    });
   }
 
 }

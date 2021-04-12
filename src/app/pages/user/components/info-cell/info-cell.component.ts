@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'swipe-info-cell',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info-cell.component.scss']
 })
 export class InfoCellComponent implements OnInit {
+
+  @Input() public renderInfo?: any = {};
 
   constructor() { }
 

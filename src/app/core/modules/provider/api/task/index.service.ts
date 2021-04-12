@@ -72,4 +72,16 @@ export class ApiTaskIndexService {
     });
   }
 
+  /* 任务统计 */
+  asyncFetchTaskStatistic(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/order/status_statistic', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
 }

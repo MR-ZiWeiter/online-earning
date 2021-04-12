@@ -11,6 +11,7 @@ import { SwipeShareComponent } from './modules/components/swipe-share/swipe-shar
 import { SwipeInputComponent } from './modules/components/swipe-input/swipe-input.component';
 import { SwipeCheckboxComponent } from './modules/components/swipe-checkbox/swipe-checkbox.component';
 import { SwipeRadioComponent } from './modules/components/swipe-radio/swipe-radio.component';
+import { SwipeNullComponent } from './modules/components/swipe-null/swipe-null.component';
 
 // API接口类服务模块
 import { ApiServiceModule } from './modules/provider/api/index.module';
@@ -33,6 +34,7 @@ import { KeysPipe } from './pipes';
     SwipeUploadComponent,
     SwipeCheckboxComponent,
     SwipeRadioComponent,
+    SwipeNullComponent,
     /* 管道类 */
     KeysPipe
   ],
@@ -61,6 +63,7 @@ import { KeysPipe } from './pipes';
     SwipeUploadComponent,
     SwipeCheckboxComponent,
     SwipeRadioComponent,
+    SwipeNullComponent,
     /* 管道类 */
     KeysPipe
   ]

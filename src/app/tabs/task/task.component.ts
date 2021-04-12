@@ -24,10 +24,10 @@ export class TaskComponent implements OnInit {
   public taskRenderList: any[] = [];
 
   public tabConfig: any[] = [
-    { label: '未开始', number: 1, value: 1 },
-    { label: '进行中', number: 2, value: 2 },
-    { label: '已完成', number: 3, value: 3 },
-    { label: '已取消', number: 4, value: 4 }
+    { label: '未开始', number: 0, value: 1 },
+    { label: '进行中', number: 0, value: 2 },
+    { label: '已完成', number: 0, value: 3 },
+    { label: '已取消', number: 0, value: 4 }
   ];
 
   @ViewChild('swiperCustomMenu') private swiperCustomMenuComponent: BusinessInfoComponent;
@@ -43,12 +43,29 @@ export class TaskComponent implements OnInit {
       /* 处理名片映射 */
       if (res && res.selected) {
         this.taskRenderConfig.buyerId = res.selected;
-
+        this.fetchTaskTotalInfo(res.selected);
       }
     })
   }
 
   ngOnInit() {
+
+  }
+
+  /* 任务统计 */
+  private fetchTaskTotalInfo(buyerId: string) {
+    this.apiTaskIndexService.asyncFetchTaskStatistic({
+      buyerId
+    }).subscribe(res => {
+      console.log(res);
+      this.tabConfig = res.rel.map(item => {
+        return {
+          label: item.statusLabel,
+          number: item.amount,
+          value: item.status
+        }
+      })
+    })
   }
 
   private async onTaskListInfo(fn?: Function, fn2?: Function) {

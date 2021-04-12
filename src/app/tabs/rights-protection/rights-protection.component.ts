@@ -24,7 +24,8 @@ export class RightsProtectionComponent implements OnInit {
 
   public set tabSelect(n: number) {
     this.renderConfig.status = n;
-    this.switchFetchApplealInfo(n);
+    this.doRefresh();
+    // this.switchFetchApplealInfo(n);
   }
   public get tabSelect(): number {
     return this.renderConfig.status;
@@ -39,73 +40,49 @@ export class RightsProtectionComponent implements OnInit {
     private apiAppealService: ApiAppealService
   ) {
     /* 获取默认数据 */
-    this.switchFetchApplealInfo(2);
+    // this.switchFetchApplealInfo(2);
   }
 
   async ngOnInit() {
   }
 
   /* 获取维权列表 */
-  public switchFetchApplealInfo(state: number) {
-    this.apiAppealService.asyncFetchAppealListInfo({
-      status: state
-    }).subscribe(res => {
+  public switchFetchApplealInfo(fn?: Function, err?: Function) {
+    this.apiAppealService.asyncFetchAppealListInfo(this.renderConfig).subscribe(res => {
       // console.log(res)
-      this.renderArrayInfo = res.rel;
+      // this.renderArrayInfo = res.rel;
+      fn && fn(res);
+    }, error => {
+      err && err(error);
     })
   }
 
-  public doRefresh(event) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+  public doRefresh(event?: any) {
+    this.renderConfig.pageNum = 1;
+    this.switchFetchApplealInfo((res) => {
+      this.renderArrayInfo = res.rel;
+      if (res.length === this.renderConfig.pageSize) {
+        event && (event.target.disabled = false);
+      } else {
+        event && (event.target.disabled = false);
+      }
+      event && event.target.complete();
+    }, () => {
+      event && event.target.complete();
+    })
   }
 
   public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
-    setTimeout(() => {
-      console.log('Done');
+    this.renderConfig.pageNum++;
+    this.switchFetchApplealInfo((res) => {
       event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.buysArray.length == 1000) {
+      if (this.renderConfig.pageSize * (this.renderConfig.pageNum - 1) > this.renderArrayInfo.length) {
+        this.renderArrayInfo = this.renderArrayInfo.concat(res.rel);
         event.target.disabled = true;
+      } else {
+        this.renderArrayInfo = res.rel;
       }
-    }, 500);
-  }
-
-  public openMenuInfo() {
-    this.menu.open('end');
-  }
-
-  public async openPlatformPickerEvent() {
-    const customPicker = await this.ionPickerCotroller.create({
-      columns: [
-        {
-          name: '选择平台',
-          options: [
-            {
-              text: '淘宝',
-              value: '1'
-            }
-          ]
-        }
-      ]
-    })
-    customPicker.present()
-  }
-
-  /* 打开新名片 */
-  public openNewCartePage() {
-    this.router.navigate(['/pages/carte/step-1'])
-  }
-
-  public segmentChanged(ev: any) {
-    // console.log('Segment changed', ev);
-    this.switchFetchApplealInfo(ev.detail.value);
+    });
   }
 
 }

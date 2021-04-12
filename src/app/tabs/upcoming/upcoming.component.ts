@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuController, PickerController } from '@ionic/angular';
 import { ApiUpcomingService } from 'src/app/core/modules/provider/api';
+import { BusinessInfoComponent } from 'src/app/pages/components/business-info/business-info.component';
 
 @Component({
   selector: 'app-upcoming',
@@ -16,7 +17,9 @@ export class UpcomingComponent implements OnInit {
     pageSize: 20
   }
 
-  public buysArray: any[] = []
+  public renderArray: any[] = []
+
+  @ViewChild('swiperCustomMenu') private swiperCustomMenuComponent: BusinessInfoComponent;
 
   constructor(
     private router: Router,
@@ -26,31 +29,46 @@ export class UpcomingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadSaloonInfo()
   }
 
-  private loadSaloonInfo() {
+  private loadSaloonInfo(fn?: Function, err?: Function) {
     this.apiUpcomingService.asyncFetchUpcomingList(this.saloonRenderConfig).subscribe(res => {
-      console.log(res)
+      // console.log(res)
+      fn &&  fn(res.rel);
+    })
+  }
+
+  doRefresh(event?: any) {
+    this.saloonRenderConfig.pageNum = 1;
+    this.loadSaloonInfo((remderArray) => {
+      this.renderArray = remderArray;
+      if (remderArray.length === this.saloonRenderConfig.pageSize) {
+        event && (event.target.disabled = false);
+      } else {
+        event && (event.target.disabled = false);
+      }
+      event && event.target.complete();
+    }, () => {
+      event && event.target.complete();
     })
   }
 
   public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
-    setTimeout(() => {
-      console.log('Done');
+    this.saloonRenderConfig.pageNum++;
+    this.loadSaloonInfo((renderArray) => {
       event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.buysArray.length == 1000) {
+      if (this.saloonRenderConfig.pageSize * (this.saloonRenderConfig.pageNum - 1) > this.renderArray.length) {
+        this.renderArray = this.renderArray.concat(renderArray);
         event.target.disabled = true;
+      } else {
+        this.renderArray = renderArray;
       }
-    }, 500);
+    });
   }
 
+  /* 打开侧栏菜单 */
   public openMenuInfo() {
-    this.menu.enable(true, 'upcoming');
-    this.menu.open('upcoming');
+    this.swiperCustomMenuComponent.openMenuInfo();
   }
 
   public async openPlatformPickerEvent() {
@@ -68,6 +86,12 @@ export class UpcomingComponent implements OnInit {
       ]
     })
     customPicker.present()
+  }
+
+  /* 名片回调 */
+  public businessChange(ev: {id: string; key: string}) {
+    this.saloonRenderConfig.buyerAccountId = ev.id;
+    this.doRefresh();
   }
 
   /* 打开新名片 */

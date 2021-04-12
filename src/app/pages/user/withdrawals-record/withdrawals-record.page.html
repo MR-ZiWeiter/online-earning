@@ -1,5 +1,5 @@
 <ion-header class="custom-header">
-  <swipe-header class="custom-header-component" title="消息列表" [isBack]="true"></swipe-header>
+  <swipe-header class="custom-header-component" title="提现记录" [isBack]="true"></swipe-header>
 </ion-header>
 
 <ion-content class="withdrawals-record-page">
@@ -11,11 +11,12 @@
       refreshingText="加载中...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-list class="content">
-    <swipe-info-cell></swipe-info-cell>
-    <swipe-info-cell></swipe-info-cell>
-    <swipe-info-cell></swipe-info-cell>
+  <ion-list class="content" *ngIf="renderArray.length; else tempNullContext">
+    <swipe-info-cell [renderInfo]="item" *ngFor="let item of renderArray"></swipe-info-cell>
   </ion-list>
+  <ng-template #tempNullContext>
+    <swipe-null></swipe-null>
+  </ng-template>
   <ion-infinite-scroll (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"

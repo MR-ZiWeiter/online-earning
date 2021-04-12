@@ -1,0 +1,10 @@
+@import 'mixin';
+
+.swipe-null-component {
+  min-height: format(500);
+  @include wh(100%, 100%);
+  @include flex-justify-align(center, center);
+  .desc-text {
+    @include sc(format(30), $default_color_3);
+  }
+}

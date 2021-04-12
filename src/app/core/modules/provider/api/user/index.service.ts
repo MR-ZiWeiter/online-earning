@@ -77,7 +77,7 @@ export class ApiUserIndexService {
   // 消息列表
   asyncFetchNotificationInfo(info: any = {}): Observable<any> {
     return new Observable(observer => {
-      this.http.get('/service/tourSysMsg/getMsgList', info, {}).subscribe((res: ApiResponseModel) => {
+      this.http.get('/buyer/message/list', info, {}).subscribe((res: ApiResponseModel) => {
         // console.log(res);
         observer.next(res);
       }, err => {
@@ -86,4 +86,39 @@ export class ApiUserIndexService {
     });
   }
 
+  /* 提现记录 */
+  asyncFetchWithdrawList(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/capital-account/cash-out/list', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  /* 资金明细 */
+  asyncFetchCapitalList(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/capital-account/list', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  /* 公告 */
+  asyncFetchNoticeList(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/notice/list', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
 }
