@@ -7,7 +7,7 @@
     <span class="lable-text">提现金额</span>
     <section class="withdraw-info">
       <input type="number" [(ngModel)]="amountConfig.amount" class="price-input" placeholder="请输入需要提现的金额">
-      <span class="all-count">全部提现</span>
+      <span class="all-count" (click)="amountAllChange()">全部提现</span>
     </section>
     <section class="count-balance" *ngIf="amountInfo">
       <span class="lable-text">当前余额：{{amountInfo.balance}}元</span>

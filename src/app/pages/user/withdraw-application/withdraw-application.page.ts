@@ -103,6 +103,11 @@ export class WithdrawApplicationPage implements OnInit {
     }
   }
 
+  /* 全部提现 */
+  public amountAllChange() {
+    this.amountConfig.amount = this.amountInfo.balance;
+  }
+
   // 提示吐司
   async presentToast(message: string, color: string = 'primary') {
     const toast = await this.toastController.create({
