@@ -14,9 +14,13 @@ export class BusinessInfoService {
     keyword: null
   };
 
-  private $businessInfoConfig: BehaviorSubject<IBusinessInfoConfigModel> = new BehaviorSubject<IBusinessInfoConfigModel>(this._businessInfoConfig);
+  public $businessInfoConfig: BehaviorSubject<IBusinessInfoConfigModel> = new BehaviorSubject<IBusinessInfoConfigModel>(null);
 
-  constructor() { }
+  constructor() {
+    // alert(1)
+    console.log('---------------------------->')
+    console.log(this._businessInfoConfig);
+  }
 
   /* 插入值 */
   public setBusinessInfoConfig(info: IBusinessInfoConfigModel) {

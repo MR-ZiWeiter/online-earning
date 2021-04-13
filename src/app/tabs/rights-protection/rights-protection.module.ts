@@ -1,9 +1,9 @@
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { RightsProtectionComponent } from './rights-protection.component';
-import { BusinessCardInfoComponent } from '../../pages/components/business-card-info/business-card-info.component';
 import { TaskInfoCellComponent } from '../upcoming/task-info-cell/task-info-cell.component';
+import { BusinessCardInfoComponent } from '../../pages/components/business-card-info/business-card-info.component';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { TaskInfoCellComponent } from '../upcoming/task-info-cell/task-info-cell
   ],
   declarations: [
     RightsProtectionComponent,
+    BusinessCardInfoComponent,
     TaskInfoCellComponent,
-    BusinessCardInfoComponent
   ]
 })
 export class RightsProtectionModule { }

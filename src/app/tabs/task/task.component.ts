@@ -3,14 +3,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BusinessInfoComponent } from 'src/app/pages/components/business-info/business-info.component';
 import { BusinessInfoService } from 'src/app/pages/components/business-info/business-info.service';
 import { ApiTaskIndexService } from 'src/app/core/modules/provider/api';
-import { ToastController, ModalController } from '@ionic/angular';
+import { ToastController, ModalController, AlertController } from '@ionic/angular';
 import { SubmitRightsComponent } from './submit-rights/submit-rights.component';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss'],
-  providers: [BusinessInfoService]
+  styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
 
@@ -34,48 +33,48 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private alertController: AlertController,
     private modalController: ModalController,
     private toastController: ToastController,
     private apiTaskIndexService: ApiTaskIndexService,
     private businessInfoService: BusinessInfoService
   ) {
+  }
+
+  ngOnInit() {
     this.businessInfoService.getBusinessInfoConfig().subscribe(res => {
+      console.log(res)
       /* 处理名片映射 */
       if (res && res.selected) {
         this.taskRenderConfig.buyerId = res.selected;
-        this.fetchTaskTotalInfo(res.selected);
+        this.doRefresh();
       }
     })
   }
 
-  ngOnInit() {
-
-  }
-
   /* 任务统计 */
   private fetchTaskTotalInfo(buyerId: string) {
-    this.apiTaskIndexService.asyncFetchTaskStatistic({
-      buyerId
-    }).subscribe(res => {
-      console.log(res);
-      this.tabConfig = res.rel.map(item => {
-        return {
-          label: item.statusLabel,
-          number: item.amount,
-          value: item.status
-        }
+    if (buyerId) {
+      this.apiTaskIndexService.asyncFetchTaskStatistic({
+        buyerId
+      }).subscribe(res => {
+        console.log(res);
+        this.tabConfig = res.rel.map(item => {
+          return {
+            label: item.statusLabel,
+            number: item.amount,
+            value: item.status
+          }
+        })
       })
-    })
+    } else {
+      this.presentToast('请先选择名片后再试!', 'danger');
+    }
   }
 
   private async onTaskListInfo(fn?: Function, fn2?: Function) {
     if (!this.taskRenderConfig.buyerId) {
-      const toast = await this.toastController.create({
-        duration: 2000,
-        color: 'danger',
-        message: '请先选择名片后再试!'
-      })
-      await toast.present();
+      this.presentToast('请先选择名片后再试!', 'danger');
       fn2 && fn2();
       return false;
     }
@@ -87,6 +86,7 @@ export class TaskComponent implements OnInit {
 
   public doRefresh(event?: any) {
     this.taskRenderConfig.pageNum = 1;
+    this.fetchTaskTotalInfo(this.taskRenderConfig.buyerId);
     this.onTaskListInfo((res) => {
       this.taskRenderList = res.rel;
       if (res.length === this.taskRenderConfig.pageSize) {
@@ -153,6 +153,47 @@ export class TaskComponent implements OnInit {
     await modal.present()
     const { data } = await modal.onWillDismiss();
     console.log(data)
+  }
+
+  /* 取消任务 */
+  public async openCancelConfirm(info: any) {
+    const alert = await this.alertController.create({
+      header: '提示',
+      message: `是否取消<strong>${info.taskCode}</strong>任务`,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel'
+        },
+        {
+          text: '确认',
+          role: 'confirm'
+        }
+      ]
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    // console.log('onDidDismiss resolved with role', role);
+    if (role === 'confirm') {
+      this.apiTaskIndexService.asyncFetchTaskCancel({
+        taskId: info.id
+      }).subscribe(res => {
+        this.presentToast('取消成功！', 'success');
+        this.doRefresh();
+      })
+    }
+  }
+
+  // 提示吐司
+  async presentToast(message: string, color: string = 'primary') {
+    const toast = await this.toastController.create({
+      color,
+      message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

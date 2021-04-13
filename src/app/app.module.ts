@@ -35,6 +35,7 @@ import { WorkIndexedDBService } from './core/modules/provider/indexedDB/work-ind
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot({
+      mode: 'ios',
       hardwareBackButton: true,
       swipeBackEnabled: true
     }),

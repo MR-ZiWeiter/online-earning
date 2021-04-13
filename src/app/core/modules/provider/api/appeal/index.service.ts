@@ -56,4 +56,15 @@ export class ApiAppealService {
       });
     });
   }
+  /* 维权状态 */
+  asyncFetchAppealStatistic(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/appeal/status_statistic', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
 }

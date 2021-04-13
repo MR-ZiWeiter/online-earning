@@ -12,7 +12,7 @@
   </ion-segment>
 </ion-header>
 
-<ion-content class="task-page" id="main">
+<ion-content class="task-page" id="task-main">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-down-outline"
@@ -28,8 +28,8 @@
         <swipe-task-info-cell *ngFor="let item of taskRenderList" [renderInfo]="item" [isCustomHandler]="true">
           <section class="custom-handler" name="customTemp" [ngSwitch]="taskRenderConfig.status">
             <ion-button class="hand-view" (click)="openTaskInfoPage(item)">查看</ion-button>
-            <ion-button class="cancel" *ngSwitchCase="1">取消</ion-button>
-            <ion-button class="cancel" *ngSwitchCase="2">取消</ion-button>
+            <ion-button class="cancel" *ngSwitchCase="1" (click)="openCancelConfirm(item)">取消</ion-button>
+            <!-- <ion-button class="cancel" *ngSwitchCase="2" (click)="openCancelConfirm(item)">取消</ion-button> -->
             <ion-button class="cancel" *ngSwitchCase="3" (click)="openRightsModal(item)">维权</ion-button>
           </section>
         </swipe-task-info-cell>
@@ -47,4 +47,4 @@
   </section>
 </ion-content>
 
-<swipe-business-info (change)="businessChange($event)" [menuKey]="'main'" #swiperCustomMenu></swipe-business-info>
+<swipe-business-info (change)="businessChange($event)" [menuKey]="'task-main'" #swiperCustomMenu></swipe-business-info>

@@ -1,10 +1,10 @@
-import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-upload.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SwipeEyeCareModeComponent } from './modules/components/swipe-eye-care-mode/swipe-eye-care-mode.component';
 import { SwipeContextNullComponent } from './modules/components/swipe-context-null/swipe-context-null.component';
+import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-upload.component';
 import { SwipeHeaderComponent } from './modules/components/swipe-header/swipe-header.component';
 import { SwipeLottieComponent } from './modules/components/swipe-lottie/swipe-lottie.component';
 import { SwipeShareComponent } from './modules/components/swipe-share/swipe-share.component';

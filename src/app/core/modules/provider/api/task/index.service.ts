@@ -84,4 +84,16 @@ export class ApiTaskIndexService {
     });
   }
 
+  /* 取消任务 */
+  asyncFetchTaskCancel(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/order/cancel', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
 }

@@ -17,8 +17,8 @@
     <!-- 操作类 -->
     <section class="tools-info">
       <section class="count-info">
-        <ion-button class="current-btn" color="primary">正在进行5个任务</ion-button>
-        <ion-button class="success-btn" color="success">已完成10个任务</ion-button>
+        <ion-button class="current-btn" color="primary">正在进行{{upcomingConfig.checking}}个任务</ion-button>
+        <ion-button class="success-btn" color="success">已完成{{upcomingConfig.success}}个任务</ion-button>
       </section>
       <ion-button class="new-card-btn" color="primary" (click)="openNewCartePage()">添加新名片</ion-button>
     </section>

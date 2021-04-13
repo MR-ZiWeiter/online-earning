@@ -13,8 +13,8 @@ export class RightsProtectionComponent implements OnInit {
   public buysArray: any[] = [];
 
   public tabConfig: any[] = [
-    { label: '处理中', number: 2, value: 2 },
-    { label: '已完成', number: 1, value: 3 }
+    { label: '处理中', number: 0, value: 2 },
+    { label: '已完成', number: 0, value: 3 }
   ];
   private renderConfig: any = {
     pageNum: 1,
@@ -38,12 +38,11 @@ export class RightsProtectionComponent implements OnInit {
     private menu: MenuController,
     private ionPickerCotroller: PickerController,
     private apiAppealService: ApiAppealService
-  ) {
-    /* 获取默认数据 */
-    // this.switchFetchApplealInfo(2);
-  }
+  ) {}
 
   async ngOnInit() {
+    /* 获取默认数据 */
+    this.doRefresh();
   }
 
   /* 获取维权列表 */
@@ -57,8 +56,23 @@ export class RightsProtectionComponent implements OnInit {
     })
   }
 
+  /* 获取状态统计 */
+  private fetchAppealStatistic() {
+    this.apiAppealService.asyncFetchAppealStatistic().subscribe(res => {
+      // console.log(res)
+      this.tabConfig = res.rel.map(item => {
+        return {
+          label: item.statusLabel,
+          number: item.amount,
+          value: item.status
+        }
+      })
+    })
+  }
+
   public doRefresh(event?: any) {
     this.renderConfig.pageNum = 1;
+    this.fetchAppealStatistic();
     this.switchFetchApplealInfo((res) => {
       this.renderArrayInfo = res.rel;
       if (res.length === this.renderConfig.pageSize) {

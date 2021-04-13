@@ -25,6 +25,7 @@
       </section>
       <section class="item" [ngSwitch]="renderInfo.status">
         <span class="label-text">任务进度：</span>
+        <span class="value-text" *ngSwitchCase="0">已取消</span>
         <span class="value-text" *ngSwitchCase="1">待开始</span>
         <span class="value-text" *ngSwitchCase="2">进行中</span>
         <span class="value-text" *ngSwitchCase="3">已完成</span>

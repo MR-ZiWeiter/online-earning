@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuController, PickerController } from '@ionic/angular';
+import { PickerController } from '@ionic/angular';
 import { ApiUpcomingService } from 'src/app/core/modules/provider/api';
 import { BusinessInfoComponent } from 'src/app/pages/components/business-info/business-info.component';
 
@@ -17,18 +17,37 @@ export class UpcomingComponent implements OnInit {
     pageSize: 20
   }
 
+  /* 计总 */
+  public upcomingConfig = {
+    checking: 0,
+    success: 0
+  };
+
   public renderArray: any[] = []
 
   @ViewChild('swiperCustomMenu') private swiperCustomMenuComponent: BusinessInfoComponent;
 
   constructor(
     private router: Router,
-    private menu: MenuController,
     private ionPickerCotroller: PickerController,
     private apiUpcomingService: ApiUpcomingService
   ) { }
 
   ngOnInit() {
+  }
+
+  /* 获取数量计总 */
+  private fetchUpcomingCount() {
+    this.apiUpcomingService.asyncFetchUpcomingStatistic().subscribe(res => {
+      // console.log(res)
+      res.rel.map(item => {
+        if (item.status === 2) {
+          this.upcomingConfig.checking = item.amount
+        } else if (item.status === 3) {
+          this.upcomingConfig.success = item.amount
+        }
+      })
+    })
   }
 
   private loadSaloonInfo(fn?: Function, err?: Function) {
@@ -40,6 +59,7 @@ export class UpcomingComponent implements OnInit {
 
   doRefresh(event?: any) {
     this.saloonRenderConfig.pageNum = 1;
+    this.fetchUpcomingCount();
     this.loadSaloonInfo((remderArray) => {
       this.renderArray = remderArray;
       if (remderArray.length === this.saloonRenderConfig.pageSize) {

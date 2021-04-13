@@ -23,5 +23,16 @@ export class ApiUpcomingService {
       });
     });
   }
+  /* 获取待办统计 */
+  asyncFetchUpcomingStatistic(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/buyer/order/account_statistic', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
 
 }
