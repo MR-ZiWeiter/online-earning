@@ -73,8 +73,8 @@ export class ChangePwdPage implements OnInit {
     if (!this.registerForm.phone) {
       this.presentToastWithOptions();
     } else {
-      this.userAccountService.asyncFetchAccountLoginRegisterCode({
-        phone: this.registerForm.phone
+      this.userAccountService.asyncFetchAccountSmsCode({
+        mobile: this.registerForm.phone
       }).subscribe((res: any) => {
         this.settingTimeOutEvent();
       });

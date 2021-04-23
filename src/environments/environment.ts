@@ -7,7 +7,7 @@ export const environment = {
   NAME: 'ONLINE_EARNING',
   ENVIRONMENT: 'development',
   API_URL: '/api',
-  BASIC_URL: '/',
+  BASIC_URL: '',
   VERSION: 2
 };
 

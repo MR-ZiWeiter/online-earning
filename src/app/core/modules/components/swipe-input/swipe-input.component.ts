@@ -30,7 +30,7 @@ export class SwipeInputComponent implements ControlValueAccessor, OnInit {
   @Input() public name: string = 'custom';
   @Input() public placeholder!: string;
   @Input() public type!: string;
-  @Input() public pattern!: RegExp;
+  @Input() public pattern!: RegExp|string;
   @Input() public isRequired: boolean = false;
   @Input() public isBorder: boolean = true;
 
@@ -40,10 +40,10 @@ export class SwipeInputComponent implements ControlValueAccessor, OnInit {
   @Input() public maxLength: number;
   @Input() public minLength: number;
   @Input()
-  private set isDisabled(n: boolean) {
+  public set isDisabled(n: boolean) {
     this.disabled = n;
   }
-  private get isDisabled(): boolean {
+  public get isDisabled(): boolean {
     return this.disabled;
   }
 
@@ -101,15 +101,15 @@ export class SwipeInputComponent implements ControlValueAccessor, OnInit {
   }
 
   /* 事件回调 */
-  public inputFocusChange(ev: InputEvent) {
+  public inputFocusChange(ev: FocusEvent) {
     this.isFocus = true;
     this.onFocus.emit(this.value);
   }
-  public inputBlurChange(ev: InputEvent) {
+  public inputBlurChange(ev: FocusEvent) {
     this.isFocus = false;
     this.onBlur.emit(this.value);
   }
-  public clearInputEvent(ev: InputEvent) {
+  public clearInputEvent(ev: MouseEvent) {
     this.value = null;
     this.isPass = false;
     this.valueChange(null);

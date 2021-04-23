@@ -15,8 +15,10 @@
           [maxLength]="6"
           [isClear]="true"
           [isSuffix]="true">
-          <span name="suffix" class="label-text">获取验证码</span>
-          <span class="label-text">获取验证码</span>
+          <span *ngIf="!getCodeStatus; else elseTemplate" name="suffix" class="label-text" (click)="fetchCodeEvent()">获取验证码</span>
+          <ng-template #elseTemplate>
+            <span name="suffix" class="label-text">{{timeOut}}S后重新获取</span>
+          </ng-template>
         </swipe-input>
       </section>
       <section class="custom-input">

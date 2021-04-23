@@ -38,7 +38,7 @@ export class RegisterPage implements OnInit {
         identifier: [null, [Validators.required, Validators.pattern(/^1[3-9]{1}[0-9]{9}$/)]],
         credential: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/)]],
         nickname: [null, [Validators.required]],
-        smsCode: [null, [Validators.required]],
+        smsCode: [null, [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
         recommendCode: [null]
       })
     }
@@ -77,7 +77,7 @@ export class RegisterPage implements OnInit {
     if (!this.registerForm.controls.identifier.valid) {
       this.presentToastWithOptions();
     } else {
-      this.userAccountService.asyncFetchAccountRegisterCode({
+      this.userAccountService.asyncFetchAccountSmsCode({
         mobile: this.registerForm.get('identifier').value
       }).subscribe((res: any) => {
         this.settingTimeOutEvent();

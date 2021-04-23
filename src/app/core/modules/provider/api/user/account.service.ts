@@ -50,9 +50,9 @@ export class UserAccountService {
     });
   }
   // 注册验证码获取
-  asyncFetchAccountRegisterCode(info: any): Observable<any> {
+  asyncFetchAccountSmsCode(info: any): Observable<any> {
     return new Observable(observer => {
-      this.http.get('/open/sms/code/register', info, {}).subscribe((res: ApiResponseModel) => {
+      this.http.get('/open/sms/code/sms', info, {}).subscribe((res: ApiResponseModel) => {
         observer.next(res);
       }, err => {
         console.log(err);
@@ -61,16 +61,16 @@ export class UserAccountService {
     });
   }
   // 获取修改手机号验证码
-  asyncFetchAccountLoginRegisterCode(info: any): Observable<any> {
-    return new Observable(observer => {
-      this.http.get('/open/sms/code/change/mobile', info, {}).subscribe((res: ApiResponseModel) => {
-        observer.next(res);
-      }, err => {
-        console.log(err);
-        observer.error(false);
-      });
-    });
-  }
+  // asyncFetchAccountLoginRegisterCode(info: any): Observable<any> {
+  //   return new Observable(observer => {
+  //     this.http.get('/open/sms/code/change/mobile', info, {}).subscribe((res: ApiResponseModel) => {
+  //       observer.next(res);
+  //     }, err => {
+  //       console.log(err);
+  //       observer.error(false);
+  //     });
+  //   });
+  // }
 
   /* 购物标签 */
   asyncAccountShoppingTagInfo(info?: any): Observable<any> {

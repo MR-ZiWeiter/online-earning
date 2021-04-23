@@ -86,7 +86,7 @@ export class RightsProtectionComponent implements OnInit {
     })
   }
 
-  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
+  public loadData(event: any) {
     this.renderConfig.pageNum++;
     this.switchFetchApplealInfo((res) => {
       event.target.complete();

@@ -41,7 +41,7 @@ export class MessagesPage implements OnInit {
     })
   }
 
-  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
+  public loadData(event: any) {
     this.renderConfig.pageNum++;
     this.fetchRenderArray((res) => {
       event.target.complete();

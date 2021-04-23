@@ -7,7 +7,7 @@
       <ng-content select="[name=left]"></ng-content>
     </ng-container>
     <ng-container v-else>
-      <section class="public-left-slot" (click)="handlerLeftEvent()" *ngIf="isBack">
+      <section class="public-left-slot" (click)="handlerLeftEvent($event)" *ngIf="isBack">
         <ion-img class="public-left-icon" [src]="renderLeftIcon"></ion-img>
       </section>
     </ng-container>

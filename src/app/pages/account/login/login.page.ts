@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
     private logger: LoggerService) {
       this.loginForm = fb.group({
         accountType: [1, [Validators.required]],
-        identifier: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/)]],
+        identifier: [null, [Validators.required]],
         credential: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/)]],
         loginMode: ['ACCOUNT_PASSWORD', [Validators.required]]
       })

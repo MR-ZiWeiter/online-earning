@@ -53,7 +53,7 @@ export class BusinessInfoComponent implements OnInit {
     })
   }
 
-  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
+  public loadData(event: any) {
     setTimeout(() => {
       console.log('Done');
       event.target.complete();
@@ -89,7 +89,7 @@ export class BusinessInfoComponent implements OnInit {
   }
 
   /* 打开平台选项 */
-  public async openPlatformPickerEvent() {
+  public async openPlatformPickerEvent(ev: MouseEvent) {
     const customPicker = await this.ionPickerCotroller.create({
       mode: "ios",
       buttons: [

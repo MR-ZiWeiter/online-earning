@@ -21,7 +21,7 @@ export class ContactCustomerServicePage implements OnInit {
       event.target.complete();
     }, 2000);
   }
-  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
+  public loadData(event: any) {
     setTimeout(() => {
       console.log('Done');
       event.target.complete();

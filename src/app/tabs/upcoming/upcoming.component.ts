@@ -73,7 +73,7 @@ export class UpcomingComponent implements OnInit {
     })
   }
 
-  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
+  public loadData(event: any) {
     this.saloonRenderConfig.pageNum++;
     this.loadSaloonInfo((renderArray) => {
       event.target.complete();

@@ -100,7 +100,7 @@ export class TaskComponent implements OnInit {
     })
   }
 
-  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
+  public loadData(event: any) {
     this.taskRenderConfig.pageNum++;
     this.onTaskListInfo((res) => {
       event.target.complete();

@@ -41,9 +41,9 @@ export class LatestAnnouncementPage implements OnInit {
     })
   }
 
-  public loadData(event: { target: { complete: () => void; disabled: boolean; }; }) {
+  public loadData(event: any) {
     this.renderConfig.pageNum++;
-    this.fetchRenderArray((res) => {
+    this.fetchRenderArray((res: any) => {
       event.target.complete();
       if (res.rel.count > this.renderArray.length) {
         this.renderArray = this.renderArray.concat(res.rel.list);
