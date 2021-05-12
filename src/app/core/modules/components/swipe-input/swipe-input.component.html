@@ -1,6 +1,8 @@
 <section [ngClass]="['swipe-input-component',
   isFocus ? 'focus' : 'blur',
-  isPass ? 'success' : (value || isRequired ? 'error' : 'no-content'),
+  isError ? 'error' : '',
+  validateControll.status,
+  flat > 2 ? (validateControll.valid ? 'success' : 'error') : 'no-content',
   isBorder ? 'border' : 'no-border']">
   <section class="prefix" *ngIf="isPrefix">
     <ng-content select="[name=prefix]"></ng-content>
@@ -9,11 +11,10 @@
     <input
       [name]="name"
       [type]="type"
-      [(ngModel)]="value"
       [placeholder]="placeholder"
       [maxlength]="maxLength"
       [minlength]="minLength"
-      [disabled]="disabled"
+      [formControl]="validateControll"
       (ngModelChange)="inputChange($event)"
       (focus)="inputFocusChange($event)"
       (blur)="inputBlurChange($event)"

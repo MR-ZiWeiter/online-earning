@@ -1,3 +1,4 @@
+import { CoreValidators } from 'src/app/core/core.validator';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -35,8 +36,9 @@ export class RegisterPage implements OnInit {
     private logger: LoggerService) {
       this.registerForm = fb.group({
         accountType: [1, [Validators.required]],
-        identifier: [null, [Validators.required, Validators.pattern(/^1[3-9]{1}[0-9]{9}$/)]],
+        identifier: [null, [Validators.required, Validators.pattern(/^(?:[\u4e00-\u9fa5]+)(?:●[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$|^[a-zA-Z0-9]{2,}$|/)]],
         credential: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/)]],
+        credential_check: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/), CoreValidators.match('credential')]],
         nickname: [null, [Validators.required]],
         smsCode: [null, [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
         recommendCode: [null]

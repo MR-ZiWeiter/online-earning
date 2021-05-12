@@ -1,9 +1,21 @@
 <section class="swipe-upload-component">
-  <section class="info-item" [ngStyle]="{width: coreTools.pxToVw(size[0]), height: coreTools.pxToVw(size[1])}">
-    <img class="image-info" />
-    <ion-icon *ngIf="!isLock" class="icon-close" name="close-circle-outline"></ion-icon>
-  </section>
-  <section *ngIf="!isLock" class="add-item" [ngStyle]="{width: coreTools.pxToVw(size[0]), height: coreTools.pxToVw(size[1])}">
-    <ion-icon class="icon-add" name="add-outline"></ion-icon>
-  </section>
+  <ng-container *ngIf="coustom; else imageTemp">
+    <ng-content></ng-content>
+    <ng-content select="[name=suffix]" (click)="openFileChange($event)"></ng-content>
+  </ng-container>
+  <ng-template #imageTemp>
+    <section
+      class="info-item"
+      *ngFor="let item of fileList"
+      [ngStyle]="{
+        width: coreTools.pxToVw(size[0]),
+        height: coreTools.pxToVw(size[1])
+      }">
+      <img class="image-info" [src]="item.url" />
+      <ion-icon *ngIf="!isReady" class="icon-close" name="close-circle-outline" (click)="onDeleteChange(item)"></ion-icon>
+    </section>
+    <section (click)="openFileChange($event)" *ngIf="!isReady && fileList.length < maxFileListLength" class="add-item" [ngStyle]="{width: coreTools.pxToVw(size[0]), height: coreTools.pxToVw(size[1])}">
+      <ion-icon class="icon-add" name="add-outline"></ion-icon>
+    </section>
+  </ng-template>
 </section>

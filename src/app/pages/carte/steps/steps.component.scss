@@ -1,10 +1,22 @@
 @import 'mixin';
+
+$active_color: #67C23A;
+
 .steps-component {
   @include wh(100%, format(138));
   @include flex-justify-align(center, center);
   background-color: $default_background_color;
   .steps-item {
     @include flex-justify-align(center, center);
+    &.active {
+      color: $active_color;
+      .number {
+        border-color: $active_color;
+      }
+      .label-text {
+        color: $active_color;
+      }
+    }
     .number {
       @include wh(format(48), format(48));
       @include flex-justify-align(center, center);
@@ -19,5 +31,8 @@
   }
   .icon-arrow {
     margin: 0 format(34);
+    &.active {
+      color: $active_color;
+    }
   }
 }

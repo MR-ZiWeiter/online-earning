@@ -67,6 +67,9 @@
         .label-text {
           @include sc(format(34), $default_color_1);
           font-weight: 400;
+          &.min {
+            font-size: format(28);
+          }
         }
         .value-text {
           @include sc(format(24), $default_color_4);

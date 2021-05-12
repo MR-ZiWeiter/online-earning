@@ -3,14 +3,14 @@
     <header class="title-info">
       <h3 class="title-text">忘记密码</h3>
     </header>
-    <section class="form-model">
+    <form [formGroup]="validateForm" class="form-model">
       <section class="custom-input">
-        <swipe-input [(ngModel)]="registerForm.phone" type="number" placeholder="请输入手机号" [isClear]="true"></swipe-input>
+        <swipe-input formControlName="identifier" type="number" placeholder="请输入手机号" [isClear]="true"></swipe-input>
       </section>
       <section class="custom-input">
         <swipe-input
           type="number"
-          [(ngModel)]="registerForm.code"
+          formControlName="smsCode"
           placeholder="请输入验证码"
           [maxLength]="6"
           [isClear]="true"
@@ -22,14 +22,14 @@
         </swipe-input>
       </section>
       <section class="custom-input">
-        <swipe-input [(ngModel)]="registerForm.password" type="password" placeholder="请输入登录密码" [isClear]="true"></swipe-input>
+        <swipe-input formControlName="credential" type="password" placeholder="请输入新登录密码" [isClear]="true"></swipe-input>
       </section>
       <section class="custom-input">
-        <swipe-input [(ngModel)]="registerForm.check_password" type="password" placeholder="请重新输入密码" [isClear]="true"></swipe-input>
+        <swipe-input formControlName="check_password" type="password" placeholder="请确认密码" [isClear]="true"></swipe-input>
       </section>
-    </section>
+    </form>
     <section class="submit-info">
-      <ion-button class="submit-btn" expand="block" color="primary">确认提交</ion-button>
+      <ion-button [disabled]="!validateForm.valid" class="submit-btn" expand="block" color="primary" (click)="submitChange()">确认提交</ion-button>
     </section>
   </section>
 </ion-content>

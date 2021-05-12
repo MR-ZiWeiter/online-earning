@@ -1,3 +1,4 @@
+import { BusinessInfoService } from 'src/app/pages/components/business-info/business-info.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PickerController } from '@ionic/angular';
@@ -10,6 +11,9 @@ import { BusinessInfoComponent } from 'src/app/pages/components/business-info/bu
   styleUrls: ['./upcoming.component.scss']
 })
 export class UpcomingComponent implements OnInit {
+
+  /* 名片选择配置 */
+  public businessConfig: any;
 
   public saloonRenderConfig = {
     buyerAccountId: '',
@@ -30,8 +34,18 @@ export class UpcomingComponent implements OnInit {
   constructor(
     private router: Router,
     private ionPickerCotroller: PickerController,
+    private businessInfoService: BusinessInfoService,
     private apiUpcomingService: ApiUpcomingService
-  ) { }
+  ) {
+    this.businessInfoService.getBusinessInfoConfig().subscribe((info: any) => {
+      // console.log('*******************************')
+      // console.log(info)
+      this.businessConfig = info;
+      if (info && info.selected) {
+        this.saloonRenderConfig.buyerAccountId = info.selected;
+      }
+    })
+  }
 
   ngOnInit() {
   }
@@ -53,7 +67,7 @@ export class UpcomingComponent implements OnInit {
   private loadSaloonInfo(fn?: Function, err?: Function) {
     this.apiUpcomingService.asyncFetchUpcomingList(this.saloonRenderConfig).subscribe(res => {
       // console.log(res)
-      fn &&  fn(res.rel);
+      fn && fn(res.rel.list);
     })
   }
 

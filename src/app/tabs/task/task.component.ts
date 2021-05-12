@@ -13,6 +13,9 @@ import { SubmitRightsComponent } from './submit-rights/submit-rights.component';
 })
 export class TaskComponent implements OnInit {
 
+  /* 名片选择配置 */
+  public businessConfig: any;
+
   public taskRenderConfig: any = {
     buyerId: null,
     pageNum: 1,
@@ -38,15 +41,15 @@ export class TaskComponent implements OnInit {
     private toastController: ToastController,
     private apiTaskIndexService: ApiTaskIndexService,
     private businessInfoService: BusinessInfoService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-    this.businessInfoService.getBusinessInfoConfig().subscribe(res => {
-      console.log(res)
+    this.businessInfoService.getBusinessInfoConfig().subscribe(info => {
+      // console.log(res)
+      this.businessConfig = info;
       /* 处理名片映射 */
-      if (res && res.selected) {
-        this.taskRenderConfig.buyerId = res.selected;
+      if (info && info.selected) {
+        this.taskRenderConfig.buyerId = info.selected;
         this.doRefresh();
       }
     })
@@ -88,8 +91,8 @@ export class TaskComponent implements OnInit {
     this.taskRenderConfig.pageNum = 1;
     this.fetchTaskTotalInfo(this.taskRenderConfig.buyerId);
     this.onTaskListInfo((res) => {
-      this.taskRenderList = res.rel;
-      if (res.length === this.taskRenderConfig.pageSize) {
+      this.taskRenderList = res.rel.list;
+      if (res.rel.count === this.taskRenderConfig.pageSize) {
         event && (event.target.disabled = false);
       } else {
         event && (event.target.disabled = false);
@@ -105,10 +108,10 @@ export class TaskComponent implements OnInit {
     this.onTaskListInfo((res) => {
       event.target.complete();
       if (this.taskRenderConfig.pageSize * (this.taskRenderConfig.pageNum - 1) > this.taskRenderList.length) {
-        this.taskRenderList = this.taskRenderList.concat(res.rel);
+        this.taskRenderList = this.taskRenderList.concat(res.rel.list);
         event.target.disabled = true;
       } else {
-        this.taskRenderList = res.rel;
+        this.taskRenderList = res.rel.list;
       }
     });
   }

@@ -18,7 +18,7 @@ export class SwipeHeaderComponent implements OnInit {
    * slot="right" 右侧插入
    * slot="all" 全部自定义
    */
-  public renderLeftIcon: string = environment.BASIC_URL + '/statics/svgs/public/min/public-min-gray-arrow@2x.svg';
+  public renderLeftIcon: string = environment.BASIC_URL + '/assets/svgs/public/min-icon/public-min-gray-arrow@2x.svg';
   public navigationColor: string = '#000000';
   /**
   * 配置项
@@ -65,10 +65,10 @@ export class SwipeHeaderComponent implements OnInit {
       // console.log('xx', _n)
       if (n === '#FFFFFF') {
         // 设置返回按钮的颜色
-        this.renderLeftIcon = environment.BASIC_URL + '/statics/svgs/public/min/public-min-back-white-arrow@2x.svg'
+        this.renderLeftIcon = environment.BASIC_URL + '/assets/svgs/public/min-icon/public-min-back-white-arrow@2x.svg'
       } else {
         // 设置返回按钮的颜色
-        this.renderLeftIcon = environment.BASIC_URL + '/statics/svgs/public/min/public-min-gray-arrow@2x.svg'
+        this.renderLeftIcon = environment.BASIC_URL + '/assets/svgs/public/min-icon/public-min-gray-arrow@2x.svg'
       }
     }
   };

@@ -1,6 +1,6 @@
 <ion-header class="custom-header">
   <swipe-header class="custom-header-component" title="我的任务" [isBack]="false" [customRight]="true">
-    <span (click)="openMenuInfo()" name="right" class="other-btn">选择名片</span>
+    <span (click)="openMenuInfo()" name="right" class="other-btn">{{ (businessConfig && businessConfig.selected) ? businessConfig.businessName : '选择名片'}}</span>
   </swipe-header>
 </ion-header>
 

@@ -11,6 +11,7 @@
   .btn-group {
     .btn-item {
       @include sc(format(24), $default_color_3);
+      @include click-active();
       padding: format(12) format(24);
       border: format(2) solid #DCDFE6;
       border-radius: format(8);
@@ -18,6 +19,30 @@
       margin: format(0) format(12) format(16) 0;
       outline: none;
       background-color: $default_color;
+      &.tertiary {
+        color: var(--ion-color-tertiary);
+        border-color: var(--ion-color-tertiary);
+      }
+      &.warning {
+        color: var(--ion-color-warning);
+        border-color: var(--ion-color-warning);
+      }
+      &.secondary {
+        color: var(--ion-color-secondary);
+        border-color: var(--ion-color-secondary);
+      }
+      &.success {
+        color: var(--ion-color-success);
+        border-color: var(--ion-color-success);
+      }
+      &.primary {
+        color: var(--ion-color-primary);
+        border-color: var(--ion-color-primary);
+      }
+      &.danger {
+        color: var(--ion-color-danger);
+        border-color: var(--ion-color-danger);
+      }
     }
   }
 }

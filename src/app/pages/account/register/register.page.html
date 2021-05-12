@@ -6,13 +6,13 @@
     <form [formGroup]="registerForm" (submit)="submitChange()">
       <section class="form-model">
         <section class="custom-input">
-          <swipe-input formControlName="nickname" type="text" placeholder="请输入您的用户名" [pattern]="'^[a-zA-Z]{1}([a-zA-Z0-9_]){4,14}|(^[\u4E00-\uFA29]{1}+[a-zA-Z0-9\u4E00-\uFA29]{2,7})$'" [isClear]="true" [isRequired]="false"></swipe-input>
+          <swipe-input formControlName="nickname" type="text" placeholder="请输入您的用户名" [pattern]="'.*'" [isClear]="true" [isRequired]="false"></swipe-input>
         </section>
         <section class="custom-input">
           <swipe-input formControlName="credential" type="password" placeholder="请输入登录密码" [isClear]="true"></swipe-input>
         </section>
         <section class="custom-input">
-          <swipe-input formControlName="credential" type="password" placeholder="请重新输入密码" [isClear]="true"></swipe-input>
+          <swipe-input formControlName="credential_check" type="password" placeholder="请重新输入密码" [isClear]="true"></swipe-input>
         </section>
         <section class="custom-input">
           <swipe-input formControlName="recommendCode" type="text" placeholder="请输入邀请码" [isClear]="true"></swipe-input>

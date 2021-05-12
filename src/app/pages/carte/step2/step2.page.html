@@ -31,7 +31,7 @@
       <span class="intro-text">（可能会收到小礼物）</span>
     </section>
     <section class="upload-component">
-      <swipe-upload></swipe-upload>
+      <swipe-upload [(ngModel)]="addressUrl" (ngModelChange)="onAddressChange()"></swipe-upload>
     </section>
   </section>
   <section class="dot-info">
@@ -41,14 +41,14 @@
     </section>
     <section class="dot-group">
       <section class="dot-item" *ngFor="let item of businessRenderInfo.buyerAccountTags|keys">
-        <span class="label-text">{{item.value || '-'}}</span>
+        <span [ngClass]="['label-text', item.value.length > 4 ? 'min' :'']">{{item.value || '-'}}</span>
         <span class="value-text">{{item.label}}</span>
       </section>
     </section>
   </section>
 </ion-content>
 
-<ion-footer class="footer">
+<ion-footer class="footer" *ngIf="businessRenderInfo">
   <section class="footer-btn-group">
     <ion-button class="btn-item" full="outline" color="light" (click)="onNavigateBack()">上一步</ion-button>
     <ion-button class="btn-item" full="solid" color="primary" (click)="onSubmitChange()">下一步</ion-button>

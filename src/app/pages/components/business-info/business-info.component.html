@@ -14,7 +14,7 @@
     <section class="platform-info">
       <section class="platform-item" (click)="openPlatformPickerEvent($event)">
         <span class="label-text">平台：</span>
-        <span class="value-text">{{ paltformInfo }}</span>
+        <span class="value-text">{{ transformValues(paltformInfo) }}</span>
         <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
       </section>
       <section class="platform-item">
@@ -26,16 +26,20 @@
       <ion-button color="primary" class="btn-search" (click)="fetchBusinessListInfo()">查询</ion-button>
       <ion-button class="btn-reset">清空</ion-button>
     </section>
-    <ion-content>
-      <ion-list>
-        <swipe-business-card-info (change)="changeBusiness($event)" *ngFor="let item of businessRenderArray" [renderInfo]="item"></swipe-business-card-info>
-      </ion-list>
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content
-          loadingSpinner="bubbles"
-          loadingText="正在加载更多数据...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </ion-content>
+    <ng-container *ngTemplateOutlet="businessList"></ng-container>
   </ion-content>
 </ion-menu>
+
+<ng-template #businessList>
+  <ion-content class="plat-context">
+    <ion-list class="plat-list-sty">
+      <swipe-business-card-info (refresh)="refreshChange($event)" (change)="changeBusiness($event)" *ngFor="let item of businessRenderArray" [renderInfo]="item"></swipe-business-card-info>
+    </ion-list>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="正在加载更多数据...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</ng-template>

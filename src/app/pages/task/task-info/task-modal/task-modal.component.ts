@@ -10,11 +10,7 @@ import { ApiTaskIndexService } from 'src/app/core/modules/provider/api';
 export class TaskModalComponent implements OnInit {
 
   public submitTaskForm: any = {
-    imagesVos: [{
-      example: 2,
-      image: '',
-      sort: 1
-    }],
+    imagesVos: [],
     orderNo: null,
     paidAmount: null,
     sort: null,
@@ -26,14 +22,15 @@ export class TaskModalComponent implements OnInit {
 
   @Input() private set renderInfo(n: any) {
     this._renderInfo = n;
-    this.submitTaskForm.sort = n.sort
-    this.submitTaskForm.stepId = n.id
-    this.submitTaskForm.taskId = n.taskId
+    this.submitTaskForm.sort = n.sort;
+    this.submitTaskForm.stepId = n.id;
+    this.submitTaskForm.taskId = Number(n.taskId);
   }
 
   @Input() public isLast: boolean;
 
   constructor(
+
     private apiTaskIndexService: ApiTaskIndexService,
     private modalController: ModalController,
     private toastController: ToastController
@@ -53,19 +50,22 @@ export class TaskModalComponent implements OnInit {
 
   /* 下一步 */
   public nextStepChange() {
-    this.apiTaskIndexService.asyncFetchTaskSubmitInfo(this.submitTaskForm).subscribe(res => {
-      // console.log(res);
-      if (res.rel.status === 2) {
-        this.onCloseTaskModal(true, res.rel);
-      } else if (res.rel.status === 3) {
-        this.toastShow("任务完成!");
-        this.onCloseTaskModal(false, {success: true});
-      } else if (res.rel.status === 4) {
-        this.toastShow("任务已过期!", 'danger');
-      } else if (res.rel.status === 4) {
-        this.toastShow("任务已锁定!", 'danger');
-      }
-    })
+    if (this.submitTaskForm.imagesVos.length) {
+      this.apiTaskIndexService.asyncFetchTaskSubmitInfo(this.submitTaskForm).subscribe(res => {
+        if (res.rel.status === 2) {
+          this.onCloseTaskModal(true, res.rel);
+        } else if (res.rel.status === 3) {
+          this.toastShow("任务完成!");
+          this.onCloseTaskModal(false, {success: true});
+        } else if (res.rel.status === 4) {
+          this.toastShow("任务已过期!", 'danger');
+        } else if (res.rel.status === 4) {
+          this.toastShow("任务已锁定!", 'danger');
+        }
+      })
+    } else {
+      this.toastShow("请上传相关凭证!", 'danger');
+    }
   }
 
   /* 关闭Modal */

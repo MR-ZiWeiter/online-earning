@@ -88,6 +88,23 @@ export class BusinessInfoComponent implements OnInit {
     })
   }
 
+  /* 操作列表后需要刷新的操作 */
+  public refreshChange(info: boolean) {
+    this.fetchBusinessListInfo();
+  }
+
+  public transformValues(info: any): string {
+    let resultString: string;
+    this.platformRenderArray.some(item => {
+      if (item.id === info) {
+        resultString = item.title;
+        return true
+      }
+      return false
+    })
+    return resultString
+  }
+
   /* 打开平台选项 */
   public async openPlatformPickerEvent(ev: MouseEvent) {
     const customPicker = await this.ionPickerCotroller.create({

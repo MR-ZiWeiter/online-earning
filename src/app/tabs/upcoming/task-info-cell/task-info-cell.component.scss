@@ -4,6 +4,7 @@
   @include bgBorderRadius($default_color, format(8), 0);
   min-height: format(512);
   overflow: hidden;
+  margin-bottom: format(20);
   .header-info {
     @include wh(100%, format(74));
     @include flex-justify-align(space-between, center);

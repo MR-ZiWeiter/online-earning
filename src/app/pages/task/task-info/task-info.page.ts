@@ -77,11 +77,7 @@ export class TaskInfoPage implements OnInit, OnDestroy {
         })
       })
     } else {
-      this.apiTaskIndexService.asyncFetchTaskStartInfo({
-        taskId: this.urlParams.id
-      }).subscribe(res => {
-        this.handlerTaskInfo(res.rel);
-      })
+      this.handlerTaskInfo(this.renderInfo);
     }
   }
 
@@ -106,7 +102,7 @@ export class TaskInfoPage implements OnInit, OnDestroy {
     await modal.present();
     const { data } = await modal.onDidDismiss();
     // console.log(data)
-    data.isNextHand && this.handlerTaskInfo(data.renderInfo);
+    data.isNextHand && ((this.renderInfo.sort = data.renderInfo.sort) && this.handlerTaskInfo(data.renderInfo));
     !data.isNextHand && data.renderInfo && data.renderInfo.success && (this.initalDetailInfo(this.urlParams.id));
   }
 

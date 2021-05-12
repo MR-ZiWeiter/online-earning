@@ -7,15 +7,15 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class TaskOrderInformationComponent implements OnInit {
 
+  public imagesVos: any[] = [];
+
   public submitTaskForm: any = {
-    imagesVos: [{
-      example: 2,
-      image: '',
-      sort: 1
-    }],
+    imagesVos: [],
     orderNo: null,
     paidAmount: null
   };
+
+  @Input() public renderInfo: any = {};
 
   @Input() public isLast?: boolean;
   @Output() private taskForm: EventEmitter<any> = new EventEmitter<any>();
@@ -28,6 +28,19 @@ export class TaskOrderInformationComponent implements OnInit {
   // taskForm
   public taskFormChange() {
     this.taskForm.emit(this.submitTaskForm);
+  }
+
+  /* 上传文件 */
+  public imagesVosChange() {
+    // console.log(this.imagesVos)
+    this.submitTaskForm.imagesVos = this.imagesVos.map((item, index) => {
+      return {
+        example: 2,
+        image: item,
+        sort: index
+      }
+    })
+    this.taskFormChange();
   }
 
 }

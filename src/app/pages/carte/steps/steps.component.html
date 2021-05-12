@@ -1,9 +1,9 @@
 <section class="steps-component">
   <ng-container *ngFor="let item of stepsInfoArray;">
-    <section class="steps-item">
+    <section [ngClass]="['steps-item', item.index <= current ? 'active' : '']">
       <span class="number">{{item.index}}</span>
       <span class="label-text">{{item.label}}</span>
     </section>
-    <ion-icon *ngIf="item.index < 3" class="icon-arrow" name="chevron-forward-outline"></ion-icon>
+    <ion-icon *ngIf="item.index < 3" [ngClass]="['icon-arrow', item.index < current ? 'active' : '']" name="chevron-forward-outline"></ion-icon>
   </ng-container>
 </section>

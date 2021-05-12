@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        opacity: 0;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #333;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.5px;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="icon-扫码" transform="translate(-38 -183)">
+    <g id="矩形_1596" data-name="矩形 1596" class="cls-1" transform="translate(38 183)">
+      <rect class="cls-3" width="21" height="21"/>
+      <rect class="cls-4" x="0.5" y="0.5" width="20" height="20"/>
+    </g>
+    <path id="圆角矩形_1686" data-name="圆角矩形 1686" class="cls-2" d="M702.31,59.094h2.2a2.432,2.432,0,0,1,2.432,2.432v1.558m0,8.509v2.093a2.432,2.432,0,0,1-2.432,2.432h-1.632m-8.224,0h-2.3a2.432,2.432,0,0,1-2.432-2.432V71.917m0-8.225V61.526a2.432,2.432,0,0,1,2.432-2.432h1.978" transform="translate(-650.03 126.058)"/>
+    <line id="形状_1687" data-name="形状 1687" class="cls-2" x2="19.125" transform="translate(38.997 193.972)"/>
+  </g>
+</svg>

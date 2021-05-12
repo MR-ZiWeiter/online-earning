@@ -116,7 +116,7 @@
         </section>
         <section class="upload-info">
           <span class="label-text">身份证照片：</span>
-          <swipe-upload [size]="[190, 190]"></swipe-upload>
+          <swipe-upload [maxFileListLength]="2" [size]="[190, 190]" formControlName="idMainPhotoUrl"></swipe-upload>
         </section>
       </section>
       <section class="group-form">
@@ -154,7 +154,7 @@
         </section>
         <section class="upload-info">
           <span class="label-text">银行卡截图：</span>
-          <swipe-upload [size]="[190, 190]"></swipe-upload>
+          <swipe-upload [size]="[190, 190]" formControlName="bankCardUrl"></swipe-upload>
         </section>
       </section>
       <section class="group-form">
@@ -176,7 +176,7 @@
         </section>
         <section class="upload-info">
           <span class="label-text">支付宝截图：</span>
-          <swipe-upload [size]="[190, 190]"></swipe-upload>
+          <swipe-upload [size]="[190, 190]" formControlName="aliPayUrl"></swipe-upload>
         </section>
       </section>
       <section class="group-form">
@@ -198,7 +198,7 @@
         </section>
         <section class="upload-info">
           <span class="label-text">微信号截图：</span>
-          <swipe-upload [size]="[190, 190]"></swipe-upload>
+          <swipe-upload [size]="[190, 190]" formControlName="weChatUrl"></swipe-upload>
         </section>
       </section>
       <section class="group-form">

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="23" viewBox="0 0 14 23">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #7b7b7b;
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="组_1221" data-name="组 1221" transform="translate(-18 -31)">
+    <rect id="矩形_952" data-name="矩形 952" class="cls-1" width="14" height="23" transform="translate(18 31)"/>
+    <g id="返回" transform="translate(20 35.098)">
+      <path id="形状_587" data-name="形状 587" class="cls-2" d="M603.4,989.667l-6.683,7.5,2.785,3.125,3.9,4.375" transform="translate(-595.963 -988.917)"/>
+    </g>
+  </g>
+</svg>

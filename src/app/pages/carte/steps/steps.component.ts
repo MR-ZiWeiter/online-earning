@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'swipe-steps',
@@ -22,7 +22,7 @@ export class StepsComponent implements OnInit {
     }
   ]
 
-  public current = 1;
+  @Input() public current: number = 1;
 
   constructor() { }
 

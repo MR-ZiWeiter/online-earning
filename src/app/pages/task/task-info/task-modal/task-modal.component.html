@@ -5,7 +5,7 @@
   <section class="content">
     <swipe-task-card [renderInfo]="_renderInfo"></swipe-task-card>
     <section class="null"></section>
-    <swipe-task-order-information [isLast]="isLast" (taskForm)="taskFormChange($event)"></swipe-task-order-information>
+    <swipe-task-order-information [renderInfo]="_renderInfo" [isLast]="isLast" (taskForm)="taskFormChange($event)"></swipe-task-order-information>
   </section>
 </ion-content>
 

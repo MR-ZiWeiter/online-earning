@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #585858;
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #999;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <g id="icon_edit" transform="translate(-307 -247.082)">
+    <rect id="矩形_956" data-name="矩形 956" class="cls-1" width="15" height="15" transform="translate(307 247.082)"/>
+    <g id="组_1" data-name="组 1" transform="translate(308.381 249.039)">
+      <line id="形状_30" data-name="形状 30" class="cls-2" x2="11.563" transform="translate(0 11.799)"/>
+      <path id="圆角矩形_5" data-name="圆角矩形 5" class="cls-2" d="M1082.22,983.266l6.311-6.312a.406.406,0,0,1,.574,0l1.865,1.865a.406.406,0,0,1,0,.574l-6.312,6.311a.406.406,0,0,1-.573,0l-1.865-1.865A.405.405,0,0,1,1082.22,983.266Z" transform="translate(-1080.255 -976.836)"/>
+      <path id="圆角矩形_5_拷贝" data-name="圆角矩形 5 拷贝" class="cls-2" d="M1079.088,1012.695a.722.722,0,0,1-.465.509l-2.525.728c-.214.062-.354-.066-.312-.285l.74-2.575a.721.721,0,0,1,.465-.509Z" transform="translate(-1075.216 -1003.722)"/>
+    </g>
+  </g>
+</svg>

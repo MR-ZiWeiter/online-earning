@@ -1,13 +1,13 @@
-<section class="business-card-info-component" (click)="changeBusinessInfo()" *ngIf="renderInfo">
+<section class="business-card-info-component" (click)="changeBusinessInfo($event)" *ngIf="renderInfo">
   <section class="header-info">
     <span class="title-text">{{renderInfo.nickname}}</span>
   </section>
   <section class="btn-group">
-    <button class="btn-item">资料</button>
-    <button class="btn-item">备注</button>
-    <button class="btn-item">查单</button>
-    <button class="btn-item">接单</button>
-    <button class="btn-item">接单检测</button>
-    <button class="btn-item">删除</button>
+    <button class="btn-item tertiary" (click)="onOpenBusinessInfo($event)">资料</button>
+    <button class="btn-item warning" (click)="onOpenRemarkInfo($event)">备注</button>
+    <button class="btn-item secondary" (click)="onOpenTaskInfo($event)">查单</button>
+    <button class="btn-item success" (click)="onOpenBusiness($event)">接单</button>
+    <button class="btn-item primary" (click)="onOpenBusinessInfo($event)">接单检测</button>
+    <button class="btn-item danger" (click)="onDeleteInfo($event)">删除</button>
   </section>
 </section>

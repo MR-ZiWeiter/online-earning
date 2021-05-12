@@ -7,7 +7,7 @@
       <section class="form-model">
         <section class="custom-input">
           <!-- [(value)]="loginForm.identifier" -->
-          <swipe-input formControlName="identifier" type="text" placeholder="请输入您的账号" [pattern]="'^[a-zA-Z]{1}([a-zA-Z0-9_]){4,14}|(^[\u4E00-\uFA29]{1}+[a-zA-Z0-9\u4E00-\uFA29]{2,7})$'" [isClear]="true" [isRequired]="false"></swipe-input>
+          <swipe-input formControlName="identifier" type="text" placeholder="请输入您的账号" [pattern]="'.*'" [isClear]="true" [isRequired]="false"></swipe-input>
         </section>
         <section class="custom-input">
           <!-- [(value)]="loginForm.credential" -->

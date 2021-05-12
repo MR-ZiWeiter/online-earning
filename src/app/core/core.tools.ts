@@ -27,4 +27,27 @@ export class CoreToolsFunction {
   public formatPx(px: number): number {
     return (px / 750) * window.screen.width;
   }
+  /* 深度融合对象数据 */
+  public deepFusinObject(firstFusion: {[x: string]: any}, cloneFusion: {[x: string]: any}): {[x: string]: any} {
+    for(const key in cloneFusion) {
+      if (firstFusion[key]) {
+        if (Object.prototype.toString.call(firstFusion[key]) === Object.prototype.toString.call(cloneFusion[key])) {
+          if (Object.prototype.toString.call(firstFusion[key]) === "[object Array]") {
+            firstFusion[key] = firstFusion[key].concat(cloneFusion[key]);
+          } else if (Object.prototype.toString.call(firstFusion[key]) === "[object Object]") {
+            firstFusion[key] = this.deepFusinObject(firstFusion[key], cloneFusion[key]);
+          } else {
+            firstFusion[key] = cloneFusion[key];
+          }
+        } else {
+          firstFusion[key] = cloneFusion[key];
+        }
+      } else {
+        firstFusion[key] = cloneFusion[key];
+      }
+    }
+    return firstFusion;
+  }
+
+
 }

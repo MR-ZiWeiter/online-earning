@@ -60,17 +60,17 @@ export class UserAccountService {
       });
     });
   }
-  // 获取修改手机号验证码
-  // asyncFetchAccountLoginRegisterCode(info: any): Observable<any> {
-  //   return new Observable(observer => {
-  //     this.http.get('/open/sms/code/change/mobile', info, {}).subscribe((res: ApiResponseModel) => {
-  //       observer.next(res);
-  //     }, err => {
-  //       console.log(err);
-  //       observer.error(false);
-  //     });
-  //   });
-  // }
+  // 找回密码
+  asyncFetchAccountFindPwdInfo(info: any): Observable<any> {
+    return new Observable(observer => {
+      this.http.post('/pwd/find', info, {}, info).subscribe((res: ApiResponseModel) => {
+        observer.next(res);
+      }, err => {
+        console.log(err);
+        observer.error(false);
+      });
+    });
+  }
 
   /* 购物标签 */
   asyncAccountShoppingTagInfo(info?: any): Observable<any> {

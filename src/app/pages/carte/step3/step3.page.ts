@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiUpcomingService } from 'src/app/core/modules/provider/api';
 import { IApiBusinessSaloonInfoModel } from 'src/app/core/model';
 import { BusinessInfoService } from '../../components/business-info/business-info.service';
@@ -9,7 +9,7 @@ import { BusinessInfoService } from '../../components/business-info/business-inf
   templateUrl: './step3.page.html',
   styleUrls: ['./step3.page.scss'],
 })
-export class Step3Page implements OnInit {
+export class Step3Page implements OnInit, OnDestroy {
 
   /* 筛选配置 */
   public saloonRenderConfig = {
@@ -19,6 +19,9 @@ export class Step3Page implements OnInit {
   }
   /* 渲染数据集合 */
   public saloonRenderArray: IApiBusinessSaloonInfoModel[] = [];
+
+  /* 观察者对象 */
+  private privateBusinessScribe: any;
 
   constructor(
     private businessInfoService: BusinessInfoService,
@@ -34,8 +37,8 @@ export class Step3Page implements OnInit {
       })
     }
     /* 监听选择名片回调 */
-    this.businessInfoService.getBusinessInfoConfig().subscribe(res => {
-      console.log(res)
+    this.privateBusinessScribe = this.businessInfoService.getBusinessInfoConfig().subscribe(res => {
+      // console.log(res)
       if (res && res.selected) {
         this.saloonRenderConfig.buyerAccountId = res.selected;
       }
@@ -46,11 +49,25 @@ export class Step3Page implements OnInit {
     this.loadSaloonInfo();
   }
 
+  /* 回调数据更新 */
+  public reLoadBusinessInfoChange(info: any) {
+    this.businessInfoService.setBusinessInfoConfig({
+      selected: info.id,
+      businessName: info.nickname
+    });
+  }
+
   private loadSaloonInfo() {
     this.apiUpcomingService.asyncFetchUpcomingList(this.saloonRenderConfig).subscribe(res => {
       // console.log(res)
-      this.saloonRenderArray = res.rel;
+      this.saloonRenderArray = res.rel.list;
     })
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.privateBusinessScribe.unsubscribe();
   }
 
 }

@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiBusinessService } from 'src/app/core/modules/provider/api/upcoming/business.service';
 import { BusinessInfoComponent } from '../components/business-info/business-info.component';
+import { BusinessInfoService } from 'src/app/pages/components/business-info/business-info.service';
 
 @Component({
   selector: 'app-carte',
@@ -9,6 +10,9 @@ import { BusinessInfoComponent } from '../components/business-info/business-info
   styleUrls: ['./carte.component.scss']
 })
 export class CarteComponent implements OnInit {
+
+  /* 名片选择配置 */
+  public _businessConfig: any;
 
   public nickname!: string;
 
@@ -26,8 +30,13 @@ export class CarteComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private businessInfoService: BusinessInfoService,
     private apiBusinessService: ApiBusinessService
-  ) { }
+  ) {
+    this.businessInfoService.getBusinessInfoConfig().subscribe((info: any) => {
+      this._businessConfig = info;
+    })
+  }
 
   ngOnInit() {
   }

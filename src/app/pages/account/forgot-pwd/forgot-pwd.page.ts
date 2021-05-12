@@ -1,10 +1,10 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController, ToastController } from '@ionic/angular';
 import { UserAccountService } from 'src/app/core/modules/provider/api';
-import { LoggerService } from 'src/app/core/modules/provider/logger/logger.service';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { WebviewService } from 'src/app/core/services/webview/webview.service';
+import { CoreValidators } from 'src/app/core/core.validator';
+import { SystemService } from 'src/app/core/services/system/system.service';
 
 @Component({
   selector: 'swipe-forgot-pwd',
@@ -13,14 +13,8 @@ import { WebviewService } from 'src/app/core/services/webview/webview.service';
 })
 export class ForgotPwdPage implements OnInit {
 
-  public registerForm: RegisterForm|any = {
-    username: null,
-    code: null,
-    phone: null,
-    password: null,
-    check_password: null,
-    phone_code: null
-  };
+  public validateForm!: FormGroup;
+
   // 获取验证码状态
   public getCodeStatus = false;
   public timeOut = 60;
@@ -31,13 +25,19 @@ export class ForgotPwdPage implements OnInit {
   // 登录成功后重定向地址
   public redirectUrl = null;
   constructor(
-    private webviewService: WebviewService,
-    private navControl: NavController,
     private router: Router,
-    private toastController: ToastController,
-    private userAccountService: UserAccountService,
-    private authService: AuthService,
-    private logger: LoggerService) { }
+    private fb: FormBuilder,
+    private systemService: SystemService,
+    private webviewService: WebviewService,
+    private userAccountService: UserAccountService) {
+      this.validateForm = fb.group({
+        accountType: [1],
+        smsCode: [null, [Validators.required, Validators.pattern(/^\d{4,6}$/)]],
+        identifier: [null, [Validators.required, Validators.pattern(/^1[3-9]{1}[0-9]{9}$/)]],
+        credential: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{6,20}$/)]],
+        check_password: [null, [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{6,20}$/), CoreValidators.match('credential')]],
+      });
+    }
 
   ngOnInit() {
   }
@@ -56,25 +56,16 @@ export class ForgotPwdPage implements OnInit {
   }
   // 清楚指定值的表单数据
   public clearInputChange(nameString: string): void {
-    this.registerForm[nameString] = null;
-  }
-  // 手机验证
-  async presentToastWithOptions() {
-    const toast = await this.toastController.create({
-      message: '请输入正确的手机号码!',
-      duration: 2000,
-      color: 'danger',
-      position: 'bottom'
-    });
-    toast.present();
+    this.validateForm.value[nameString] = null;
   }
   // 获取验证码
   public fetchCodeEvent(): void {
-    if (!this.registerForm.phone) {
-      this.presentToastWithOptions();
+    if (!this.validateForm.value.phone) {
+      // this.presentToastWithOptions();
+      this.systemService.presentToast('请输入正确的手机号码!', 'danger');
     } else {
       this.userAccountService.asyncFetchAccountSmsCode({
-        mobile: this.registerForm.phone
+        mobile: this.validateForm.value.phone
       }).subscribe((res: any) => {
         this.settingTimeOutEvent();
       });
@@ -82,13 +73,16 @@ export class ForgotPwdPage implements OnInit {
   }
   // 提交
   public submitChange(): void {
-    // console.log(this.registerForm);
-    this.userAccountService.asyncAccountLogin(this.registerForm).subscribe(res => {
-      // console.log(this.navControl);
-      // if (this.navControl.direction
-      // this.navControl.back();
-      this.router.navigate(['/']);
-    }, err => {});
+    /* 校验表单 */
+    CoreValidators.deepCheckForm(this.validateForm);
+    /* 提交数据 */
+    if (this.validateForm.valid) {
+      this.userAccountService.asyncFetchAccountFindPwdInfo(this.validateForm.value).subscribe(res => {
+        this.router.navigate(['/']);
+      }, err => {});
+    } else {
+      this.systemService.presentToast('请完善表单后提交', 'danger');
+    }
   }
 
   /* 登录账号 */

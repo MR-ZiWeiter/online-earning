@@ -39,7 +39,7 @@ export class ApiSystemService {
   // 上传文件
   asyncFetchSystemUpLoadFile(info: any = {}): Observable<any> {
     return new Observable(observer => {
-      this.http.post('/service/app/upload/uploadFile', {noHeader: true}, {}, info).subscribe((res: ApiResponseModel) => {
+      this.http.post('/upload/file', {noHeader: true}, {}, info).subscribe((res: ApiResponseModel) => {
         // console.log(res);
         observer.next(res);
       }, err => {
