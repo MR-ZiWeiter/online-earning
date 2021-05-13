@@ -68,7 +68,7 @@ export class DataAuthenticationPage implements OnInit {
         gender: [res.gender, [Validators.required]],
         gender_name: [this.genderPipe.transform(res.gender)],
         qq: [res.qq, [Validators.required, Validators.pattern(/^[0-9]{5,10}$/)]],
-        addressCode: [Number(res.addressCode)||null, [Validators.required]],
+        addressCode: [Number(res.areaCode), [Validators.required]],
         idCardNumber: [res.idCardNumber, [Validators.required]],
         idMainPhotoUrl: [res.idMainPhotoUrl, [Validators.required]],
         openBankCode: [res.openBankCode, [Validators.required]],

@@ -1,5 +1,7 @@
+import { ModalController } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiAppealService } from 'src/app/core/modules/provider/api';
+import { SystemService } from 'src/app/core/services/system/system.service';
 
 @Component({
   selector: 'app-submit-rights',
@@ -34,6 +36,8 @@ export class SubmitRightsComponent implements OnInit {
   }
 
   constructor(
+    private modalController: ModalController,
+    private systemService: SystemService,
     private apiAppealService: ApiAppealService
   ) { }
 
@@ -68,8 +72,22 @@ export class SubmitRightsComponent implements OnInit {
 
   /* 提交维权 */
   public submitAppealInfo() {
+    if (!this.appealConfig.rightProtectionTypeId) {
+      this.systemService.presentToast('请选择维权类型', 'danger');
+      return;
+    }
+    if (!this.appealConfig.description) {
+      this.systemService.presentToast('请描述您的问题', 'danger');
+      return;
+    }
+    if (!this.appealConfig.screenshot) {
+      this.systemService.presentToast('请上传截图证明', 'danger');
+      return;
+    }
     this.apiAppealService.asyncFetchSubmitAppealInfo(this.appealConfig).subscribe(res => {
-      console.log(res)
+      // console.log(res)
+      this.systemService.presentToast('提交成功', 'success');
+      this.modalController.dismiss();
     })
   }
 }
