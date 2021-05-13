@@ -27,7 +27,7 @@
         </section>
         <section class="custom-input">
           <swipe-input
-            type="text"
+            type="number"
             [isBorder]="false"
             placeholder="请输入您的手机号码"
             formControlName="phone"
@@ -48,7 +48,7 @@
             (click)="presentActionSheetGender()"
             [isBorder]="false"
             placeholder="男"
-            formControlName="gender"
+            formControlName="gender_name"
             [isPrefix]="true"
             [isSuffix]="true"
             [isDisabled]="true">
@@ -60,7 +60,7 @@
         </section>
         <section class="custom-input">
           <swipe-input
-            type="text"
+            type="number"
             formControlName="qq"
             [isBorder]="false"
             placeholder="请输入您的QQ号码"
@@ -75,7 +75,8 @@
           </swipe-input>
         </section>
         <section class="custom-input">
-          <swipe-input
+          <swipe-city-picker formControlName="addressCode"></swipe-city-picker>
+          <!-- <swipe-input
             (click)="openPickerAddressInfo()"
             type="text"
             formControlName="addressCode"
@@ -89,7 +90,7 @@
             <span name="suffix">
               <ion-icon class="icon-arrow" name="chevron-forward-outline"></ion-icon>
             </span>
-          </swipe-input>
+          </swipe-input> -->
         </section>
       </section>
     </section>
@@ -100,7 +101,7 @@
       <section class="group-form">
         <section class="custom-input">
           <swipe-input
-            type="text"
+            type="number"
             formControlName="idCardNumber"
             [isBorder]="false"
             placeholder="请输入与真实姓名对应的身份证号码"
@@ -138,7 +139,7 @@
         </section>
         <section class="custom-input">
           <swipe-input
-            type="text"
+            type="number"
             formControlName="bankCardNum"
             [isBorder]="false"
             placeholder="请输入与真实姓名对应的银行卡号"

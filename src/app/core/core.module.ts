@@ -12,6 +12,7 @@ import { SwipeInputComponent } from './modules/components/swipe-input/swipe-inpu
 import { SwipeCheckboxComponent } from './modules/components/swipe-checkbox/swipe-checkbox.component';
 import { SwipeRadioComponent } from './modules/components/swipe-radio/swipe-radio.component';
 import { SwipeNullComponent } from './modules/components/swipe-null/swipe-null.component';
+import { SwipeCityPickerComponent } from './modules/components/swipe-city-picker/swipe-city-picker.component';
 
 // API接口类服务模块
 import { ApiServiceModule } from './modules/provider/api/index.module';
@@ -21,7 +22,8 @@ import { TabsService } from './services/tabs/tabs.service';
 // import { UserService } from './services/user/user.service';
 
 // 管道类
-import { KeysPipe } from './pipes';
+import { GenderPipe, KeysPipe } from './pipes';
+import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 
 @NgModule({
   declarations: [
@@ -35,14 +37,17 @@ import { KeysPipe } from './pipes';
     SwipeCheckboxComponent,
     SwipeRadioComponent,
     SwipeNullComponent,
+    SwipeCityPickerComponent,
     /* 管道类 */
-    KeysPipe
+    KeysPipe,
+    GenderPipe,
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
+    NgZorroAntdMobileModule,
+    ReactiveFormsModule,
     ApiServiceModule
   ],
   providers: [
@@ -53,6 +58,7 @@ import { KeysPipe } from './pipes';
     CommonModule,
     FormsModule,
     IonicModule,
+    NgZorroAntdMobileModule,
     ReactiveFormsModule,
     SwipeEyeCareModeComponent,
     SwipeContextNullComponent,
@@ -64,8 +70,10 @@ import { KeysPipe } from './pipes';
     SwipeCheckboxComponent,
     SwipeRadioComponent,
     SwipeNullComponent,
+    SwipeCityPickerComponent,
     /* 管道类 */
-    KeysPipe
+    KeysPipe,
+    GenderPipe
   ]
 })
 export class CoreModule { }

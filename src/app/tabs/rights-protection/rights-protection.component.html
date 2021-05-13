@@ -35,7 +35,7 @@
             </section>
             <section class="handler-info">
               <span class="title-text">上传截图</span>
-              <swipe-upload [isLock]="true"></swipe-upload>
+              <swipe-upload [isReady]="true" [(ngModel)]="item.image"></swipe-upload>
             </section>
           </section>
         </swipe-task-info-cell>

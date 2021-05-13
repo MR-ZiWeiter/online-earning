@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 
+import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -34,6 +35,7 @@ import { WorkIndexedDBService } from './core/modules/provider/indexedDB/work-ind
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    NgZorroAntdMobileModule,
     IonicModule.forRoot({
       mode: 'ios',
       hardwareBackButton: true,

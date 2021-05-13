@@ -23,6 +23,7 @@
     "@capacitor/core": "2.4.7",
     "@ionic/angular": "^5.5.2",
     "lottie-web": "^5.7.6",
+    "ng-zorro-antd-mobile": "^4.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "weixin-js-sdk": "^1.6.0",

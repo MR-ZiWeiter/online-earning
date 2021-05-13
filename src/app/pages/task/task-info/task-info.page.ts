@@ -69,12 +69,19 @@ export class TaskInfoPage implements OnInit, OnDestroy {
   public async openStartTask() {
     /* 判断是否是取消的任务 */
     if (this.renderInfo.status === 0) {
-      this.openStartTaskInfo(() => {
-        this.apiTaskIndexService.asyncFetchTaskStartInfo({
-          taskId: this.urlParams.id
-        }).subscribe(res => {
-          this.handlerTaskInfo(res.rel);
-        })
+      this.router.navigate(['/']);
+      // this.openStartTaskInfo(() => {
+      // this.apiTaskIndexService.asyncFetchTaskStartInfo({
+      //   taskId: this.urlParams.id
+      // }).subscribe(res => {
+      //   this.handlerTaskInfo(res.rel);
+      // })
+      // })
+    } else if (this.renderInfo.status === 1) {
+      this.apiTaskIndexService.asyncFetchTaskStartInfo({
+        taskId: this.urlParams.id
+      }).subscribe(res => {
+        this.handlerTaskInfo(res.rel);
       })
     } else {
       this.handlerTaskInfo(this.renderInfo);

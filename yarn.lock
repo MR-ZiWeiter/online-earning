@@ -147,12 +147,28 @@
     ora "5.3.0"
     rxjs "6.6.3"
 
+"@angular/animations@^11.0.5":
+  version "11.2.14"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-11.2.14.tgz#cf119ea779bf11bd3759f1355c85e4e8e9e7bb03"
+  integrity sha512-Heq/nNrCmb3jbkusu+BQszOecfFI/31Oxxj+CDQkqqYpBcswk6bOJLoEE472o+vmgxaXbgeflU9qbIiCQhpMFA==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/animations@^11.2.4":
   version "11.2.4"
   resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-11.2.4.tgz#3372b45e70d128cf0fe260d452bf95da69126222"
   integrity sha512-t04jQwoqpaBT3tJIAnPKZ2p43Hy0Vhq7FoyZZQB0TZZyPzxgl8DenBPMsNZxfaV9QM5i2gFE0eqkCy7YfXvvPA==
   dependencies:
     tslib "^2.0.0"
+
+"@angular/cdk@^11.0.3":
+  version "11.2.12"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-11.2.12.tgz#c1c9c8d4a5763745fe2d324fc253f221b9c2b1b3"
+  integrity sha512-LImCQQ7n5OnTGXBAx1BaHgBBbdXiEtsNcHk5RvVURya9sswRcXRoa48EG3RyuT8mtqWsUdOX9+v4nCINLG4hZA==
+  dependencies:
+    tslib "^2.0.0"
+  optionalDependencies:
+    parse5 "^5.0.0"
 
 "@angular/cli@~11.1.4":
   version "11.1.4"
@@ -271,6 +287,21 @@
   resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-11.2.4.tgz#0c460badfebd60fa76108718208b7a9837bde765"
   integrity sha512-yzCgNoUp9R2NbR1+Nj20/D9o4Z8PPQXxm+DraQgcJiJ4OJwMoVAIH/ugp11SyDs9YK95WtkhebIiddFUrqogEw==
   dependencies:
+    tslib "^2.0.0"
+
+"@ant-design/colors@^5.0.0":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@ant-design/colors/-/colors-5.1.1.tgz#800b2186b1e27e66432e67d03ed96af3e21d8940"
+  integrity sha512-Txy4KpHrp3q4XZdfgOBqLl+lkQIc3tEvHXOimRN1giX1AEC7mGtyrO9p8iRGJ3FLuVMGa2gNEzQyghVymLttKQ==
+  dependencies:
+    "@ctrl/tinycolor" "^3.3.1"
+
+"@ant-design/icons-angular@^11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@ant-design/icons-angular/-/icons-angular-11.0.1.tgz#8ff3131f3d9b4b25fd28c64c4a9bdfe36da54942"
+  integrity sha512-WwxVx/aToxTjWmB5+O+3rOjSYdF8FC/Yd/8jF1ZGQMtLWAzP8/foQmKvPAktTUsh0/Ijhtur7LrHN2VuUedMcA==
+  dependencies:
+    "@ant-design/colors" "^5.0.0"
     tslib "^2.0.0"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13":
@@ -1157,6 +1188,11 @@
   integrity sha512-ZPzXXQ4EPwR/ZhNDkmlxyzw4FvquIl/ROj8HMMM0MEd4xZfM8ulNGPIL6br9TWdlFLGBKq40eymPZjKaivGnig==
   dependencies:
     tslib "^1.9.0"
+
+"@ctrl/tinycolor@^3.3.1":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
+  integrity sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ==
 
 "@ionic-native/core@^5.31.1":
   version "5.31.1"
@@ -6209,6 +6245,16 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
+ng-zorro-antd-mobile@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ng-zorro-antd-mobile/-/ng-zorro-antd-mobile-4.0.0.tgz#22af328b344c414a1fdbb920f7184dbfd686850f"
+  integrity sha512-/xxDfkTNXbW0cUC/ZXcm6tFaQvdhvBwPk+ghn9TxxA6gstcccJM2+aTzsPtkE0kMYZcehOxz6eIsPwSpggv2cA==
+  dependencies:
+    "@angular/animations" "^11.0.5"
+    "@angular/cdk" "^11.0.3"
+    "@ant-design/icons-angular" "^11.0.1"
+    tslib "^2.0.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -6757,6 +6803,11 @@ parse5@^3.0.1:
   integrity sha512-rgO9Zg5LLLkfJF9E6CCmXlSE4UVceloys8JrFqCcHloC3usd/kJCyPDwH2SOlzix2j3xaP9sUX3e8+kvkuleAA==
   dependencies:
     "@types/node" "*"
+
+parse5@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
+  integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
 
 parse5@^6.0.1:
   version "6.0.1"

@@ -1,0 +1,5 @@
+<ListItem Picker class="picker-mask-item" [data]="cityArray" [extra]="cityConfig.name"
+  [cols]="cityConfig.cols" [arrow]="'horizontal'" [mask]="true" [title]="labelText"
+  [(ngModel)]="cityConfig.value" (ngModelChange)="onCityOKEvent($event)" (onDismiss)="onCityCancelEvent()">
+  {{labelText}}
+</ListItem>

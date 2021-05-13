@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output, Pipe } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 @Component({
@@ -51,6 +51,7 @@ export class SwipeInputComponent implements ControlValueAccessor, OnInit {
   @Input() public maxLength: number;
   @Input() public minLength: number;
   @Input() public isError: boolean = false;
+  @Input() public isPipe!: Pipe;
   @Input()
   public set isDisabled(n: boolean) {
     this.disabled = n;

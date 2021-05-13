@@ -1,20 +1,24 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActionSheetController, NavController, PickerController, ToastController } from '@ionic/angular';
-import CityJson from './city.json';
+// import CityJson from './city.json';
 import { UserAccountService } from 'src/app/core/modules/provider/api';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { GenderPipe } from 'src/app/core/pipes/gender.pipe';
 
 @Component({
   selector: 'swipe-data-authentication',
   templateUrl: './data-authentication.page.html',
   styleUrls: ['./data-authentication.page.scss'],
+  providers: [GenderPipe]
 })
 export class DataAuthenticationPage implements OnInit {
 
   public validetaForm!: FormGroup;
 
   public username: any;
+
+  public _genderPipe = GenderPipe;
 
   // 选中的坐标
   private selects = [4, 1, 8];
@@ -24,6 +28,7 @@ export class DataAuthenticationPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private genderPipe: GenderPipe,
     private navController: NavController,
     private toastController: ToastController,
     private pickerController: PickerController,
@@ -37,8 +42,9 @@ export class DataAuthenticationPage implements OnInit {
     this.validetaForm = fb.group({
       realName: [null, [Validators.required, Validators.pattern(/^(?:[\u4e00-\u9fa5]+)(?:●[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$/)]],
       gender: [null, [Validators.required]],
+      gender_name: [null],
       qq: [null, [Validators.required, Validators.pattern(/^[0-9]{5,10}$/)]],
-      addressCode: ['150202', [Validators.required]],
+      addressCode: [null, [Validators.required]],
       idCardNumber: [null, [Validators.required]],
       idMainPhotoUrl: ['null', [Validators.required]],
       openBankCode: [null, [Validators.required]],
@@ -60,8 +66,9 @@ export class DataAuthenticationPage implements OnInit {
         realName: [res.realName, [Validators.required, Validators.pattern(/^(?:[\u4e00-\u9fa5]+)(?:●[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$/)]],
         phone: [res.phone],
         gender: [res.gender, [Validators.required]],
+        gender_name: [this.genderPipe.transform(res.gender)],
         qq: [res.qq, [Validators.required, Validators.pattern(/^[0-9]{5,10}$/)]],
-        addressCode: [res.addressCode, [Validators.required]],
+        addressCode: [Number(res.addressCode)||null, [Validators.required]],
         idCardNumber: [res.idCardNumber, [Validators.required]],
         idMainPhotoUrl: [res.idMainPhotoUrl, [Validators.required]],
         openBankCode: [res.openBankCode, [Validators.required]],
@@ -141,102 +148,102 @@ export class DataAuthenticationPage implements OnInit {
   }
 
   /* 选择地区 */
-  public async openPickerAddressInfo(numColumn: number = 3) {
-    const picker = await this.pickerController.create({
-      backdropDismiss: true,
-      buttons: [
-        {
-          role: 'cancel',
-          text: '取消'
-        },
-        {
-          role: 'confirm',
-          text: '确定',
-          handler: ev => {
-            // console.log(ev)
-            this.validetaForm.controls['addressCode'].setValue(ev[Object.keys(ev).length - 1].value);
-          }
-        }
-      ],
-      columns: this.getColumns(numColumn, CityJson),
-      keyboardClose: true,
-      mode: 'ios',
-      showBackdrop: true
-    })
-    console.log(new PickerController())
-    picker.addEventListener('ionPickerColChange', async (ev: any) => {
-      console.log(ev)
-      const data = ev.detail;
-      // const pickerColumn = await picker.getColumn('0')
-      // console.log(pickerColumn)
-      /* 处理选择的列 */
-      this.selects[Number(data.name)] = data.selectedIndex;
-      // data.target.remove()
-      // 获取数据
-      let pickerColumns = [];
-      pickerColumns = picker.columns;
-      // 处理对应数据
-      if (data.name < numColumn) {
-        for (let i = 0; i < numColumn; i ++) {
-          if (i > data.name) {
-            // const pickerColumn = await picker.getColumn(`${i}`);
-            // pickerColumn.options = this.getColumnOptions(i, this.getPrivateColumn(i, CityJson));
-            // pickerColumn.selectedIndex = 0;
-            // await picker.present();
-            const options = this.getColumnOptions(i, this.getPrivateColumn(i, CityJson));
-            pickerColumns[i] = {
-              name: `${i}`,
-              options,
-              selectedIndex: 0
-            }
-            // console.log(pickerColumns)
-          }
-        }
-        // console.log(pickerColumns)
-        picker.columns = pickerColumns;
-        // console.log((picker as any).__proto__)
-        // picker.present();
-        // console.log(pickerColumns)
-        // (picker as any).forceUpdate();
-      }
-    })
-    await picker.present();
-  }
+  // public async openPickerAddressInfo(numColumn: number = 3) {
+  //   const picker = await this.pickerController.create({
+  //     backdropDismiss: true,
+  //     buttons: [
+  //       {
+  //         role: 'cancel',
+  //         text: '取消'
+  //       },
+  //       {
+  //         role: 'confirm',
+  //         text: '确定',
+  //         handler: ev => {
+  //           // console.log(ev)
+  //           this.validetaForm.controls['addressCode'].setValue(ev[Object.keys(ev).length - 1].value);
+  //         }
+  //       }
+  //     ],
+  //     columns: this.getColumns(numColumn, CityJson),
+  //     keyboardClose: true,
+  //     mode: 'ios',
+  //     showBackdrop: true
+  //   })
+  //   console.log(new PickerController())
+  //   picker.addEventListener('ionPickerColChange', async (ev: any) => {
+  //     console.log(ev)
+  //     const data = ev.detail;
+  //     // const pickerColumn = await picker.getColumn('0')
+  //     // console.log(pickerColumn)
+  //     /* 处理选择的列 */
+  //     this.selects[Number(data.name)] = data.selectedIndex;
+  //     // data.target.remove()
+  //     // 获取数据
+  //     let pickerColumns = [];
+  //     pickerColumns = picker.columns;
+  //     // 处理对应数据
+  //     if (data.name < numColumn) {
+  //       for (let i = 0; i < numColumn; i ++) {
+  //         if (i > data.name) {
+  //           // const pickerColumn = await picker.getColumn(`${i}`);
+  //           // pickerColumn.options = this.getColumnOptions(i, this.getPrivateColumn(i, CityJson));
+  //           // pickerColumn.selectedIndex = 0;
+  //           // await picker.present();
+  //           const options = this.getColumnOptions(i, this.getPrivateColumn(i, CityJson));
+  //           pickerColumns[i] = {
+  //             name: `${i}`,
+  //             options,
+  //             selectedIndex: 0
+  //           }
+  //           // console.log(pickerColumns)
+  //         }
+  //       }
+  //       // console.log(pickerColumns)
+  //       picker.columns = pickerColumns;
+  //       // console.log((picker as any).__proto__)
+  //       // picker.present();
+  //       // console.log(pickerColumns)
+  //       // (picker as any).forceUpdate();
+  //     }
+  //   })
+  //   await picker.present();
+  // }
 
   /* 处理数据 */
-  private getColumns(numColumns, columnOptions) {
-    const options = [];
-    for(let i = 0; i < numColumns; i++) {
-      options.push({
-        name: `${i}`,
-        options: this.getColumnOptions(i, this.getPrivateColumn(i, columnOptions)),
-        selectedIndex: this.selects[i] ? this.selects[i] : 0
-      })
+  // private getColumns(numColumns, columnOptions) {
+  //   const options = [];
+  //   for(let i = 0; i < numColumns; i++) {
+  //     options.push({
+  //       name: `${i}`,
+  //       options: this.getColumnOptions(i, this.getPrivateColumn(i, columnOptions)),
+  //       selectedIndex: this.selects[i] ? this.selects[i] : 0
+  //     })
 
-    }
-    return options
-  }
+  //   }
+  //   return options
+  // }
 
   /* 根据数据不同获取数据不同 */
-  private getPrivateColumn(index, arrayInfo) {
-    let resultArray = arrayInfo;
-    for(let i = 0; i < index; i ++) {
-      resultArray = (resultArray[this.selects[i] || 0] || {}).children || []
-    }
-    return resultArray;
-  }
+  // private getPrivateColumn(index, arrayInfo) {
+  //   let resultArray = arrayInfo;
+  //   for(let i = 0; i < index; i ++) {
+  //     resultArray = (resultArray[this.selects[i] || 0] || {}).children || []
+  //   }
+  //   return resultArray;
+  // }
 
   /* 处理二级数据或者3级数据 */
-  private getColumnOptions(columnIndex, columnOptions) {
-    const options = [];
-    for(let i = 0; i < columnOptions.length; i ++) {
-      options.push({
-        text: columnOptions[i].name,
-        value: columnOptions[i].cityId
-      })
-    }
-    return options;
-  }
+  // private getColumnOptions(columnIndex, columnOptions) {
+  //   const options = [];
+  //   for(let i = 0; i < columnOptions.length; i ++) {
+  //     options.push({
+  //       text: columnOptions[i].name,
+  //       value: columnOptions[i].cityId
+  //     })
+  //   }
+  //   return options;
+  // }
 
   /* checkboxRenderChange */
   public checkboxRenderChange(info: any) {

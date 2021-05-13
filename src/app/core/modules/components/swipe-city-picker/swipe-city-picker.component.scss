@@ -1,0 +1,24 @@
+@import 'mixin';
+$default_color: #999;
+$default_color_1: #666;
+$default_color_2: #333;
+$default_color_3: #f4f4f4;
+$default_color_4: #ddd;
+
+
+.picker-mask-item {
+  padding: 0;
+  &::ng-deep .am-list-content {
+    font-size: 14px;
+    color: $default_color_1;
+    flex: none;
+  }
+  &::ng-deep .am-list-line {
+    justify-content: space-between;
+  }
+  &::ng-deep .am-list-extra {
+    font-size: 14px;
+    color: #333;
+    flex: 1;
+  }
+}
