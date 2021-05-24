@@ -74,8 +74,8 @@ export class RightsProtectionComponent implements OnInit {
     this.renderConfig.pageNum = 1;
     this.fetchAppealStatistic();
     this.switchFetchApplealInfo((res) => {
-      this.renderArrayInfo = res.rel;
-      if (res.length === this.renderConfig.pageSize) {
+      this.renderArrayInfo = res.rel.list;
+      if (res.rel.list.length === this.renderConfig.pageSize) {
         event && (event.target.disabled = false);
       } else {
         event && (event.target.disabled = false);
@@ -90,12 +90,8 @@ export class RightsProtectionComponent implements OnInit {
     this.renderConfig.pageNum++;
     this.switchFetchApplealInfo((res) => {
       event.target.complete();
-      if (this.renderConfig.pageSize * (this.renderConfig.pageNum - 1) > this.renderArrayInfo.length) {
-        this.renderArrayInfo = this.renderArrayInfo.concat(res.rel);
-        event.target.disabled = true;
-      } else {
-        this.renderArrayInfo = res.rel;
-      }
+      this.renderArrayInfo = this.renderArrayInfo.concat(res.rel.list);
+      event.target.disabled = true;
     });
   }
 

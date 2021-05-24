@@ -1,5 +1,5 @@
 <ion-header class="custom-header">
-  <swipe-header class="custom-header-component" title="添加名片" [isBack]="false" [customRight]="true">
+  <swipe-header class="custom-header-component" [title]="stepConfig.title" [isBack]="true" [customRight]="true">
     <span (click)="openMenuInfo()" name="right" class="other-btn">{{ (_businessConfig && _businessConfig.selected) ? _businessConfig.businessName : '选择名片'}}</span>
   </swipe-header>
 </ion-header>
@@ -7,7 +7,7 @@
 <ion-content class="carte-page" id="carte-main">
   <section class="carte-container">
     <ion-header class="carte-header">
-      <swipe-steps></swipe-steps>
+      <swipe-steps [current]="stepConfig.step"></swipe-steps>
     </ion-header>
     <section class="carte-content">
       <ion-router-outlet class="custom-router-outlet"></ion-router-outlet>

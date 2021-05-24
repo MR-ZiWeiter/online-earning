@@ -1,9 +1,9 @@
 <ion-content class="user-page" *ngIf="homeCenterInfo">
   <section class="anthor-info">
-    <img src="/" class="anthor-img" alt="/">
+    <img [src]="homeCenterInfo.avatar" class="anthor-img" alt="/">
     <section class="anthor-info-intro">
       <span class="title-text">{{homeCenterInfo.realName}}</span>
-      <span class="label-text">余额：{{homeCenterInfo.balance}}元</span>
+      <span class="label-text">余额：{{homeCenterInfo.balance|price:'format'}}元</span>
     </section>
   </section>
   <section class="nav-group">

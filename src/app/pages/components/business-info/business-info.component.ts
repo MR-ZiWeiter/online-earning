@@ -11,8 +11,6 @@ import { BusinessInfoService } from './business-info.service';
 })
 export class BusinessInfoComponent implements OnInit {
 
-  public nickname!: string;
-
   public businessConfig = {
     nickname: '',
     pageNum: 1,

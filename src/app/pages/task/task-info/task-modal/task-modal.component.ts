@@ -24,7 +24,7 @@ export class TaskModalComponent implements OnInit {
     this._renderInfo = n;
     this.submitTaskForm.sort = n.sort;
     this.submitTaskForm.stepId = n.id;
-    this.submitTaskForm.taskId = Number(n.taskId);
+    this.submitTaskForm.taskId = n.taskId;
   }
 
   @Input() public isLast: boolean;

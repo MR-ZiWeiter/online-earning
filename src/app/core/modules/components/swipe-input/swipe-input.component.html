@@ -3,7 +3,9 @@
   isError ? 'error' : '',
   validateControll.status,
   flat > 2 ? (validateControll.valid ? 'success' : 'error') : 'no-content',
-  isBorder ? 'border' : 'no-border']">
+  validateControll.errors && validateControll.errors.pattern ? 'error' : '',
+  isBorder ? 'border' : 'no-border',
+  isCheck ? '' : 'no-borders']">
   <section class="prefix" *ngIf="isPrefix">
     <ng-content select="[name=prefix]"></ng-content>
   </section>
@@ -15,6 +17,7 @@
       [maxlength]="maxLength"
       [minlength]="minLength"
       [formControl]="validateControll"
+      [readonly]="readonly"
       (ngModelChange)="inputChange($event)"
       (focus)="inputFocusChange($event)"
       (blur)="inputBlurChange($event)"

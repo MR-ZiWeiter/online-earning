@@ -1,6 +1,6 @@
 <section class="task-order-component" *ngIf="renderInfo">
   <section class="header-info">
-    <span class="lable-text">编号：{{renderInfo.businessId}}</span>
+    <span class="lable-text">订单编号：{{renderInfo.taskCode}}</span>
   </section>
   <section class="basic-bord">
     <section class="min-title">
@@ -9,11 +9,11 @@
     <section class="group">
       <section class="item">
         <span class="label-text">任务本金：</span>
-        <span class="value-text light">{{renderInfo.unitPrice}}元</span>
+        <span class="value-text light">{{renderInfo.unitPrice|price:'format'}}元</span>
       </section>
       <section class="item">
         <span class="label-text">任务奖励：</span>
-        <span class="value-text light">{{renderInfo.award}}元</span>
+        <span class="value-text light">{{renderInfo.award|price:'format'}}元</span>
       </section>
       <section class="item">
         <span class="label-text">商家名片：</span>

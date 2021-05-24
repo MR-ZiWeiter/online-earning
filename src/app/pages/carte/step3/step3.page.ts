@@ -1,5 +1,6 @@
+import { CarteService } from './../carte.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiUpcomingService } from 'src/app/core/modules/provider/api';
 import { IApiBusinessSaloonInfoModel } from 'src/app/core/model';
 import { BusinessInfoService } from '../../components/business-info/business-info.service';
@@ -26,7 +27,8 @@ export class Step3Page implements OnInit, OnDestroy {
   constructor(
     private businessInfoService: BusinessInfoService,
     private apiUpcomingService: ApiUpcomingService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private carteService: CarteService,
   ) {
     /* URL处理数据 */
     const urlParams = activatedRoute.snapshot.params;
@@ -47,6 +49,10 @@ export class Step3Page implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadSaloonInfo();
+  }
+
+  ionViewWillEnter() {
+    this.carteService.setCarteConfig({ step: 3, title: '领取任务' });
   }
 
   /* 回调数据更新 */

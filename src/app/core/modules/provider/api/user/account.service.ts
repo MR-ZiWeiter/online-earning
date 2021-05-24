@@ -72,6 +72,18 @@ export class UserAccountService {
     });
   }
 
+  // 修改密码
+  asyncFetchAccountChangPwdInfo(info: any): Observable<any> {
+    return new Observable(observer => {
+      this.http.post('/pwd/change', info, {}, info).subscribe((res: ApiResponseModel) => {
+        observer.next(res);
+      }, err => {
+        console.log(err);
+        observer.error(false);
+      });
+    });
+  }
+
   /* 购物标签 */
   asyncAccountShoppingTagInfo(info?: any): Observable<any> {
     return new Observable(observer => {

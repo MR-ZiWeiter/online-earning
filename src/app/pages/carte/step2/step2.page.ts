@@ -1,5 +1,6 @@
+import { CarteService } from './../carte.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { IApiBusinessInfoModel } from 'src/app/core/model';
 import { ApiBusinessService } from 'src/app/core/modules/provider/api';
 import { NavController } from '@ionic/angular';
@@ -25,6 +26,7 @@ export class Step2Page implements OnInit {
     private businessInfoService: BusinessInfoService,
     private activeSnapshot: ActivatedRoute,
     private navController: NavController,
+    private carteService: CarteService,
     private router: Router
   ) {
     this.urlParams = activeSnapshot.snapshot.params;
@@ -59,6 +61,10 @@ export class Step2Page implements OnInit {
   }
 
   ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.carteService.setCarteConfig({ step: 2, title: '解析名片' });
+  }
 
   /* 回调数据更新 */
   public reLoadBusinessInfoChange(info: any) {

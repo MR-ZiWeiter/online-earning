@@ -10,18 +10,29 @@
       <span class="all-count" (click)="amountAllChange()">全部提现</span>
     </section>
     <section class="count-balance" *ngIf="amountInfo">
-      <span class="lable-text">当前余额：{{amountInfo.balance}}元</span>
+      <span class="lable-text">当前余额：{{amountInfo.balance|price}}元</span>
     </section>
   </section>
   <section class="withdraw-intro">
     <section class="title-text">
-      <span>提现备注</span>
+      <span>提现方式</span>
     </section>
     <section class="type-group">
-      <section class="type-item" *ngFor="let item of withdrawTypeRender">
-        <swipe-checkbox [checkboxRender]="item.renderCheck" (checkedChange)="checkedChange($event, item)"></swipe-checkbox>
-        <span class="intro">{{item.label}}</span>
+      <ion-segment [(ngModel)]="amountConfig.payAccountId">
+        <ion-segment-button [value]="item.id" *ngFor="let item of withdrawTypeRender">{{item.payType|paytype}}</ion-segment-button>
+      </ion-segment>
+
+      <section class="paytype-info">
+        <section class="label-item">
+          <span class="label-text">姓名：</span>
+          <span class="value-text">{{ handlerPayTypeInfo().accountId }}</span>
+        </section>
+        <section class="label-item">
+          <span class="label-text">支付宝账号：</span>
+          <span class="value-text">{{ handlerPayTypeInfo().account }}</span>
+        </section>
       </section>
+
     </section>
   </section>
   <section class="footer-btn">

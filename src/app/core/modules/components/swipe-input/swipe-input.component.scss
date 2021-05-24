@@ -8,17 +8,34 @@
   &.no-content {
     border-color: $default_border_color;
   }
+  &.no-border {
+    border: none;
+    border-bottom: format(2) solid $default_border_color;
+    border-radius: 0;
+  }
   &.focus {
     border-color: var(--ion-color-primary);
+    .input-class {
+      color: var(--ion-color-primary) !important;
+    }
   }
   &.success {
     border-color: var(--ion-color-success);
+    .input-class {
+      color: var(--ion-color-success) !important;
+    }
   }
   &.error {
     border-color: var(--ion-color-danger);
+    .input-class {
+      color: var(--ion-color-danger) !important;
+    }
   }
-  &.no-border {
+  &.no-borders {
     border: none;
+    .input-class {
+      color: $default_color_2 !important;
+    }
   }
   .prefix,
   .suffix {

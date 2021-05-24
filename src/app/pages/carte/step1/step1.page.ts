@@ -1,5 +1,6 @@
+import { CarteService } from './../carte.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { ApiBusinessService } from 'src/app/core/modules/provider/api';
 import { ToastController } from '@ionic/angular';
 
@@ -14,9 +15,15 @@ export class Step1Page implements OnInit {
 
   constructor(
     private router: Router,
+    private carteService: CarteService,
     private toastController: ToastController,
     private apiBusinessService: ApiBusinessService
   ) { }
+
+  ionViewWillEnter(): void {
+    // throw new Error/*  */('Method not implemented.');
+    this.carteService.setCarteConfig({ step: 1, title: '添加名片' });
+  }
 
   ngOnInit() {
   }

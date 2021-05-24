@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PickerController } from '@ionic/angular';
 import { ApiUpcomingService } from 'src/app/core/modules/provider/api';
 import { BusinessInfoComponent } from 'src/app/pages/components/business-info/business-info.component';
+import { SystemService } from 'src/app/core/services/system/system.service';
 
 @Component({
   selector: 'app-upcoming',
@@ -33,6 +34,7 @@ export class UpcomingComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private systemService: SystemService,
     private ionPickerCotroller: PickerController,
     private businessInfoService: BusinessInfoService,
     private apiUpcomingService: ApiUpcomingService
@@ -65,6 +67,11 @@ export class UpcomingComponent implements OnInit {
   }
 
   private loadSaloonInfo(fn?: Function, err?: Function) {
+    if (!this.saloonRenderConfig.buyerAccountId) {
+      this.systemService.presentToast('请选择名片后再试', 'danger');
+      err && err();
+      return false;
+    }
     this.apiUpcomingService.asyncFetchUpcomingList(this.saloonRenderConfig).subscribe(res => {
       // console.log(res)
       fn && fn(res.rel.list);
@@ -74,9 +81,12 @@ export class UpcomingComponent implements OnInit {
   doRefresh(event?: any) {
     this.saloonRenderConfig.pageNum = 1;
     this.fetchUpcomingCount();
-    this.loadSaloonInfo((remderArray) => {
-      this.renderArray = remderArray;
-      if (remderArray.length === this.saloonRenderConfig.pageSize) {
+    this.loadSaloonInfo((renderArray) => {
+      this.renderArray = renderArray.map(item => {
+        item.award = item.award * 100
+        return item
+      });
+      if (renderArray.length === this.saloonRenderConfig.pageSize) {
         event && (event.target.disabled = false);
       } else {
         event && (event.target.disabled = false);
@@ -92,10 +102,16 @@ export class UpcomingComponent implements OnInit {
     this.loadSaloonInfo((renderArray) => {
       event.target.complete();
       if (this.saloonRenderConfig.pageSize * (this.saloonRenderConfig.pageNum - 1) > this.renderArray.length) {
-        this.renderArray = this.renderArray.concat(renderArray);
+        this.renderArray = this.renderArray.concat(renderArray.map(item => {
+          item.award = item.award * 100
+          return item
+        }));
         event.target.disabled = true;
       } else {
-        this.renderArray = renderArray;
+        this.renderArray = renderArray.map(item => {
+          item.award = item.award * 100
+          return item
+        });
       }
     });
   }
@@ -124,8 +140,10 @@ export class UpcomingComponent implements OnInit {
 
   /* 名片回调 */
   public businessChange(ev: {id: string; key: string}) {
-    this.saloonRenderConfig.buyerAccountId = ev.id;
-    this.doRefresh();
+    if (ev.id) {
+      this.doRefresh();
+      this.saloonRenderConfig.buyerAccountId = ev.id;
+    }
   }
 
   /* 打开新名片 */

@@ -22,7 +22,7 @@ import { TabsService } from './services/tabs/tabs.service';
 // import { UserService } from './services/user/user.service';
 
 // 管道类
-import { GenderPipe, KeysPipe } from './pipes';
+import { GenderPipe, KeysPipe, PaytypePipe, PricePipe } from './pipes';
 import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 
 @NgModule({
@@ -41,6 +41,8 @@ import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
     /* 管道类 */
     KeysPipe,
     GenderPipe,
+    PricePipe,
+    PaytypePipe,
   ],
   imports: [
     CommonModule,
@@ -73,7 +75,9 @@ import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
     SwipeCityPickerComponent,
     /* 管道类 */
     KeysPipe,
-    GenderPipe
+    GenderPipe,
+    PricePipe,
+    PaytypePipe
   ]
 })
 export class CoreModule { }

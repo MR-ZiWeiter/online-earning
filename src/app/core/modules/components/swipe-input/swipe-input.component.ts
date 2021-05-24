@@ -52,6 +52,8 @@ export class SwipeInputComponent implements ControlValueAccessor, OnInit {
   @Input() public minLength: number;
   @Input() public isError: boolean = false;
   @Input() public isPipe!: Pipe;
+  @Input() public readonly: boolean = false;
+  @Input() public isCheck: boolean = true;
   @Input()
   public set isDisabled(n: boolean) {
     this.disabled = n;
@@ -138,11 +140,14 @@ export class SwipeInputComponent implements ControlValueAccessor, OnInit {
   public inputBlurChange(ev: FocusEvent) {
     this.isFocus = false;
     this.onBlur.emit(this.value);
+    this.validateControll.markAsDirty();
+    this.validateControll.updateValueAndValidity();
+    console.log(this.validateControll)
   }
   public clearInputEvent(ev: MouseEvent) {
     this.value = null;
     this.isPass = false;
-    this.valueChange(null);
+    this.validateControll.setValue(null);
   }
 
 }

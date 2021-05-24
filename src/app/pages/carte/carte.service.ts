@@ -7,7 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 export class CarteService {
   /* 处理 */
   public carteConfig: any = {
-    step: 1
+    step: 1,
+    title: '添加名片'
   };
 
   private $carteConfig: BehaviorSubject<any> = new BehaviorSubject<any>(this.carteConfig);

@@ -64,23 +64,19 @@
     .type-group {
       @include flex-justify-align(flex-start, flex-start);
       flex-direction: column;
-      .type-item {
-        @include flex-justify-align(center, flex-start);
-        @include wh(calc(100% - #{format(64)}), auto);
-        border-bottom: format(1) solid $default_border_color;
-        min-height: format(144);
+      padding: format(36) format(68);
+      .paytype-info {
+        @include flex-justify-align(flex-start, flex-start);
         flex-direction: column;
-        margin: 0 format(32);
-        &:last-child {
-          border-bottom: none;
-        }
-        ::ng-deep .label-text {
-          @include sc(format(28), $default_color_2);
-        }
-        .intro {
-          @include sc(format(24), $default_color_3);
-          font-weight: 400;
-          margin-top: format(10);
+        margin-top: format(30);
+        .label-item {
+          @include wh(auto, format(72));
+          @include flex-justify-align(flex-start, center);
+          .label-text,
+          .value-text {
+            @include sc(format(28), $default_color_9);
+            font-weight: 400;
+          }
         }
       }
     }

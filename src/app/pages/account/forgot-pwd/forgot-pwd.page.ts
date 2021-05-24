@@ -60,8 +60,7 @@ export class ForgotPwdPage implements OnInit {
   }
   // 获取验证码
   public fetchCodeEvent(): void {
-    if (!this.validateForm.value.phone) {
-      // this.presentToastWithOptions();
+    if (!this.validateForm.valid) {
       this.systemService.presentToast('请输入正确的手机号码!', 'danger');
     } else {
       this.userAccountService.asyncFetchAccountSmsCode({

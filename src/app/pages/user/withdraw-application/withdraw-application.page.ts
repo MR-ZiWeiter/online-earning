@@ -1,42 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { ApiUserIndexService } from 'src/app/core/modules/provider/api';
+import { PaytypePipe } from 'src/app/core/pipes';
 
 @Component({
   selector: 'swipe-withdraw-application',
   templateUrl: './withdraw-application.page.html',
   styleUrls: ['./withdraw-application.page.scss'],
+  providers: [
+    PaytypePipe
+  ]
 })
 export class WithdrawApplicationPage implements OnInit {
 
   public amountConfig: any = {
-    amount: 0,
-    payAccountId: 0,
-    payAccountText: null
+    amount: null,
+    payAccountId: 0
   };
 
   public amountInfo: any = {};
 
-  public withdrawTypeRender: any[] = [
-    {
-      renderCheck: [{label: '我希望优先转到银行卡', isCheck: true}],
-      label: '银行账号：136 6546 6616'
-    },
-    {
-      renderCheck: [{label: '我希望优先转到支付宝', isCheck: false}],
-      label: '支付宝账号：136 6546 6616'
-    },
-    {
-      renderCheck: [{label: '我希望优先转到微信', isCheck: false}],
-      label: '微信账号：136 6546 6616'
-    },
-    {
-      renderCheck: [{label: '其他', isCheck: false}],
-      label: '其他账号：136 6546 6616'
-    }
-  ];
+  public withdrawTypeRender: any[] = [];
+
+  public handlerPayTypeInfo() {
+    let result: any = {};
+    this.withdrawTypeRender.some(item => {
+      if (item.id === Number(this.amountConfig.payAccountId)) {
+        result = item;
+        return true;
+      }
+      return false;
+    })
+    return result;
+  };
 
   constructor(
+    private paytypePipe: PaytypePipe,
     private toastController: ToastController,
     private apiIndexUserService: ApiUserIndexService
   ) {
@@ -58,43 +57,26 @@ export class WithdrawApplicationPage implements OnInit {
   private fetchWithdrawInfo() {
     this.apiIndexUserService.asyncFetchWithdrawInfo().subscribe(res => {
       // console.log(res)
-      this.withdrawTypeRender = res.rel.map(item => {
-        return {
-          renderCheck: [{label: `我希望优先转到${item.payType}`, isCheck: false}],
-          label: `${item.payType}账号: ${item.account}`,
-          ...item
-        }
-      })
+      this.withdrawTypeRender = res.rel;
+      this.amountConfig.payAccountId = res.rel[0].id;
     })
 
-  }
-
-  /* 选择提款方式 */
-  public checkedChange(info: any, infos: any) {
-    console.log(infos)
-    if (info[0].isCheck) {
-      this.amountConfig.payAccountId = infos.id;
-      this.amountConfig.payAccountText = infos.payType;
-      /* 还原数据 */
-      this.withdrawTypeRender = this.withdrawTypeRender.map(item => {
-        return {
-          renderCheck: [{label: `我希望优先转到${item.payType}`, isCheck: item.id === infos.id ? true : false}],
-          label: `${item.payType}账号: ${item.account}`,
-          ...item
-        }
-      })
-      // this.withdrawTypeRender = JSON.parse(JSON.stringify(clone));
-      // this.withdrawTypeRender = [];
-      // this.withdrawTypeRender = JSON.parse(JSON.stringify(clone));
-    }
   }
 
   /* 提现 */
   public submitChange() {
     // this.apiIndexUserService.asyncFetchWithdrawCashOut()
-    if (this.amountConfig.amount <= Number(this.amountInfo.balance)) {
-      this.apiIndexUserService.asyncFetchWithdrawCashOut(this.amountConfig).subscribe(res => {
-        this.presentToast('提交成功~将在3个工作日内提现到' + this.amountConfig.payAccountText, 'success');
+    if (!this.amountConfig.amount) {
+      this.presentToast('请输入大于0的提现金额', 'danger');
+      return
+    }
+    if (this.amountConfig.amount <= Number(this.amountInfo.balance) / 100) {
+      this.apiIndexUserService.asyncFetchWithdrawCashOut({
+        ...this.amountConfig,
+        amount: this.amountConfig.amount * 100
+      }).subscribe(res => {
+        this.presentToast('提交成功~将在3个工作日内提现到' + this.paytypePipe.transform(this.handlerPayTypeInfo().payType), 'success');
+        this.amountConfig.amount = null;
         this.fetchAmountInfo();
       })
     } else {
@@ -105,7 +87,7 @@ export class WithdrawApplicationPage implements OnInit {
 
   /* 全部提现 */
   public amountAllChange() {
-    this.amountConfig.amount = this.amountInfo.balance;
+    this.amountConfig.amount = this.amountInfo.balance / 100;
   }
 
   // 提示吐司

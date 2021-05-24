@@ -123,8 +123,10 @@
       <section class="group-form">
         <section class="custom-input">
           <swipe-input
+            (click)="openSelectBankCode()"
+            [readonly]="true"
             type="text"
-            formControlName="openBankCode"
+            formControlName="bankName"
             [isBorder]="false"
             placeholder="请输入与真实姓名对应的开户行"
             [isPrefix]="true"

@@ -1,10 +1,12 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActionSheetController, NavController, PickerController, ToastController } from '@ionic/angular';
 // import CityJson from './city.json';
-import { UserAccountService } from 'src/app/core/modules/provider/api';
+import { ApiSystemService, UserAccountService } from 'src/app/core/modules/provider/api';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { GenderPipe } from 'src/app/core/pipes/gender.pipe';
+
+import { bankRegExp } from './bank-reg';
 
 @Component({
   selector: 'swipe-data-authentication',
@@ -12,11 +14,13 @@ import { GenderPipe } from 'src/app/core/pipes/gender.pipe';
   styleUrls: ['./data-authentication.page.scss'],
   providers: [GenderPipe]
 })
-export class DataAuthenticationPage implements OnInit {
+export class DataAuthenticationPage implements OnInit, OnDestroy {
 
   public validetaForm!: FormGroup;
 
   public username: any;
+
+  public backList: any[] = [];
 
   public _genderPipe = GenderPipe;
 
@@ -26,11 +30,14 @@ export class DataAuthenticationPage implements OnInit {
   /* 标签 */
   public checkboxRender: any[] = [];
 
+  private basicInfoSubscribe!: any;
+
   constructor(
     private fb: FormBuilder,
     private genderPipe: GenderPipe,
     private navController: NavController,
     private toastController: ToastController,
+    private apiSystemService: ApiSystemService,
     private pickerController: PickerController,
     public changeDetectorRef: ChangeDetectorRef,
     private apiUserAccountService: UserAccountService,
@@ -39,18 +46,23 @@ export class DataAuthenticationPage implements OnInit {
     private userService: UserService
   ) {
     this.initalTagsInfo();
+    this.apiSystemService.asyncFetchSystemBankList().subscribe(res => {
+      // console.log(res);
+      this.backList = res.rel;
+    })
     this.validetaForm = fb.group({
       realName: [null, [Validators.required, Validators.pattern(/^(?:[\u4e00-\u9fa5]+)(?:●[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$/)]],
       gender: [null, [Validators.required]],
       gender_name: [null],
       qq: [null, [Validators.required, Validators.pattern(/^[0-9]{5,10}$/)]],
       addressCode: [null, [Validators.required]],
-      idCardNumber: [null, [Validators.required]],
+      idCardNumber: [null, [Validators.required, Validators.pattern(/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/)]],
       idMainPhotoUrl: ['null', [Validators.required]],
       openBankCode: [null, [Validators.required]],
-      bankCardNum: [null, [Validators.required]],
+      bankName: [null],
+      bankCardNum: [null, [Validators.required, Validators.pattern(bankRegExp)]],
       bankCardUrl: ['null', [Validators.required]],
-      aliPayNum: [null, [Validators.required]],
+      aliPayNum: [null, [Validators.required, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$|^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/)]],
       aliPayUrl: ['null', [Validators.required]],
       weChatNum: [null, [Validators.required]],
       weChatUrl: ['null', [Validators.required]],
@@ -60,21 +72,22 @@ export class DataAuthenticationPage implements OnInit {
 
   ngOnInit() {
     /* 初始化数据 */
-    this.userService.getUserBasicInfo().subscribe(res => {
+    this.basicInfoSubscribe = this.userService.getUserBasicInfo().subscribe(res => {
       // console.log(res);
       this.validetaForm = this.fb.group({
         realName: [res.realName, [Validators.required, Validators.pattern(/^(?:[\u4e00-\u9fa5]+)(?:●[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$/)]],
-        phone: [res.phone],
+        phone: [res.phone, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$/)],
         gender: [res.gender, [Validators.required]],
         gender_name: [this.genderPipe.transform(res.gender)],
         qq: [res.qq, [Validators.required, Validators.pattern(/^[0-9]{5,10}$/)]],
         addressCode: [Number(res.areaCode), [Validators.required]],
-        idCardNumber: [res.idCardNumber, [Validators.required]],
+        idCardNumber: [res.idCardNumber, [Validators.required, Validators.pattern(/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/)]],
         idMainPhotoUrl: [res.idMainPhotoUrl, [Validators.required]],
+        bankName: [null],
         openBankCode: [res.openBankCode, [Validators.required]],
-        bankCardNum: [res.bankCardNum, [Validators.required]],
+        bankCardNum: [res.bankCardNum, [Validators.required, Validators.pattern(bankRegExp)]],
         bankCardUrl: [res.bankCardUrl, [Validators.required]],
-        aliPayNum: [res.aliPayNum, [Validators.required]],
+        aliPayNum: [res.aliPayNum, [Validators.required, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$|^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/)]],
         aliPayUrl: [res.aliPayUrl, [Validators.required]],
         weChatNum: [res.weChatNum, [Validators.required]],
         weChatUrl: [res.weChatUrl, [Validators.required]],
@@ -115,6 +128,44 @@ export class DataAuthenticationPage implements OnInit {
       })
       // console.log(this.checkboxRender)
     })
+  }
+
+  /* 选择开户行 */
+  public async openSelectBankCode() {
+    const picker = await this.pickerController.create({
+      backdropDismiss: true,
+      buttons: [
+        {
+          role: 'cancel',
+          text: '取消'
+        },
+        {
+          role: 'confirm',
+          text: '确定',
+          handler: ev => {
+            // console.log(ev)
+            this.validetaForm.controls['openBankCode'].setValue(ev.bankcode.value);
+            this.validetaForm.controls['bankName'].setValue(ev.bankcode.text);
+          }
+        }
+      ],
+      columns: [
+        {
+          name: 'bankcode',
+          options: this.backList.map(item => {
+            return {
+              value: item.bankCode,
+              text: item.bankName,
+              selected: item.bankCode === this.validetaForm.value.openBankCode ? true : false
+            };
+          })
+        }
+      ],
+      keyboardClose: true,
+      mode: 'ios',
+      showBackdrop: true
+    })
+    picker.present()
   }
 
   /* 选择性别 */
@@ -279,6 +330,12 @@ export class DataAuthenticationPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.basicInfoSubscribe.unsubscribe();
   }
   // asyncAccountShoppingTagInfo
 // asyncAccountEditBaiscInfoChange

@@ -28,7 +28,8 @@ export class TaskComponent implements OnInit {
   public tabConfig: any[] = [
     { label: '未开始', number: 0, value: 1 },
     { label: '进行中', number: 0, value: 2 },
-    { label: '已完成', number: 0, value: 3 },
+    { label: '待核对', number: 0, value: 3 },
+    { label: '已完成', number: 0, value: 6 },
     { label: '已取消', number: 0, value: 4 }
   ];
 

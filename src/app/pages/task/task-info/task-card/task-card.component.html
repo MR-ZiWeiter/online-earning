@@ -5,7 +5,7 @@
   <section class="step-info">
     <section class="step-item">
       <span class="label-text">步骤奖励：</span>
-      <span class="value-text light">{{renderInfo.commission}}元</span>
+      <span class="value-text light">{{renderInfo.commission|price}}元</span>
     </section>
     <section class="step-item" [ngSwitch]="renderInfo.refundType">
       <span class="label-text">返款时效：</span>
